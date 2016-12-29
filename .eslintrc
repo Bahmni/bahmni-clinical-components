@@ -1,0 +1,18 @@
+{
+    "extends": "airbnb",
+    "globals": {
+        "describe": true,
+        "before": true,
+        "after": true,
+        "beforeEach": true,
+        "afterEach": true,
+        "context": true,
+        "it": true
+    },
+    "rules": {
+        "react/prop-types": [1, { "ignore": ["children"] }],
+        "react/sort-prop-types": 2,
+        "react/jsx-sort-props": 2,
+        "max-len": [2, 100, 2, {"ignoreComments": true }]
+    },
+}
