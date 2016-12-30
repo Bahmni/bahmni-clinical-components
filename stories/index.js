@@ -18,7 +18,6 @@ storiesOf('Button', module)
   ));
 
 storiesOf('MyButton', module)
-    .add('test', () =>
-
-        <MyButton />
-    );
+    .add('test', () => (
+        <MyButton title={"Click Me!!"} />
+    ));
