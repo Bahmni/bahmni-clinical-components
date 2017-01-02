@@ -9,6 +9,5 @@ BAHMNI CLINICAL COMPONENTS
 
 ### Setup Steps
 
-1. Install nvm
-2. Install node
-3. Install dependencies, `npm install`
+1. Install node
+2. Install dependencies, `npm install`
