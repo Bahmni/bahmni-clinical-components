@@ -1,6 +1,6 @@
 {
   "name": "bahmni-clinical-components",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Repository for bahmni clinical components",
   "main": "./dist/bundle.js",
   "scripts": {
