@@ -1,11 +1,11 @@
 {
   "name": "bahmni-clinical-components",
-  "version": "0.0.1",
-  "description": "",
-  "main": "webpack.config.js",
+  "version": "0.0.2",
+  "description": "Repository for bahmni clinical components",
+  "main": "./dist/bundle.js",
   "scripts": {
     "clean": "rimraf dist/*",
-    "build": "webpack",
+    "build": "webpack --display-modules",
     "pretest": "rimraf coverage/*",
     "test": "jest --config jest-config.json",
     "posttest": "eslint --ext .js --ext .jsx ./src ./test",
@@ -17,8 +17,7 @@
     "ci": "npm run clean && npm run build && npm run publish",
     "bump-up": "npm version patch -m 'Bumped to version %s'"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "bahmni@thoughtworks.com",
   "devDependencies": {
     "@kadira/storybook": "^2.21.0",
     "babel-core": "^6.21.0",
