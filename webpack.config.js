@@ -1,21 +1,77 @@
 'use strict';
 
-let webpack = require('webpack');
 let path = require('path');
-let BUILD_DIR = path.resolve(__dirname, 'dist');
-let APP_DIR = path.resolve(__dirname, './src');
+let webpack = require('webpack');
 let srcPath = path.join(__dirname, './src');
-let config = {
-    entry: APP_DIR + '/index.jsx',
+let CopyWebpackPlugin = require('copy-webpack-plugin');
+
+module.exports = {
+    devtool: 'eval',
+    entry: {
+        bundle: ['./src/index.jsx']
+    },
     output: {
-        path: BUILD_DIR,
-        filename: 'bundle.js'
+        path: path.join(__dirname, 'dist'),
+        filename: '[name].js',
+        libraryTarget: 'umd',
+        library: 'BahmniClinicalComponents'
+    },
+    plugins: [
+        new CopyWebpackPlugin(
+            [
+                {
+                    from: path.join(__dirname, './styles/fonts'), to: path.join(__dirname, './dist/fonts'),
+                },
+            ],
+            {copyUnmodified: true}
+        ),
+    ],
+    externals: {
+        'react/lib/ExecutionEnvironment': true,
+        'react/lib/ReactContext': true,
+        'react/addons': true,
+        react: {
+            root: 'React',
+            commonjs2: 'react',
+            commonjs: 'react',
+            amd: 'react'
+        },
+        'react-dom': {
+            root: 'ReactDOM',
+            commonjs2: 'react-dom',
+            commonjs: 'react-dom',
+            amd: 'react-dom'
+        }
+    },
+    module: {
+        loaders: [
+            {
+                test: /\.(js|jsx)$/,
+                loaders: ['babel'],
+                include: path.join(__dirname, 'src')
+            },
+            {
+                test: /\.json$/,
+                loader: 'json'
+            },
+            {
+                test: /\.scss$/,
+                loaders: ["style", "css", "sass"]
+            },
+            {
+                test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "url-loader?limit=10000&mimetype=application/font-woff"
+            },
+            {
+                test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                loader: "file-loader"
+            }
+        ],
     },
     resolve: {
         alias: {
+            components: srcPath + '/components/',
             src: srcPath
         }
     }
 };
-
-module.exports = config;
