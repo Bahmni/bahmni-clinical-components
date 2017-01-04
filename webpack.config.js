@@ -8,6 +8,7 @@ let CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
     devtool: 'eval',
     entry: {
+        helpers: ['./src/helpers/componentStore.js'],
         bundle: ['./src/index.jsx']
     },
     output: {

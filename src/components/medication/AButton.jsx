@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ComponentStore from 'src/helpers/componentStore';
 
 export default class AButton extends Component {
   constructor() {
@@ -17,3 +18,4 @@ export default class AButton extends Component {
   }
 }
 
+ComponentStore.registerComponent('AButton', AButton);
