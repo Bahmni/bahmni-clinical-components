@@ -48,6 +48,8 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "react-select": "1.0.0-rc.1",
+    "whatwg-fetch": "^1.0.0"
   }
 }
