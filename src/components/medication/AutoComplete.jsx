@@ -14,7 +14,6 @@ export default class AutoComplete extends Component {
     }
     
     handleChange(value) {
-        console.log("handleChange");
         this.setState({ value: value });
         if (this.props.onValueChange && value.length > this.props.minimumInput) {
             this.props.onValueChange(value);
@@ -22,7 +21,6 @@ export default class AutoComplete extends Component {
     }
 
     render() {
-        console.log("rerender");
         const { autofocus, disabled, labelKey, valueKey,  minimumInput, loadOptions} = this.props;
         const props = {
             autofocus,

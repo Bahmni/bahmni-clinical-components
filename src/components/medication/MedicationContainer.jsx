@@ -11,7 +11,6 @@ export default class MedicationContainer extends Component {
     }
 
     getDrugs(input){
-        console.log("handleChange");
         const { optionsUrl } = this.props;
         return httpInterceptor.get(optionsUrl + input)
             .then((data) => {
@@ -26,7 +25,6 @@ export default class MedicationContainer extends Component {
     }
 
     render() {
-        console.log("render");
         return (<AutoComplete loadOptions={this.getDrugs} />);
     }
 
