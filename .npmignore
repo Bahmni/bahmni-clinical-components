@@ -6,3 +6,5 @@ webpack.config.js
 .idea*
 coverage/
 src/
+.storybook/
+stories/
