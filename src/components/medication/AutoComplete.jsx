@@ -11,27 +11,51 @@ export default class AutoComplete extends Component {
             value: get(props, 'value'),
             noResultsText: '',
         };
+        this.handleChange = this.handleChange.bind(this);
+        this.getValueFromProps = this.getValueFromProps.bind(this);
     }
-    
-    handleChange(value) {
-        this.setState({ value: value });
-        if (this.props.onValueChange && value.length > this.props.minimumInput) {
-            this.props.onValueChange(value);
+
+    componentWillReceiveProps(nextProps) {
+        const value = this.getValueFromProps(nextProps);
+        this.setState({ value });
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        if (!isEqual(this.props.value, nextProps.value) ||
+            !isEqual(this.state.value, nextState.value) ||
+            this.state.noResultsText !== nextState.noResultsText) {
+            return true;
         }
+        return false;
+    }
+
+    getValueFromProps(props) {
+        return get(props, 'value');
+    }
+
+    handleChange(value) {
+        this.setState({ value });
+
+        if (this.props.loadOptions) {
+            this.props.loadOptions(value);
+        }
+        this.props.onValueChange(value);
     }
 
     render() {
-        const { autofocus, disabled, labelKey, valueKey,  minimumInput, loadOptions} = this.props;
+
+        const { autofocus, disabled, labelKey, valueKey,  minimumInput, loadOptions, placeholder} = this.props;
         const props = {
             autofocus,
             backspaceRemoves: false,
             disabled,
             labelKey,
             minimumInput,
-            options,
             loadOptions,
             value: this.state.value,
+            onChange: this.handleChange,
             valueKey,
+            placeholder
         };
             return (
                 <div >
@@ -48,10 +72,12 @@ AutoComplete.propTypes = {
     disabled: PropTypes.bool,
     labelKey: PropTypes.string,
     minimumInput: PropTypes.number,
-    onValueChange: PropTypes.func,
+    loadOptions: PropTypes.func,
     validations: PropTypes.array,
     value: PropTypes.any,
     valueKey: PropTypes.string,
+    placeholder: PropTypes.string,
+    onValueChange: PropTypes.func
 };
 
 AutoComplete.defaultProps = {
