@@ -1,5 +1,37 @@
 {
     "bail": true,
     "verbose": true,
-    "collectCoverage": true
+    "collectCoverage": true,
+    "modulePaths": [
+        "<rootDir>/src"
+    ],
+    "moduleDirectories":  ["node_modules", "src"],
+    "moduleFileExtensions": [
+        "js",
+        "json",
+        "jsx"
+    ],
+    "testPathDirs": [
+        "<rootDir>/test"
+    ],
+    "collectCoverageFrom": [
+        "src/**/*.js",
+        "src/**/*.jsx",
+        "!node_modules/**"
+    ],
+    "coverageDirectory": "coverage",
+    "coveragePathIgnorePatterns": [
+        "node_modules"
+    ],
+    "coverageThreshold": {
+        "global": {
+            "branches": 50,
+            "functions": 50,
+            "lines": 50,
+            "statements": 50
+        }
+    },
+    "transform": {
+        "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    }
 }

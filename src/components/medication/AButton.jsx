@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ComponentStore from 'src/helpers/componentStore';
 
 export default class AButton extends Component {
   constructor() {
@@ -17,5 +16,3 @@ export default class AButton extends Component {
     return (<button onClick={this.update}>{this.state.value}</button>);
   }
 }
-
-ComponentStore.registerComponent('AButton', AButton);

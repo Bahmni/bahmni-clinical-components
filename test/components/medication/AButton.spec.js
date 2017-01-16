@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import AButton from '../../../src/components/medication/AButton';
+import AButton from 'src/components/medication/AButton';
 import chaiEnzyme from 'chai-enzyme';
 import chai, { expect } from 'chai';
 

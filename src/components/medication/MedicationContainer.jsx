@@ -10,13 +10,21 @@ export default class MedicationContainer extends Component {
         this.state = {color: "red"};
         this.getDrugs = this.getDrugs.bind(this);
         this.addToPrescription = this.addToPrescription.bind(this);
-        this.getColor = this.getColor.bind(this);
         this.onDrugSelect = this.onDrugSelect.bind(this);
     }
 
     getDrugs(input) {
-        const {optionsUrl} = this.props;
-        return httpInterceptor.get(optionsUrl + input)
+        var optionsUrl = '/openmrs/ws/rest/v1/drug';
+        var params = {
+            v: "custom:(uuid,strength,name,dosageForm,concept:(uuid,name,names:(name)))",
+            s: "ordered",
+            q: input
+        };
+        if (this.props.conceptSet) {
+            params.q = this.props.conceptSet;
+            params.s = "byConceptSet";
+        }
+        return httpInterceptor.get(optionsUrl, params)
             .then((data) => {
                 const options = data.results;
                 return {options: options};
@@ -36,8 +44,13 @@ export default class MedicationContainer extends Component {
     }
 
     render() {
+        var minimumInput = 0;
+        if (!this.props.isDropDown) {
+            minimumInput = 2
+        }
         return (<div><AutoComplete loadOptions={this.getDrugs} placeholder="Search for drug to add to prescription"
-                                   onValueChange={this.onDrugSelect} value={this.state.value}/>
+                                   onValueChange={this.onDrugSelect} searchable={!this.props.isDropDown}
+                                   minimumInput={minimumInput}/>
             <Button onClick={this.addToPrescription} label="Add to prescription" color={this.state.color}/>
 
         </div>);
@@ -49,12 +62,9 @@ export default class MedicationContainer extends Component {
 
 }
 
-MedicationContainer.defaultProps = {
-    optionsUrl: '/openmrs/ws/rest/v1/drug?s=ordered&v=custom:(uuid,strength,name,dosageForm,concept:(uuid,name,names:(name)))&q=',
-};
-
 MedicationContainer.propTypes = {
-    optionsUrl: PropTypes.string,
+    isDropDown: PropTypes.boolean,
+    conceptSet: PropTypes.string
 };
 
 ComponentStore.registerComponent('MedicationContainer', MedicationContainer);
