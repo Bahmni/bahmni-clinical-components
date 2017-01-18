@@ -1,8 +1,8 @@
 import React, {Component, PropTypes} from 'react';
-import ComponentStore from 'src/helpers/componentStore';
-import  AutoComplete  from 'src/components/medication/AutoComplete.jsx';
-import  Button  from 'src/components/medication/Button.jsx';
-import {httpInterceptor} from 'src/helpers/httpInterceptor';
+import ComponentStore from '../../helpers/componentStore';
+import  AutoComplete  from './AutoComplete.jsx';
+import  Button  from './Button.jsx';
+import {httpInterceptor} from '../../helpers/httpInterceptor';
 
 export default class MedicationContainer extends Component {
     constructor(props) {
@@ -63,8 +63,13 @@ export default class MedicationContainer extends Component {
 }
 
 MedicationContainer.propTypes = {
-    isDropDown: PropTypes.boolean,
+    isDropDown: PropTypes.bool,
     conceptSet: PropTypes.string
+};
+
+MedicationContainer.defaultProps = {
+    isDropDown: false,
+    conceptSet: null
 };
 
 ComponentStore.registerComponent('MedicationContainer', MedicationContainer);

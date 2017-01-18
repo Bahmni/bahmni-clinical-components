@@ -4,3 +4,5 @@ export { MedicationContainer } from 'components/medication/MedicationContainer.j
 
 // -------------------------- helpers ---------------------
 export { default as ComponentStore } from 'src/helpers/componentStore';
+export { default as httpInterceptor } from 'src/helpers/httpInterceptor';
+

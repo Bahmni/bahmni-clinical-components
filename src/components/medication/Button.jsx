@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import ComponentStore from 'src/helpers/componentStore';
+import ComponentStore from '../../helpers/componentStore';
 
 export default class Button extends Component {
     constructor(props) {

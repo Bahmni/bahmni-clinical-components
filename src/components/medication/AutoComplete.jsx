@@ -11,8 +11,7 @@ export default class AutoComplete extends Component {
 
 
     shouldComponentUpdate(nextProps, nextState) { /* check */
-        if (!isEqual(this.state.value, nextState.value) ||
-            this.state.noResultsText !== nextState.noResultsText) {
+        if (!isEqual(this.state.value, nextState.value)) {
             return true;
         }
         return false;
