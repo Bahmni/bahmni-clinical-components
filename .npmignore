@@ -1,10 +1,2 @@
-test/
-node_modules/
-webpack.config.js
-.babelrc
-.eslintrc
-.idea*
-coverage/
-src/
-.storybook/
-stories/
+/*
+!/dist/*

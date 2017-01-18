@@ -1,4 +1,4 @@
-export { AutoComplete } from 'components/medication/AutoComplete.jsx';
+export { AutoComplete } from 'components/AutoComplete.jsx';
 export { MedicationContainer } from 'components/medication/MedicationContainer.jsx';
 
 // -------------------------- helpers ---------------------
