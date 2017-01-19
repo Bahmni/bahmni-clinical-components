@@ -1,7 +1,7 @@
-import {expect} from 'chai';
-import {Autocomplete} from 'components/Autocomplete.jsx';
-import {Button} from 'components/Button.jsx';
-import ComponentStore from 'helpers/componentStore';
+import { expect } from 'chai';
+import { Autocomplete } from '../../../src/components/Autocomplete.jsx';
+import { Button } from '../../../src/components/Button.jsx';
+import ComponentStore from '../../../src/helpers/componentStore';
 
 describe('ComponentStore', () => {
   beforeEach(() => {
@@ -11,7 +11,7 @@ describe('ComponentStore', () => {
   describe('registerComponent', () => {
     it('should register a component', () => {
       ComponentStore.registerComponent('autocomplete', Autocomplete);
-      expect(ComponentStore.componentList).to.deep.eql({autocomplete: Autocomplete});
+      expect(ComponentStore.componentList).to.deep.eql({ autocomplete: Autocomplete });
     });
   });
 
@@ -51,11 +51,10 @@ describe('ComponentStore', () => {
 
   describe('getAllRegisteredComponents', () => {
     it('should return all the registered components', () => {
-      const expectedComponents = {autocomplete: Autocomplete, button: Button};
+      const expectedComponents = { autocomplete: Autocomplete, button: Button };
       ComponentStore.registerComponent('autocomplete', Autocomplete);
       ComponentStore.registerComponent('button', Button);
       expect(ComponentStore.getAllRegisteredComponents()).to.deep.eql(expectedComponents);
     });
   });
-
 });

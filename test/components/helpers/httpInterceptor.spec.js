@@ -1,6 +1,6 @@
 import chaiEnzyme from 'chai-enzyme';
 import chai, { expect } from 'chai';
-import { httpInterceptor } from 'helpers/httpInterceptor';
+import { httpInterceptor } from '../../../src/helpers/httpInterceptor';
 import fetchMock from 'fetch-mock';
 
 chai.use(chaiEnzyme());
