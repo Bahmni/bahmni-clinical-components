@@ -40,6 +40,7 @@
     "eslint-plugin-jsx-a11y": "^2.0.1",
     "eslint-plugin-jsx-control-statements": "^2.1.1",
     "eslint-plugin-react": "^5.2.2",
+    "fetch-mock": "^5.8.1",
     "jest": "^18.0.0",
     "jest-cli": "^18.1.0",
     "publish": "^0.6.0",
@@ -53,8 +54,8 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
-    "webpack": "^1.14.0",
     "react-select": "1.0.0-rc.1",
+    "webpack": "^1.14.0",
     "whatwg-fetch": "^1.0.0"
   }
 }
