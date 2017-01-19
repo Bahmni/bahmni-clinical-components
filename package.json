@@ -1,6 +1,6 @@
 {
   "name": "bahmni-clinical-components",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Repository for bahmni clinical components",
   "license": "GPL-2.0",
   "main": "./dist/bundle.js",
