@@ -1,10 +1,15 @@
 import 'whatwg-fetch';
+import isEmpty from 'lodash/isEmpty';
 
 export const httpInterceptor = {
 
 
   get: (url, params) => {
-    const urlWithParams = `${url}?${httpInterceptor.stringify(params)}`;
+    let urlWithParams = url;
+    const stringifiedParams = httpInterceptor.stringify(params);
+    if (!isEmpty(stringifiedParams)) {
+      urlWithParams = `${url}?${stringifiedParams}`;
+    }
     return fetch(urlWithParams, { credentials: 'same-origin', Accept: 'application/json' })
             .then((response) => {
               if (response.status >= 200 && response.status < 300) {
