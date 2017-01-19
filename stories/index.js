@@ -2,7 +2,7 @@ import React from 'react';
 import {storiesOf, action, linkTo} from '@kadira/storybook';
 import Button from './Button';
 import Welcome from './Welcome';
-import MedicationContainerStory from './MedicationContainerStory';
+import MyButton from './MyButton';
 
 storiesOf('Welcome', module)
     .add('to Storybook', () => (
@@ -17,7 +17,7 @@ storiesOf('Button', module)
         <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>
     ));
 
-storiesOf('MedicationContainerStory', module)
+storiesOf('MyButton', module)
     .add('test', () => (
-        <MedicationContainerStory title={"Click Me!!"}/>
+        <MyButton title={"Click Me!!"}/>
     ));
