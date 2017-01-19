@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import ComponentStore from '../../helpers/componentStore';
-import AutoComplete from '../AutoComplete.jsx';
-import Button from '../Button.jsx';
-import { httpInterceptor } from '../../helpers/httpInterceptor';
+import ComponentStore from 'src/helpers/componentStore';
+import AutoComplete from 'src/components/AutoComplete.jsx';
+import Button from 'src/components/Button.jsx';
+import { httpInterceptor } from 'src/helpers/httpInterceptor';
 
 export default class MedicationContainer extends Component {
   constructor(props) {

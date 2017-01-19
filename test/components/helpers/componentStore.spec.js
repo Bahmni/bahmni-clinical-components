@@ -1,7 +1,7 @@
 import { expect } from 'chai';
-import { Autocomplete } from 'components/AutoComplete.jsx';
-import { Button } from 'components/Button.jsx';
-import ComponentStore from 'helpers/componentStore';
+import { Autocomplete } from 'src/components/AutoComplete.jsx';
+import { Button } from 'src/components/Button.jsx';
+import ComponentStore from 'src/helpers/componentStore';
 
 describe('ComponentStore', () => {
   beforeEach(() => {

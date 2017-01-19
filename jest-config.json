@@ -3,9 +3,9 @@
     "verbose": true,
     "collectCoverage": true,
     "modulePaths": [
-        "<rootDir>/src"
+        "<rootDir>"
     ],
-    "moduleDirectories":  ["node_modules", "src"],
+    "moduleDirectories":  ["node_modules" ],
     "moduleFileExtensions": [
         "js",
         "json",

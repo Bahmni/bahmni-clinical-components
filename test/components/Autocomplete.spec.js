@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import chai, { expect } from 'chai';
-import Autocomplete from 'components/AutoComplete.jsx';
+import Autocomplete from 'src/components/AutoComplete.jsx';
 
 chai.use(chaiEnzyme());
 
