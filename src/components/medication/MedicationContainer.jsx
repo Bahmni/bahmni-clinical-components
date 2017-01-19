@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ComponentStore from '../../helpers/componentStore';
 import AutoComplete from '../AutoComplete.jsx';
-import Button from '../Button.jsx';
 import { httpInterceptor } from '../../helpers/httpInterceptor';
 
 export default class MedicationContainer extends Component {
@@ -57,7 +56,7 @@ export default class MedicationContainer extends Component {
             placeholder="Search for drug to add to prescription"
             searchable={!this.props.isDropDown}
           />
-          <Button color={this.state.color} label="Add to prescription" />
+          <button> Add to prescription {this.state.color}</button>
         </div>);
   }
 }
