@@ -27,8 +27,8 @@ export default class MedicationContainer extends Component {
       s: 'ordered',
       q: input,
     };
-    if (this.props.conceptSet) {
-      params.q = this.props.conceptSet;
+    if (this.props.drugConceptSet) {
+      params.q = this.props.drugConceptSet;
       params.s = 'byConceptSet';
     }
     return httpInterceptor.get(optionsUrl, params)
@@ -63,12 +63,12 @@ export default class MedicationContainer extends Component {
 }
 
 MedicationContainer.propTypes = {
-  conceptSet: PropTypes.string,
+  drugConceptSet: PropTypes.string,
   isDropDown: PropTypes.bool,
 };
 
 MedicationContainer.defaultProps = {
-  conceptSet: null,
+  drugConceptSet: null,
   isDropDown: false,
 };
 

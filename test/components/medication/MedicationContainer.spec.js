@@ -18,7 +18,7 @@ describe('MedicationContainer', () => {
   });
 
   it('should change button props to red on drug select when drug is non coded  ', () => {
-    const props = { conceptSet: 'All TB Drugs', isDropDown: true };
+    const props = { drugConceptSet: 'All TB Drugs', isDropDown: true };
     const wrapper = mount(<MedicationContainer {...props} />);
     const onChange = wrapper.find('Select').props().onChange;
     onChange('paracetmol');
@@ -30,7 +30,7 @@ describe('MedicationContainer', () => {
   });
 
   it('should change button props to blue on drug select when drug is  coded  ', () => {
-    const props = { conceptSet: 'All TB Drugs', isDropDown: true };
+    const props = { drugConceptSet: 'All TB Drugs', isDropDown: true };
     const wrapper = mount(<MedicationContainer {...props} />);
     const onChange = wrapper.find('Select').props().onChange;
     onChange({ uuid: 'some uuid' });
