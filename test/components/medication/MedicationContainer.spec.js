@@ -3,11 +3,15 @@ import { mount } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import chai, { expect } from 'chai';
 import MedicationContainer from 'src/components/medication/MedicationContainer.jsx';
+import fetchMock from 'fetch-mock';
 
 chai.use(chaiEnzyme());
 
 
 describe('MedicationContainer', () => {
+  afterEach(() => {
+    fetchMock.restore();
+  });
   it('should render Autocomplete and Button components by default', () => {
     const wrapper = mount(<MedicationContainer />);
 
@@ -39,5 +43,15 @@ describe('MedicationContainer', () => {
     expect(wrapper.find('Select').props().minimumInput).to.equal(0);
     expect(wrapper.find('Select').props().searchable).to.equal(false);
     expect(wrapper.find('Button').props().color).to.equal('blue');
+  });
+
+  it('should render Autocomplete with load options by default', () => {
+    const options = {name : "paracetamol", value : "100"};
+    fetchMock.mock('/openmrs/ws/rest/v1/drug?v=custom%3A(uuid%2Cstrength%2Cname%2CdosageForm%2Cconcept%3A(uuid%2Cname%2Cnames%3A(name)))&s=ordered&q=pa', options );
+
+    const wrapper = mount(<MedicationContainer />);
+    const onChange = wrapper.find('AutoComplete').props().loadOptions;
+      onChange("pa");
+    expect(fetchMock.calls().matched.length).to.eql(1);
   });
 });
