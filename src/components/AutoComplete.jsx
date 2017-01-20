@@ -7,20 +7,27 @@ export default class AutoComplete extends Component {
     super(props);
     this.state = {};
     this.handleChange = this.handleChange.bind(this);
+    this.storeChildRef = this.storeChildRef.bind(this);
   }
 
 
-  shouldComponentUpdate(nextProps, nextState) { /* check */
+  shouldComponentUpdate(nextProps, nextState) {
     if (!isEqual(this.state.value, nextState.value)) {
       return true;
     }
     return false;
   }
 
+  storeChildRef(ref) {
+    if (ref) this.childRef = ref;
+  }
 
   handleChange(value) {
     this.setState({ value });
     this.props.onValueChange(value);
+    if (this.props.searchable) {
+      this.childRef.resetState();
+    }
   }
 
   render() {
@@ -44,11 +51,13 @@ export default class AutoComplete extends Component {
       valueKey,
       placeholder,
       searchable,
+      searchPromptText: null,
     };
     return (
                 <div >
                     <Select.Async
                       { ...props }
+                      ref={this.storeChildRef}
                     />
                 </div>
     );

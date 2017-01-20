@@ -55,7 +55,7 @@ export default class MedicationContainer extends Component {
             minimumInput={minimumInput}
             onValueChange={this.onDrugSelect}
             placeholder="Search for drug to add to prescription"
-            searchable={!this.props.isDropDown}
+            searchable={!(this.props.isDropDown && this.props.drugConceptSet)}
           />
           <Button color={this.state.color} label="Add to prescription" />
         </div>);
