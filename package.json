@@ -54,6 +54,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "react-modal": "^1.6.5",
     "react-select": "1.0.0-rc.1",
     "webpack": "^1.14.0",
     "whatwg-fetch": "^1.0.0"

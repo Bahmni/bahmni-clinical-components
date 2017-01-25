@@ -1,20 +1,27 @@
 import React, { Component, PropTypes } from 'react';
 import ComponentStore from 'src/helpers/componentStore';
 import AutoComplete from 'src/components/AutoComplete.jsx';
-import Button from 'src/components/Button.jsx';
 import { httpInterceptor } from 'src/helpers/httpInterceptor';
+import Button from 'src/components/Button.jsx';
+import NewPrescriptionModal from 'src/components/medication/NewPrescriptionModal.jsx';
 
 export default class MedicationContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { color: 'red' };
+    this.state = { color: 'red', showModal:false };
     this.getDrugs = this.getDrugs.bind(this);
     this.onDrugSelect = this.onDrugSelect.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
+
+  handleCloseModal () {
+    this.setState({ showModal: false });
+  }
+
 
   onDrugSelect(value) {
     if (value && value.uuid) {
-      this.setState({ color: 'blue', value });
+      this.setState({ color: 'blue', value , showModal: true});
     } else {
       this.setState({ color: 'red', value });
     }
@@ -57,14 +64,16 @@ export default class MedicationContainer extends Component {
             placeholder="Search for drug to add to prescription"
             searchable={!(this.props.isDropDown && this.props.drugConceptSet)}
           />
-          <Button color={this.state.color} label="Add to prescription" />
-        </div>);
+          <Button color={this.state.color} label="Add to prescription"  />
+          { this.state.showModal &&  <NewPrescriptionModal handleCloseModal={this.handleCloseModal} drug={this.state.value} treatmentConfig={this.props.treatmentConfig}/> }
+          </div>);
   }
 }
 
 MedicationContainer.propTypes = {
   drugConceptSet: PropTypes.string,
   isDropDown: PropTypes.bool,
+  treatmentConfig:PropTypes.object
 };
 
 MedicationContainer.defaultProps = {
