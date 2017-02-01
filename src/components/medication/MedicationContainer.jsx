@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import ComponentStore from 'src/helpers/componentStore';
+import {ComponentStore} from 'bahmni-form-controls';
 import AutoComplete from 'src/components/AutoComplete.jsx';
 import { httpInterceptor } from 'src/helpers/httpInterceptor';
 import Button from 'src/components/Button.jsx';
