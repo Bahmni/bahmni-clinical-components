@@ -13,7 +13,7 @@ export default class DrugStartDate extends Component {
   }
 
   onDateSelection(e) {
-    this.props.onChange(e.target.value);
+    this.props.onValueChange(e.target.value);
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -30,7 +30,7 @@ export default class DrugStartDate extends Component {
     if (value === this.options[0].value) {
       date = new Date().toISOString().split('T')[0];
     }
-    this.props.onChange(date);
+    this.props.onValueChange(date);
   }
 
   render() {
@@ -52,6 +52,6 @@ export default class DrugStartDate extends Component {
 }
 
 DrugStartDate.propTypes = {
-  onChange: PropTypes.func,
+  onValueChange: PropTypes.func,
   value: PropTypes.string,
 };

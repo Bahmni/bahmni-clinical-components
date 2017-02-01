@@ -10,7 +10,7 @@ chai.use(chaiEnzyme());
 describe('DrugStartDate', () => {
   it('should render drug start date with options today and other day', () => {
     const onChange = jest.fn();
-    const wrapper = mount(<DrugStartDate value={new Date().toISOString().split('T')[0]} onChange={onChange} />);
+    const wrapper = mount(<DrugStartDate value={new Date().toISOString().split('T')[0]} onValueChange={onChange} />);
     const options = [{ name: 'Today', value: 'Today' }, { name: 'Other Day', value: 'Other Day' }];
 
     expect(wrapper.find('RadioButton').props().options).to.deep.equal(options);
@@ -24,8 +24,8 @@ describe('DrugStartDate', () => {
   });
 
   it('should set the date to today when option is changed from Other day to Today', () => {
-    const onChange = jest.fn(() => '');
-    const wrapper = mount(<DrugStartDate value={new Date().toISOString().split('T')[0]} onChange={onChange} />);
+    const onChange = jest.fn(() => {});
+    const wrapper = mount(<DrugStartDate value={new Date().toISOString().split('T')[0]} onValueChange={onChange} />);
 
     const onValueChange = wrapper.find('RadioButton').props().onValueChange;
     onValueChange('Today');
@@ -36,8 +36,8 @@ describe('DrugStartDate', () => {
 
 
   it('should set the date from the date field', () => {
-    const onChange = jest.fn(() => '');
-    const wrapper = mount(<DrugStartDate value={new Date().toISOString().split('T')[0]} onChange={onChange} />);
+    const onChange = jest.fn(() => {});
+    const wrapper = mount(<DrugStartDate value={new Date().toISOString().split('T')[0]} onValueChange={onChange} />);
 
     wrapper.find('input').at(2).simulate('change', { target: { value: '2017-02-01' } });
 

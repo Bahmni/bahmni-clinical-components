@@ -8,12 +8,44 @@ import fetchMock from 'fetch-mock';
 chai.use(chaiEnzyme());
 
 
+var treatmentConfig = {
+  getDrugConceptSet: function () {
+    return "All TB Drugs";
+  },
+  isDropDownForGivenConceptSet: function () {
+    return false;
+  },
+  isAutoCompleteForGivenConceptSet: function () {
+    return false;
+  },
+  isAutoCompleteForAllConcepts: function () {
+    return true;
+  },
+  getDoseFractions: function () {
+    return [{"value": 0.50, "label": "½"}];
+  },
+  frequencies: [{name: 'Twice a day', frequencyPerDay: 2}],
+  durationUnits: [
+    {name: "Day(s)", factor: 1},
+    {name: "Week(s)", factor: 7},
+    {name: "Month(s)", factor: 30}
+  ],
+  inputOptionsConfig: {"frequencyDefaultDurationUnitsMap": [
+    {
+      "minFrequency": 5,
+      "maxFrequency": null,
+      "defaultDurationUnit": "Hour(s)"
+    }
+  ]},
+  dosingInstructions:[{name:"Before Meals"}]
+};
+
 describe('MedicationContainer', () => {
   afterEach(() => {
     fetchMock.restore();
   });
   it('should render Autocomplete and Button components by default', () => {
-    const wrapper = mount(<MedicationContainer  treatmentConfig={{}} />);
+    const wrapper = mount(<MedicationContainer  treatmentConfig={treatmentConfig} />);
 
     expect(wrapper.find('Button').length).to.equal(1);
     expect(wrapper.find('Select').length).to.equal(1);
@@ -22,7 +54,7 @@ describe('MedicationContainer', () => {
   });
 
   it('should change button props to red on drug select when drug is non coded  ', () => {
-    const props = { drugConceptSet: 'All TB Drugs', isDropDown: true, treatmentConfig: {} };
+    const props = { drugConceptSet: 'All TB Drugs', isDropDown: true, treatmentConfig };
     const wrapper = mount(<MedicationContainer {...props} />);
     const onChange = wrapper.find('Select').props().onChange;
     onChange('paracetmol');
@@ -34,7 +66,7 @@ describe('MedicationContainer', () => {
   });
 
   it('should change button props to blue on drug select when drug is  coded  ', () => {
-    const props = { drugConceptSet: 'All TB Drugs', isDropDown: true, treatmentConfig: {} };
+    const props = { drugConceptSet: 'All TB Drugs', isDropDown: true, treatmentConfig };
     const wrapper = mount(<MedicationContainer {...props} />);
     const onChange = wrapper.find('Select').props().onChange;
     onChange({ uuid: 'some uuid' });
@@ -52,7 +84,7 @@ describe('MedicationContainer', () => {
       '%2Cconcept%3A(uuid%2Cname%2Cnames%3A(name)))&s=ordered&q=pa',
       options);
 
-    const wrapper = mount(<MedicationContainer treatmentConfig={{}} />);
+    const wrapper = mount(<MedicationContainer treatmentConfig={treatmentConfig} />);
     const onChange = wrapper.find('AutoComplete').props().loadOptions;
     onChange('pa');
     expect(fetchMock.calls().matched.length).to.eql(1);
