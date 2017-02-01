@@ -1,7 +1,6 @@
-import React, {Component, PropTypes} from 'react';
-import {httpInterceptor} from 'src/helpers/httpInterceptor';
+import React, { Component, PropTypes } from 'react';
 import Select from 'react-select';
-import {NumericBox} from 'bahmni-form-controls';
+import { NumericBox } from 'bahmni-form-controls';
 
 export default class Measurement extends Component {
   constructor(props) {
@@ -11,21 +10,36 @@ export default class Measurement extends Component {
     this.handleUnitsChange = this.handleUnitsChange.bind(this);
   }
 
-  handleValueChange(value){
-    this.props.onChange({name:this.props.measurement.name, value :value, unit : this.props.measurement.unit});
+  handleValueChange(value) {
+    this.props.onChange({ name: this.props.measurement.name,
+      value, unit: this.props.measurement.unit });
   }
 
-  handleUnitsChange(unit){
-    this.props.onChange({ name:this.props.measurement.name, value : this.props.measurement.value, unit : unit});
+  handleUnitsChange(unit) {
+    this.props.onChange({ name: this.props.measurement.name,
+      value: this.props.measurement.value,
+      unit });
   }
 
 
   render() {
     return (<div>
             <p>{this.props.label}</p>
-            <NumericBox value={this.props.measurement.value} onChange={this.handleValueChange} validate={true}  validations={[]}/>
+            <NumericBox
+              onChange={this.handleValueChange}
+              validate validations={[]}
+              value={this.props.measurement.value}
+            />
+
             <p>Units</p>
-            <Select options={this.props.options} value={this.props.measurement.unit} labelKey="name" valueKey="name" onChange={this.handleUnitsChange}  searchable={false}/>
+            <Select
+              labelKey="name"
+              onChange={this.handleUnitsChange}
+              options={this.props.options}
+              searchable={false}
+              value={this.props.measurement.unit}
+              valueKey="name"
+            />
            </div>
     );
   }
@@ -34,10 +48,9 @@ export default class Measurement extends Component {
 }
 
 Measurement.propTypes = {
-  measurement:PropTypes.object.isRequired,
+  label: PropTypes.string,
+  measurement: PropTypes.object.isRequired,
+  onChange: PropTypes.func,
   options: PropTypes.array,
-  onChange:PropTypes.func,
-  label: PropTypes.string
 };
-
 

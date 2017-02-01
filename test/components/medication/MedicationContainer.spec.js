@@ -46,12 +46,15 @@ describe('MedicationContainer', () => {
   });
 
   it('should render Autocomplete with load options by default', () => {
-    const options = {name : "paracetamol", value : "100"};
-    fetchMock.mock('/openmrs/ws/rest/v1/drug?v=custom%3A(uuid%2Cstrength%2Cname%2CdosageForm%2Cconcept%3A(uuid%2Cname%2Cnames%3A(name)))&s=ordered&q=pa', options );
+    const options = { name: 'paracetamol', value: '100' };
+    fetchMock.mock(
+      '/openmrs/ws/rest/v1/drug?v=custom%3A(uuid%2Cstrength%2Cname%2CdosageForm' +
+      '%2Cconcept%3A(uuid%2Cname%2Cnames%3A(name)))&s=ordered&q=pa',
+      options);
 
     const wrapper = mount(<MedicationContainer />);
     const onChange = wrapper.find('AutoComplete').props().loadOptions;
-      onChange("pa");
+    onChange('pa');
     expect(fetchMock.calls().matched.length).to.eql(1);
   });
 });

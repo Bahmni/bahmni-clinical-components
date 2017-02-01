@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {ComponentStore} from 'bahmni-form-controls';
+import { ComponentStore } from 'bahmni-form-controls';
 import AutoComplete from 'src/components/AutoComplete.jsx';
 import { httpInterceptor } from 'src/helpers/httpInterceptor';
 import Button from 'src/components/Button.jsx';
@@ -8,20 +8,15 @@ import NewPrescriptionModal from 'src/components/medication/NewPrescriptionModal
 export default class MedicationContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { color: 'red', showModal:false };
+    this.state = { color: 'red', showModal: false };
     this.getDrugs = this.getDrugs.bind(this);
-    this.onDrugSelect = this.onDrugSelect.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.onDrugSelect = this.onDrugSelect.bind(this);
   }
-
-  handleCloseModal () {
-    this.setState({ showModal: false });
-  }
-
 
   onDrugSelect(value) {
     if (value && value.uuid) {
-      this.setState({ color: 'blue', value , showModal: true});
+      this.setState({ color: 'blue', value, showModal: true });
     } else {
       this.setState({ color: 'red', value });
     }
@@ -48,6 +43,10 @@ export default class MedicationContainer extends Component {
             });
   }
 
+  handleCloseModal() {
+    this.setState({ showModal: false });
+  }
+
   render() {
     let minimumInput = 0;
     if (!this.props.isDropDown) {
@@ -64,8 +63,11 @@ export default class MedicationContainer extends Component {
             placeholder="Search for drug to add to prescription"
             searchable={!(this.props.isDropDown && this.props.drugConceptSet)}
           />
-          <Button color={this.state.color} label="Add to prescription"  />
-          { this.state.showModal &&  <NewPrescriptionModal handleCloseModal={this.handleCloseModal} drug={this.state.value} treatmentConfig={this.props.treatmentConfig}/> }
+          <Button color={this.state.color} label="Add to prescription" />
+          { this.state.showModal && <NewPrescriptionModal drug={this.state.value}
+            handleCloseModal={this.handleCloseModal}
+            treatmentConfig={this.props.treatmentConfig}
+          /> }
           </div>);
   }
 }
@@ -73,7 +75,7 @@ export default class MedicationContainer extends Component {
 MedicationContainer.propTypes = {
   drugConceptSet: PropTypes.string,
   isDropDown: PropTypes.bool,
-  treatmentConfig:PropTypes.object
+  treatmentConfig: PropTypes.object,
 };
 
 MedicationContainer.defaultProps = {
