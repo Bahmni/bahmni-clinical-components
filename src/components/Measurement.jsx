@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Select from 'react-select';
 import { NumericBox } from 'bahmni-form-controls';
+import isEqual from 'lodash/isEqual';
 
 export default class Measurement extends Component {
   constructor(props) {
@@ -11,8 +12,18 @@ export default class Measurement extends Component {
   }
 
   handleValueChange(value) {
-    this.props.onChange({ name: this.props.measurement.name,
-      value, unit: this.props.measurement.unit });
+    this.props.onChange({
+      name: this.props.measurement.name,
+      value,
+      unit: this.props.measurement.unit
+    });
+  }
+  shouldComponentUpdate(nextProps) {
+    if (!isEqual(this.props.measurement.value, nextProps.measurement.value)
+      || !isEqual(this.props.measurement.unit, nextProps.measurement.unit)) {
+      return true;
+    }
+    return false;
   }
 
   handleUnitsChange(unit) {
@@ -20,7 +31,6 @@ export default class Measurement extends Component {
       value: this.props.measurement.value,
       unit });
   }
-
 
   render() {
     return (<div>
@@ -43,8 +53,6 @@ export default class Measurement extends Component {
            </div>
     );
   }
-
-
 }
 
 Measurement.propTypes = {
@@ -53,4 +61,3 @@ Measurement.propTypes = {
   onChange: PropTypes.func,
   options: PropTypes.array,
 };
-

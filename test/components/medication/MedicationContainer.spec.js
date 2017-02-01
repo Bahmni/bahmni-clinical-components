@@ -13,7 +13,7 @@ describe('MedicationContainer', () => {
     fetchMock.restore();
   });
   it('should render Autocomplete and Button components by default', () => {
-    const wrapper = mount(<MedicationContainer />);
+    const wrapper = mount(<MedicationContainer  treatmentConfig={{}} />);
 
     expect(wrapper.find('Button').length).to.equal(1);
     expect(wrapper.find('Select').length).to.equal(1);
@@ -22,7 +22,7 @@ describe('MedicationContainer', () => {
   });
 
   it('should change button props to red on drug select when drug is non coded  ', () => {
-    const props = { drugConceptSet: 'All TB Drugs', isDropDown: true };
+    const props = { drugConceptSet: 'All TB Drugs', isDropDown: true, treatmentConfig: {} };
     const wrapper = mount(<MedicationContainer {...props} />);
     const onChange = wrapper.find('Select').props().onChange;
     onChange('paracetmol');
@@ -52,7 +52,7 @@ describe('MedicationContainer', () => {
       '%2Cconcept%3A(uuid%2Cname%2Cnames%3A(name)))&s=ordered&q=pa',
       options);
 
-    const wrapper = mount(<MedicationContainer />);
+    const wrapper = mount(<MedicationContainer treatmentConfig={{}} />);
     const onChange = wrapper.find('AutoComplete').props().loadOptions;
     onChange('pa');
     expect(fetchMock.calls().matched.length).to.eql(1);

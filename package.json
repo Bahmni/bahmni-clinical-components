@@ -16,7 +16,8 @@
     "deploy-storybook": "storybook-to-ghpages",
     "publish": "publish || true",
     "ci": "yarn run clean && yarn run build && yarn run publish",
-    "bump-up": "npm version patch -m 'Bumped to version %s'"
+    "bump-up": "npm version patch -m 'Bumped to version %s'",
+    "watch": "webpack --watch"
   },
   "author": "bahmni@thoughtworks.com",
   "devDependencies": {

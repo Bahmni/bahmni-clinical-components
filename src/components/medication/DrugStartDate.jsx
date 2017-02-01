@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { RadioButton } from 'bahmni-form-controls';
+import isEqual from 'lodash/isEqual';
 
 export default class DrugStartDate extends Component {
   constructor(props) {
     super(props);
-
     const value = props.value;
     this.options = [{ name: 'Today', value: 'Today' }, { name: 'Other Day', value: 'Other Day' }];
     this.state = { value, option: this.options[0].value };
@@ -14,6 +14,14 @@ export default class DrugStartDate extends Component {
 
   onDateSelection(e) {
     this.props.onChange(e.target.value);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (!isEqual(this.props.value, nextProps.value)
+      || !isEqual(this.state.option, nextState.option)) {
+      return true;
+    }
+    return false;
   }
 
   handleChange(value) {
@@ -47,4 +55,3 @@ DrugStartDate.propTypes = {
   onChange: PropTypes.func,
   value: PropTypes.string,
 };
-

@@ -75,7 +75,7 @@ export default class MedicationContainer extends Component {
 MedicationContainer.propTypes = {
   drugConceptSet: PropTypes.string,
   isDropDown: PropTypes.bool,
-  treatmentConfig: PropTypes.object,
+  treatmentConfig:PropTypes.object.isRequired
 };
 
 MedicationContainer.defaultProps = {

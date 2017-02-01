@@ -4,7 +4,7 @@ import Select from 'react-select';
 import Measurement from 'src/components/Measurement.jsx';
 import find from 'lodash/find';
 import DrugStartDate from 'src/components/medication/DrugStartDate.jsx';
-
+import {Button as ButtonSelect}  from "bahmni-form-controls";
 
 export default class NewPrescriptionModal extends Component {
   constructor(props) {
@@ -21,6 +21,7 @@ export default class NewPrescriptionModal extends Component {
     this.handleRouteChange = this.handleRouteChange.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
     this.togglePRNStatus = this.togglePRNStatus.bind(this);
+    this.handleDosingInstructionChange = this.handleDosingInstructionChange.bind(this);
   }
 
 
@@ -94,6 +95,9 @@ export default class NewPrescriptionModal extends Component {
     this.setState(newState);
   }
 
+  handleDosingInstructionChange(value){
+    this.setState({dosingInstructions: value});
+  }
 
   handleDateChange(date) {
     this.setState({ drugStartDate: date });
@@ -122,6 +126,7 @@ export default class NewPrescriptionModal extends Component {
         border: '1px solid #ccc',
         background: '#fff',
         overflow: 'auto',
+        height: '100px',
         WebkitOverflowScrolling: 'touch',
         borderRadius: '4px',
         outline: 'none',
@@ -168,7 +173,15 @@ export default class NewPrescriptionModal extends Component {
 
           <p>Additional Instructions</p>
 
+          <ButtonSelect options={this.props.treatmentConfig.dosingInstructions}
+                        value={this.state.dosingInstructions }
+                        validate={false}
+                        validations={[]}
+                        valueKey={"name"}
+                        onValueChange={this.handleDosingInstructionChange}
+                        multiSelect={false}/>
           <button onClick={this.props.handleCloseModal}>Close</button>
+          <button onClick={this.props.handleCloseModal}>Done</button>
           </div>
         </ReactModal>
     );
