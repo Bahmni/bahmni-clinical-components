@@ -143,43 +143,52 @@ export default class NewPrescriptionModal extends Component {
           <div  ref={(ref) =>  {this.modalRef = ref;}} >
           <p>{this.props.drug.name}</p>
 
-          <Measurement onChange={this.handleMeasurementChange} options={this.props.treatmentConfig.durationUnits}
-            measurement={this.state.duration} label="Duration"
-          />
-
-          <br />
-          <Measurement onChange={this.handleMeasurementChange} options={this.props.treatmentConfig.doseUnits}
-            measurement={this.state.dose} label="Dose"
-          />
-          <br />
-          <Measurement onChange={this.handleTotalQuantityChange} options={this.props.treatmentConfig.doseUnits}
-            measurement={this.state.totalQuantity} label="Total Quantity"
-          />
-
+          <Measurement   onChange={this.handleMeasurementChange}
+                         options={this.props.treatmentConfig.doseUnits}
+                         measurement={this.state.dose}
+                         label="Dose"/> <br/>
 
           <p>Frequency</p>
-          <Select options={this.props.treatmentConfig.frequencies} value={this.state.frequency} labelKey="name"
-            valueKey="name" onChange={this.handleFrequencyChange} searchable={false}
-          />
-          <p>routes</p>
-          <Select options={this.props.treatmentConfig.routes} value={this.state.route} labelKey="name" valueKey="name"
-            onChange={this.handleRouteChange} searchable={false}
-          />
+          <Select        options={this.props.treatmentConfig.frequencies}
+                         value={this.state.frequency}
+                         labelKey="name"
+                         valueKey="name"
+                         onChange={this.handleFrequencyChange}
+                         searchable={false}/> <br/>
 
-          <DrugStartDate value={this.state.drugStartDate} onChange={this.handleDateChange} />
+          <Measurement   onChange={this.handleMeasurementChange}
+                         options={this.props.treatmentConfig.durationUnits}
+                         measurement={this.state.duration}
+                         label="Duration"/>
+
+          <Measurement   onChange={this.handleTotalQuantityChange}
+                         options={this.props.treatmentConfig.doseUnits}
+                         measurement={this.state.totalQuantity}
+                         label="Total Quantity"/>
+
+          <DrugStartDate value={this.state.drugStartDate}
+                         onValueChange={this.handleDateChange} />
+
+          <p>Routes</p>
+          <Select        options={this.props.treatmentConfig.routes}
+                         value={this.state.route}
+                         labelKey="name"
+                         valueKey="name"
+                         onChange={this.handleRouteChange}
+                         searchable={false}/>
 
           <p>PRN</p>
-          <button onClick={this.togglePRNStatus}>PRN {this.state.PRNStatus}</button>
+          <button  onClick={this.togglePRNStatus}>PRN {this.state.PRNStatus}</button>
 
           <p>Additional Instructions</p>
+          <ButtonSelect  options={this.props.treatmentConfig.dosingInstructions}
+                         value={this.state.dosingInstructions }
+                         validate={false}
+                         validations={[]}
+                         valueKey={"name"}
+                         onValueChange={this.handleDosingInstructionChange}
+                         multiSelect={false}/>
 
-          <ButtonSelect options={this.props.treatmentConfig.dosingInstructions}
-                        value={this.state.dosingInstructions }
-                        validate={false}
-                        validations={[]}
-                        valueKey={"name"}
-                        onValueChange={this.handleDosingInstructionChange}
-                        multiSelect={false}/>
           <button onClick={this.props.handleCloseModal}>Close</button>
           <button onClick={this.props.handleCloseModal}>Done</button>
           </div>
