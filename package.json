@@ -55,6 +55,7 @@
     "webpack-dev-server": "^1.16.2"
   },
   "dependencies": {
+    "lodash": "^4.17.4",
     "react-modal": "^1.6.5",
     "bahmni-form-controls": "^0.1.0",
     "react-select": "1.0.0-rc.1",
