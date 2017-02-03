@@ -3,14 +3,20 @@ import DrugSection from 'src/components/medication/DrugSection.jsx';
 import groupBy from 'lodash/groupBy';
 import orderBy from 'lodash/orderBy';
 
+const drugTableHeader = ['Drug Information - Name, Form, Route',
+  'Schedule - Dosage, Frequency, Duration',
+  'Total Qty',
+  'Instructions',
+  'Status',
+  'Action'];
+
 export default class DrugTable extends Component {
   constructor(props) {
     super(props);
   }
 
   _showHeaders() {
-    const headerNames = this.props.headers;
-    return headerNames.map((name, index) => {
+    return drugTableHeader.map((name, index) => {
       return (
         <div key={index} className="table-header-column">
           {name}
@@ -45,7 +51,6 @@ export default class DrugTable extends Component {
 }
 
 DrugTable.propTypes = {
-  headers: PropTypes.arrayOf(PropTypes.string).isRequired,
   data: PropTypes.arrayOf(PropTypes.object),
 };
 
@@ -55,4 +60,3 @@ DrugTable.defaultProps = {
     { name: 'drug2', dateActivated: 1484850600000 }
   ],
 };
-

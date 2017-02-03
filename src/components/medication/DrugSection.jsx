@@ -1,15 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import orderBy from 'lodash/orderBy';
+import { dateFormat } from 'src/helpers/dateFormat';
 
 import DrugRow from 'src/components/medication/DrugRow.jsx';
 
 export default class DrugSection extends Component {
   constructor(props) {
     super(props);
+    const date = new Date(Number.parseInt(props.header));
+    this.header = dateFormat(date);
   }
 
   _displayRowData() {
-    const rows = orderBy(this.props.data, 'sortWeight');  
+    const rows = orderBy(this.props.data, 'sortWeight');
     return rows.map((rowData, index) => {
       return (
         <DrugRow key={index} data={rowData} ></DrugRow>
@@ -20,7 +23,7 @@ export default class DrugSection extends Component {
   render() {
     return (
       <div className="table-section">
-        <div className="table-section-header">{this.props.header}</div>
+        <div className="table-section-header">{this.header}</div>
         {this._displayRowData()}
       </div>
     );
@@ -28,7 +31,7 @@ export default class DrugSection extends Component {
 }
 
 DrugSection.propTypes = {
-  header: PropTypes.string.isRequired,
+  header: PropTypes.number.isRequired,
   data: PropTypes.arrayOf(PropTypes.object),
 };
 

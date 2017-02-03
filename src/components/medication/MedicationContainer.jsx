@@ -2,16 +2,28 @@ import React, { Component, PropTypes } from 'react';
 import { ComponentStore } from 'bahmni-form-controls';
 import AutoComplete from 'src/components/AutoComplete.jsx';
 import { httpInterceptor } from 'src/helpers/httpInterceptor';
+import { urlConstants } from 'src/helpers/dateFormat';
 import Button from 'src/components/Button.jsx';
+import DrugTable from 'src/components/medication/DrugTable.jsx'
 import NewPrescriptionModal from 'src/components/medication/NewPrescriptionModal.jsx';
 
 export default class MedicationContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { color: 'red', showModal: false };
+    this.state = { drugHistoryData: [], color: 'red', showModal: false };
     this.getDrugs = this.getDrugs.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.onDrugSelect = this.onDrugSelect.bind(this);
+  }
+
+  componentDidMount() {
+    const allDrugHistory = `${urlConstants.allDrugHistory}${this.props.patientUuid}`;
+    return httpInterceptor.get(allDrugHistory)
+      .then((data) => this.setState({ drugHistoryData: data }))
+      .catch(() => {
+        const options = [];
+        return { options };
+      });
   }
 
   onDrugSelect(value) {
@@ -23,7 +35,7 @@ export default class MedicationContainer extends Component {
   }
 
   getDrugs(input) {
-    const optionsUrl = '/openmrs/ws/rest/v1/drug';
+    const optionsUrl = urlConstants.drugOptionUrl;
     const params = {
       v: 'custom:(uuid,strength,name,dosageForm,concept:(uuid,name,names:(name)))',
       s: 'ordered',
@@ -68,11 +80,13 @@ export default class MedicationContainer extends Component {
             handleCloseModal={this.handleCloseModal}
             treatmentConfig={this.props.treatmentConfig}
           /> }
-          </div>);
+          <DrugTable data={this.state.drugHistoryData} />
+        </div>);
   }
 }
 
 MedicationContainer.propTypes = {
+  patientUuid: PropTypes.string.isRequired,
   drugConceptSet: PropTypes.string,
   isDropDown: PropTypes.bool,
   treatmentConfig:PropTypes.object.isRequired

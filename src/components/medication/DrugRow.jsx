@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { dateFormat } from 'src/helpers/dateFormat';
 import isEmpty from 'lodash/isEmpty';
 
 import { prescriptionStatus } from 'src/constants';
@@ -69,7 +70,7 @@ export default class DrugRow extends Component {
     if (!isEmpty(data)) {
       const firstColumn = `${data.drug.name} ${data.drug.form}, ${data.dosingInstructions.route}`;
       const secondColumn = `${data.dosingInstructions.dose}, ${data.dosingInstructions.frequency} for ${data.duration}
-        ${data.durationUnits} started on ${new Date(data.effectiveStartDate)}`;
+        ${data.durationUnits} started on ${dateFormat(new Date(data.effectiveStartDate))} by ${data.creatorName}`;
       const thirdColumn = data.dosingInstructions.quantity;
       const fourthColumn = data.instructions;
       const fifthColumn = this._getStatus(this.props.data);
