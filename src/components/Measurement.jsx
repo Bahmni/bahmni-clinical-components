@@ -10,14 +10,6 @@ export default class Measurement extends Component {
     this.handleValueChange = this.handleValueChange.bind(this);
     this.handleUnitsChange = this.handleUnitsChange.bind(this);
   }
-
-  handleValueChange(value) {
-    this.props.onChange({
-      name: this.props.measurement.name,
-      value,
-      unit: this.props.measurement.unit
-    });
-  }
   shouldComponentUpdate(nextProps) {
     if (!isEqual(this.props.measurement.value, nextProps.measurement.value)
       || !isEqual(this.props.measurement.unit, nextProps.measurement.unit)) {
@@ -25,6 +17,15 @@ export default class Measurement extends Component {
     }
     return false;
   }
+
+  handleValueChange(value) {
+    this.props.onChange({
+      name: this.props.measurement.name,
+      value,
+      unit: this.props.measurement.unit,
+    });
+  }
+
 
   handleUnitsChange(unit) {
     this.props.onChange({ name: this.props.measurement.name,

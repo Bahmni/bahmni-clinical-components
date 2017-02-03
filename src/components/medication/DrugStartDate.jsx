@@ -12,10 +12,6 @@ export default class DrugStartDate extends Component {
     this.onDateSelection = this.onDateSelection.bind(this);
   }
 
-  onDateSelection(e) {
-    this.props.onValueChange(e.target.value);
-  }
-
   shouldComponentUpdate(nextProps, nextState) {
     if (!isEqual(this.props.value, nextProps.value)
       || !isEqual(this.state.option, nextState.option)) {
@@ -23,6 +19,11 @@ export default class DrugStartDate extends Component {
     }
     return false;
   }
+
+  onDateSelection(e) {
+    this.props.onValueChange(e.target.value);
+  }
+
 
   handleChange(value) {
     let date = '';

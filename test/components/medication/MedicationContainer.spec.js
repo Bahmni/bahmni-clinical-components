@@ -8,36 +8,36 @@ import fetchMock from 'fetch-mock';
 chai.use(chaiEnzyme());
 
 
-var treatmentConfig = {
-  getDrugConceptSet: function () {
-    return "All TB Drugs";
+const treatmentConfig = {
+  getDrugConceptSet() {
+    return 'All TB Drugs';
   },
-  isDropDownForGivenConceptSet: function () {
+  isDropDownForGivenConceptSet() {
     return false;
   },
-  isAutoCompleteForGivenConceptSet: function () {
+  isAutoCompleteForGivenConceptSet() {
     return false;
   },
-  isAutoCompleteForAllConcepts: function () {
+  isAutoCompleteForAllConcepts() {
     return true;
   },
-  getDoseFractions: function () {
-    return [{"value": 0.50, "label": "½"}];
+  getDoseFractions() {
+    return [{ value: 0.50, label: '½' }];
   },
-  frequencies: [{name: 'Twice a day', frequencyPerDay: 2}],
+  frequencies: [{ name: 'Twice a day', frequencyPerDay: 2 }],
   durationUnits: [
-    {name: "Day(s)", factor: 1},
-    {name: "Week(s)", factor: 7},
-    {name: "Month(s)", factor: 30}
+    { name: 'Day(s)', factor: 1 },
+    { name: 'Week(s)', factor: 7 },
+    { name: 'Month(s)', factor: 30 },
   ],
-  inputOptionsConfig: {"frequencyDefaultDurationUnitsMap": [
+  inputOptionsConfig: { frequencyDefaultDurationUnitsMap: [
     {
-      "minFrequency": 5,
-      "maxFrequency": null,
-      "defaultDurationUnit": "Hour(s)"
-    }
-  ]},
-  dosingInstructions:[{name:"Before Meals"}]
+      minFrequency: 5,
+      maxFrequency: null,
+      defaultDurationUnit: 'Hour(s)',
+    },
+  ] },
+  dosingInstructions: [{ name: 'Before Meals' }],
 };
 
 describe('MedicationContainer', () => {
@@ -45,7 +45,7 @@ describe('MedicationContainer', () => {
     fetchMock.restore();
   });
   it('should render Autocomplete and Button components by default', () => {
-    const wrapper = mount(<MedicationContainer  treatmentConfig={treatmentConfig} />);
+    const wrapper = mount(<MedicationContainer treatmentConfig={treatmentConfig} />);
 
     expect(wrapper.find('Button').length).to.equal(1);
     expect(wrapper.find('Select').length).to.equal(1);
@@ -88,5 +88,13 @@ describe('MedicationContainer', () => {
     const onChange = wrapper.find('AutoComplete').props().loadOptions;
     onChange('pa');
     expect(fetchMock.calls().matched.length).to.eql(1);
+  });
+
+  it('should close modal when Close button is clicked', () => {
+    const wrapper = mount(<MedicationContainer treatmentConfig={treatmentConfig} />);
+
+    wrapper.instance().handleCloseModal();
+
+    expect(wrapper.state().showModal).to.equal(false);
   });
 });

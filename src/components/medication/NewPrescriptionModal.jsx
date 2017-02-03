@@ -4,7 +4,7 @@ import Select from 'react-select';
 import Measurement from 'src/components/Measurement.jsx';
 import find from 'lodash/find';
 import DrugStartDate from 'src/components/medication/DrugStartDate.jsx';
-import {Button as ButtonSelect}  from "bahmni-form-controls";
+import { Button as ButtonSelect } from 'bahmni-form-controls';
 
 export default class NewPrescriptionModal extends Component {
   constructor(props) {
@@ -33,22 +33,21 @@ export default class NewPrescriptionModal extends Component {
       const a = input.split('/');
       return (a[0] / (a[1] || 1));
     }
-    return 0;
+    return null;
   }
 
   getDurationUnitForFrequency(frequency) {
     const durationUnitForFrequency =
-      find(this.props.treatmentConfig.inputOptionsConfig.frequencyDefaultDurationUnitsMap, (range) => {
-        const minFrequency = this.getDecimalFromString(range.minFrequency);
-        const maxFrequency = this.getDecimalFromString(range.maxFrequency);
-        return frequency.frequencyPerDay > minFrequency
-          && frequency.frequencyPerDay <= maxFrequency;
-      });
+      find(
+        this.props.treatmentConfig.inputOptionsConfig.frequencyDefaultDurationUnitsMap, (range) => {
+          const minFrequency = this.getDecimalFromString(range.minFrequency);
+          const maxFrequency = this.getDecimalFromString(range.maxFrequency);
+          return ((!minFrequency || frequency.frequencyPerDay > minFrequency)
+          && (!maxFrequency || frequency.frequencyPerDay <= maxFrequency));
+        });
 
-    const durationUnit =
-      find(this.props.treatmentConfig.durationUnits, (durationUnit) =>
-      durationUnitForFrequency && durationUnit.name === durationUnitForFrequency.defaultDurationUnit);
-    return durationUnit;
+    return find(this.props.treatmentConfig.durationUnits, (durationUnit) =>
+    durationUnitForFrequency && durationUnit.name === durationUnitForFrequency.defaultDurationUnit);
   }
 
 
@@ -71,12 +70,18 @@ export default class NewPrescriptionModal extends Component {
     this.setState({ route });
   }
 
-  calculateTotalQuantity({ dose = this.state.dose, duration = this.state.duration, frequency = this.state.frequency }) {
-    const totalQty = this.state.totalQuantity;
-    if (duration.value && dose.value && duration.unit && frequency) {
-      totalQty.value = Math.ceil(duration.value * duration.unit.factor * dose.value * frequency.frequencyPerDay);
-      totalQty.unit = dose.unit;
+  calculateTotalQuantity(
+    { dose = this.state.dose, duration = this.state.duration, frequency = this.state.frequency }) {
+    const totalQty = Object.assign({}, this.state.totalQuantity);
+    if (duration.value && dose.value && frequency) {
+      totalQty.value = Math.ceil(
+        duration.value *
+        ((duration.unit && duration.unit.factor) || 1) *
+        dose.value *
+        frequency.frequencyPerDay
+      );
     }
+    totalQty.unit = dose.unit;
     return totalQty;
   }
 
@@ -84,7 +89,7 @@ export default class NewPrescriptionModal extends Component {
   handleFrequencyChange(frequency) {
     const newState = { frequency };
 
-    const duration = this.state.duration;
+    const duration = Object.assign({}, this.state.duration);
     duration.unit = this.getDurationUnitForFrequency(frequency) || duration.unit;
     newState.duration = duration;
 
@@ -95,8 +100,8 @@ export default class NewPrescriptionModal extends Component {
     this.setState(newState);
   }
 
-  handleDosingInstructionChange(value){
-    this.setState({dosingInstructions: value});
+  handleDosingInstructionChange(value) {
+    this.setState({ dosingInstructions: value });
   }
 
   handleDateChange(date) {
@@ -126,7 +131,7 @@ export default class NewPrescriptionModal extends Component {
         border: '1px solid #ccc',
         background: '#fff',
         overflow: 'auto',
-        height: '100px',
+        height: '350px',
         WebkitOverflowScrolling: 'touch',
         borderRadius: '4px',
         outline: 'none',
@@ -136,58 +141,72 @@ export default class NewPrescriptionModal extends Component {
     };
     return (
         <ReactModal
-          isOpen={true}
           contentLabel="onRequestClose Example"
+          isOpen
           style={styles}
         >
-          <div  ref={(ref) =>  {this.modalRef = ref;}} >
+          <div ref={(ref) => {this.modalRef = ref;}} >
           <p>{this.props.drug.name}</p>
 
-          <Measurement   onChange={this.handleMeasurementChange}
-                         options={this.props.treatmentConfig.doseUnits}
-                         measurement={this.state.dose}
-                         label="Dose"/> <br/>
+          <Measurement
+            label="Dose"
+            measurement={this.state.dose}
+            onChange={this.handleMeasurementChange}
+            options={this.props.treatmentConfig.doseUnits}
+          /> <br />
 
           <p>Frequency</p>
-          <Select        options={this.props.treatmentConfig.frequencies}
-                         value={this.state.frequency}
-                         labelKey="name"
-                         valueKey="name"
-                         onChange={this.handleFrequencyChange}
-                         searchable={false}/> <br/>
+          <Select
+            labelKey="name"
+            onChange={this.handleFrequencyChange}
+            options={this.props.treatmentConfig.frequencies}
+            searchable={false}
+            value={this.state.frequency}
+            valueKey="name"
+          /> <br />
 
-          <Measurement   onChange={this.handleMeasurementChange}
-                         options={this.props.treatmentConfig.durationUnits}
-                         measurement={this.state.duration}
-                         label="Duration"/>
+          <Measurement
+            label="Duration"
+            measurement={this.state.duration}
+            onChange={this.handleMeasurementChange}
+            options={this.props.treatmentConfig.durationUnits}
+          />
 
-          <Measurement   onChange={this.handleTotalQuantityChange}
-                         options={this.props.treatmentConfig.doseUnits}
-                         measurement={this.state.totalQuantity}
-                         label="Total Quantity"/>
+          <Measurement
+            label="Total Quantity"
+            measurement={this.state.totalQuantity}
+            onChange={this.handleTotalQuantityChange}
+            options={this.props.treatmentConfig.doseUnits}
+          />
 
-          <DrugStartDate value={this.state.drugStartDate}
-                         onValueChange={this.handleDateChange} />
+          <DrugStartDate
+            onValueChange={this.handleDateChange}
+            value={this.state.drugStartDate}
+          />
 
           <p>Routes</p>
-          <Select        options={this.props.treatmentConfig.routes}
-                         value={this.state.route}
-                         labelKey="name"
-                         valueKey="name"
-                         onChange={this.handleRouteChange}
-                         searchable={false}/>
+          <Select
+            labelKey="name"
+            onChange={this.handleRouteChange}
+            options={this.props.treatmentConfig.routes}
+            searchable={false}
+            value={this.state.route}
+            valueKey="name"
+          />
 
           <p>PRN</p>
-          <button  onClick={this.togglePRNStatus}>PRN {this.state.PRNStatus}</button>
+          <button onClick={this.togglePRNStatus}>PRN {this.state.PRNStatus}</button>
 
           <p>Additional Instructions</p>
-          <ButtonSelect  options={this.props.treatmentConfig.dosingInstructions}
-                         value={this.state.dosingInstructions }
-                         validate={false}
-                         validations={[]}
-                         valueKey={"name"}
-                         onValueChange={this.handleDosingInstructionChange}
-                         multiSelect={false}/>
+          <ButtonSelect
+            multiSelect={false}
+            onValueChange={this.handleDosingInstructionChange}
+            options={this.props.treatmentConfig.dosingInstructions}
+            validate={false}
+            validations={[]}
+            value={this.state.dosingInstructions }
+            valueKey={'name'}
+          />
 
           <button onClick={this.props.handleCloseModal}>Close</button>
           <button onClick={this.props.handleCloseModal}>Done</button>
@@ -198,8 +217,8 @@ export default class NewPrescriptionModal extends Component {
 }
 
 NewPrescriptionModal.propTypes = {
-  handleCloseModal: PropTypes.func,
   drug: PropTypes.object,
+  handleCloseModal: PropTypes.func,
   treatmentConfig: PropTypes.object,
 };
 

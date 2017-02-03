@@ -89,7 +89,7 @@ MedicationContainer.propTypes = {
   patientUuid: PropTypes.string.isRequired,
   drugConceptSet: PropTypes.string,
   isDropDown: PropTypes.bool,
-  treatmentConfig:PropTypes.object.isRequired
+  treatmentConfig: PropTypes.object.isRequired,
 };
 
 MedicationContainer.defaultProps = {
