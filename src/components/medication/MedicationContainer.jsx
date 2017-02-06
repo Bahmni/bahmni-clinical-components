@@ -2,18 +2,20 @@ import React, { Component, PropTypes } from 'react';
 import { ComponentStore } from 'bahmni-form-controls';
 import AutoComplete from 'src/components/AutoComplete.jsx';
 import { httpInterceptor } from 'src/helpers/httpInterceptor';
-import { urlConstants } from 'src/helpers/dateFormat';
+import { urlConstants } from 'src/constants';
 import Button from 'src/components/Button.jsx';
 import DrugTable from 'src/components/medication/DrugTable.jsx'
 import NewPrescriptionModal from 'src/components/medication/NewPrescriptionModal.jsx';
+import NewPrescribedDrugTable from 'src/components/medication/NewPrescribedDrugTable.jsx'
 
 export default class MedicationContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { drugHistoryData: [], color: 'red', showModal: false };
+    this.state = { drugHistoryData: [], color: 'red', showModal: false, newPrescribedDrugs: [] };
     this.getDrugs = this.getDrugs.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.onDrugSelect = this.onDrugSelect.bind(this);
+    this.addNewDrug = this.addNewDrug.bind(this);
   }
 
   componentDidMount() {
@@ -59,14 +61,17 @@ export default class MedicationContainer extends Component {
     this.setState({ showModal: false });
   }
 
+  addNewDrug(drug){
+    var drugList = this.state.newPrescribedDrugs||[];
+    drugList.push(drug);
+    this.setState({newPrescribedDrugs:drugList, showModal: false });
+  }
+
   render() {
     let minimumInput = 0;
     if (!this.props.isDropDown) {
       minimumInput = 2;
-    }
-
-
-    return (
+      return (
         <div>
           <AutoComplete
             loadOptions={this.getDrugs}
@@ -77,11 +82,17 @@ export default class MedicationContainer extends Component {
           />
           <Button color={this.state.color} label="Add to prescription" />
           { this.state.showModal && <NewPrescriptionModal drug={this.state.value}
-            handleCloseModal={this.handleCloseModal}
-            treatmentConfig={this.props.treatmentConfig}
+                                                          handleCloseModal={this.handleCloseModal} handleDone={this.addNewDrug}
+                                                          treatmentConfig={this.props.treatmentConfig}
           /> }
+
+          <NewPrescribedDrugTable drugOrderList={this.state.newPrescribedDrugs}  />
           <DrugTable data={this.state.drugHistoryData} />
+
         </div>);
+    }
+
+
   }
 }
 

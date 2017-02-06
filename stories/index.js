@@ -3,6 +3,7 @@ import {storiesOf, action, linkTo} from '@kadira/storybook';
 import Button from './Button';
 import Welcome from './Welcome';
 import MedicationContainerStory from './MedicationContainerStory';
+import NewPrescribedDrugTableStory from './NewPrescribedDrugTableStory';
 
 storiesOf('Welcome', module)
     .add('to Storybook', () => (
@@ -20,4 +21,8 @@ storiesOf('Button', module)
 storiesOf('MedicationContainerStory', module)
     .add('test', () => (
         <MedicationContainerStory title={"Click Me!!"}/>
+    ));
+storiesOf('NewPrescribedDrugTableStory', module)
+    .add('test', () => (
+        <NewPrescribedDrugTableStory title={"Click Me!!"}/>
     ));

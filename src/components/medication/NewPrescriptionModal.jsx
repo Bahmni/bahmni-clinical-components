@@ -5,6 +5,7 @@ import Measurement from 'src/components/Measurement.jsx';
 import find from 'lodash/find';
 import DrugStartDate from 'src/components/medication/DrugStartDate.jsx';
 import { Button as ButtonSelect } from 'bahmni-form-controls';
+import { DrugOrder } from 'src/helpers/DrugOrder';
 
 export default class NewPrescriptionModal extends Component {
   constructor(props) {
@@ -22,6 +23,7 @@ export default class NewPrescriptionModal extends Component {
     this.handleDateChange = this.handleDateChange.bind(this);
     this.togglePRNStatus = this.togglePRNStatus.bind(this);
     this.handleDosingInstructionChange = this.handleDosingInstructionChange.bind(this);
+    this.createDrugOrder = this.createDrugOrder.bind(this);
   }
 
 
@@ -108,8 +110,43 @@ export default class NewPrescriptionModal extends Component {
     this.setState({ drugStartDate: date });
   }
 
+  _constructDrugOrder() {
+    const dosingInstructions =
+    {
+      dose: this.state.dose.value,
+      doseUnits: this.state.dose.unit.name,
+      route: this.state.route.name,
+      frequency: this.state.frequency.name,
+      asNeeded: this.state.PRNStatus,
+      quantity: this.state.totalQuantity.value,
+      quantityUnits: this.state.totalQuantity.unit.name
+    };
+    return new DrugOrder(
+      {
+        drug: this.props.drug,
+        dosingInstructions,
+        duration: this.state.duration.value,
+        durationUnits: this.state.duration.unit.name,
+        scheduledDate: this.state.drugStartDate
+      }
+    );
+  }
+
+  createDrugOrder() {
+    const drugOrder = this._constructDrugOrder();
+    this.props.handleDone(drugOrder);
+  }
+
+
   togglePRNStatus() {
     this.setState({ PRNStatus: !this.state.PRNStatus });
+  }
+
+  getPRNStatus() {
+    if (this.state.PRNStatus)
+      return "true"
+    else
+    return "false";
   }
 
   render() {
@@ -194,7 +231,7 @@ export default class NewPrescriptionModal extends Component {
             valueKey="name"
           />
 
-          <p>PRN</p>
+          <p>PRN {this.getPRNStatus()}</p>
           <button onClick={this.togglePRNStatus}>PRN {this.state.PRNStatus}</button>
 
           <p>Additional Instructions</p>
@@ -209,7 +246,7 @@ export default class NewPrescriptionModal extends Component {
           />
 
           <button onClick={this.props.handleCloseModal}>Close</button>
-          <button onClick={this.props.handleCloseModal}>Done</button>
+          <button onClick={this.createDrugOrder}>Done</button>
           </div>
         </ReactModal>
     );
@@ -219,6 +256,7 @@ export default class NewPrescriptionModal extends Component {
 NewPrescriptionModal.propTypes = {
   drug: PropTypes.object,
   handleCloseModal: PropTypes.func,
+  handleDone: PropTypes.func.isRequired,
   treatmentConfig: PropTypes.object,
 };
 
