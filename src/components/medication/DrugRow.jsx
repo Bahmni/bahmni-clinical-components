@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { dateFormat } from 'src/helpers/dateFormat';
+import { DateUtil } from 'src/helpers/DateUtil';
+import StoppedReason from 'src/components/medication/StoppedReason.jsx';
 import isEmpty from 'lodash/isEmpty';
 
 import { prescriptionStatus } from 'src/constants';
@@ -48,6 +49,15 @@ export default class DrugRow extends Component {
     return this._activeActions();
   }
 
+  _displayStopped() {
+    return (
+      <div>
+        {prescriptionStatus.Stopped}
+        <StoppedReason data={this.props.data} />
+      </div>
+    );
+  }
+
   _getStatus(data) {
     const currentTime = Date.now();
     if (data.dateStopped) {
@@ -60,9 +70,18 @@ export default class DrugRow extends Component {
     return prescriptionStatus.Active;
   }
 
+  _getDrugInstructions(data) {
+    const sosDetails = data.dosingInstructions.asNeeded ? 'SOS' : '';
+    const administrationInstructions = JSON.parse(data.dosingInstructions.administrationInstructions);
+    const instructions = administrationInstructions.instructions;
+    const additionalInstructions = administrationInstructions.additionalInstructions || '';
+    return `${sosDetails} ${instructions} ${additionalInstructions}`;
+  }
+
   _displayData() {
     const data = this.props.data;
     if (!isEmpty(data)) {
+<<<<<<< HEAD
       const firstColumn = `${data.drug.name} ${data.drug.form}, ${data.dosingInstructions.route}`;
       const secondColumn = `${data.dosingInstructions.dose}, ${data.dosingInstructions.frequency} for ${data.duration}` +
         `${data.durationUnits} started on ${dateFormat(new Date(data.effectiveStartDate))} by ${data.creatorName}`;
@@ -70,6 +89,24 @@ export default class DrugRow extends Component {
       const fourthColumn = data.instructions;
       const fifthColumn = this._getStatus(this.props.data);
       const sixthColumn = this._generateActions(fifthColumn);
+=======
+      const drugNameAndForm = data.drug ? `${data.drug.name}, ${data.drug.form}` : data.drugNonCoded;
+      const firstColumn = `${drugNameAndForm}, ${data.dosingInstructions.route || ''}`;
+
+      let dosingInstructions = '';
+      if (data.dosingInstructions.dose) {
+        dosingInstructions += `${data.dosingInstructions.dose} ${data.dosingInstructions.doseUnits}, ${data.dosingInstructions.frequency}`;
+      } else {
+        const adminInstructions = JSON.parse(data.dosingInstructions.administrationInstructions);
+        dosingInstructions += `${adminInstructions.morningDose}-${adminInstructions.afternoonDose}-${adminInstructions.eveningDose}`;
+      }
+      const secondColumn = `${dosingInstructions} for ${data.duration} ${data.durationUnits} started on ${DateUtil.dateFormat(new Date(data.effectiveStartDate))} by ${data.creatorName}`;
+      const thirdColumn = `${data.dosingInstructions.quantity} ${data.dosingInstructions.quantityUnits}`;
+      const fourthColumn = this._getDrugInstructions(data);
+      const status = this._getStatus(this.props.data);
+      const fifthColumn = status === prescriptionStatus.Stopped ? this._displayStopped() : status;
+      const sixthColumn = this._generateActions(status);
+>>>>>>> 9a00766... prescription history
       return (
         <div className="table-row">
           <div className="col0">{firstColumn}</div>

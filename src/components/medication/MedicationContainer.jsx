@@ -7,15 +7,20 @@ import Button from 'src/components/Button.jsx';
 import DrugTable from 'src/components/medication/DrugTable.jsx';
 import NewPrescriptionModal from 'src/components/medication/NewPrescriptionModal.jsx';
 import NewPrescribedDrugTable from 'src/components/medication/NewPrescribedDrugTable.jsx';
+import PrescriptionFilter, { FilterValues } from 'src/components/medication/PrescriptionFilter.jsx'
+import { DateUtil } from 'src/helpers/DateUtil';
+import filter from 'lodash/filter';
+import isEmpty from 'lodash/isEmpty';
 
 export default class MedicationContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { drugHistoryData: [], color: 'red', showModal: false, newPrescribedDrugs: [] };
+    this.state = { drugHistoryData: [], color: 'red', showModal: false, newPrescribedDrugs: [], filter: FilterValues.Active  };
     this.getDrugs = this.getDrugs.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.onDrugSelect = this.onDrugSelect.bind(this);
     this.addNewDrug = this.addNewDrug.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
   }
 
   componentDidMount() {
@@ -70,6 +75,31 @@ export default class MedicationContainer extends Component {
       color: 'red' });
   }
 
+  _filterFunction() {
+    if(this.state.filter === FilterValues.Active) {
+      return filter(this.state.drugHistoryData, (data) => {
+        return !data.dateStopped && data.effectiveStopDate > DateUtil.dateWithoutTime().getTime();
+      })
+    }
+    return this.state.drugHistoryData;
+  }
+
+  _onFilterChange(filter) {
+    this.setState({ filter });
+  }
+
+  _showDrugHistoryTabs() {
+    if(!isEmpty(this.state.drugHistoryData)) {
+      return (
+        <div>
+          <PrescriptionFilter data={this.state.drugHistoryData} onFilterChange={this._onFilterChange}/>
+          <DrugTable data={this._filterFunction()} activePrescription={false}/>
+        </div>
+      );
+    }
+    return null;
+  }
+
   render() {
     let minimumInput = 0;
     if (!this.props.isDropDown) {
@@ -92,8 +122,7 @@ export default class MedicationContainer extends Component {
         /> }
 
         <NewPrescribedDrugTable drugOrderList={this.state.newPrescribedDrugs} />
-        <DrugTable data={this.state.drugHistoryData} />
-
+        {this._showDrugHistoryTabs()}
       </div>);
   }
 }

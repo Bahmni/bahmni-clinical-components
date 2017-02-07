@@ -15,15 +15,18 @@ describe('DrugRow', () => {
       name: 'drug1',
       form: 'form1',
     },
+    creatorName: 'testUser',
     dosingInstructions: {
       route: 'oral',
       dose: 12,
+      doseUnits: 'tabs',
       frequency: 'Once a day',
       quantity: 24,
+      quantityUnits: 'tabs',
+      administrationInstructions: `{"instructions": "Do not take this medicine"}`,
     },
     duration: 2,
     durationUnits: 'Day(s)',
-    instructions: 'Do not take this medicine',
     effectiveStartDate: 1485282600000,
     effectiveStopDate: 1485455399000,
   };
@@ -35,12 +38,12 @@ describe('DrugRow', () => {
   });
 
   it('should render row with the appropriate data', () => {
-    const firstColumn = `${rowData.drug.name} ${rowData.drug.form}, ${rowData.dosingInstructions.route}`;
-    const secondColumn = `${rowData.dosingInstructions.dose}, ${rowData.dosingInstructions.frequency} for ${rowData.duration}
-        ${rowData.durationUnits} started on ${new Date(rowData.effectiveStartDate)}`;
-    const thirdColumn = rowData.dosingInstructions.quantity;
-    const fourthColumn = rowData.instructions;
-    const wrapper = shallow(<DrugRow data={rowData} />);
+
+    const firstColumn = `${rowData.drug.name}, ${rowData.drug.form}, ${rowData.dosingInstructions.route}`;
+    const secondColumn = '12 tabs, Once a day for 2 Day(s) started on 25 Jan 17 by testUser';
+    const thirdColumn = '24 tabs';
+    const fourthColumn = ' Do not take this medicine ';
+    const wrapper = shallow(<DrugRow data={rowData}/>);
     const tableRow = wrapper.find('.table-row');
 
     expect(tableRow.children()).to.have.length(6);
@@ -86,7 +89,7 @@ describe('DrugRow', () => {
       const statusCol = wrapper.find('.col4');
       const actionsCol = wrapper.find('.table-actions-finished');
 
-      expect(statusCol.text()).to.equal(prescriptionStatus.Stopped);
+      expect(statusCol.text()).to.equal(prescriptionStatus.Stopped + '<StoppedReason />');
       expect(actionsCol.children()).to.have.length(1);
       expect(actionsCol.childAt(0).text()).to.equal('add');
     });

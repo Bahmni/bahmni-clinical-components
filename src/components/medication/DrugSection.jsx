@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import orderBy from 'lodash/orderBy';
-import { dateFormat } from 'src/helpers/dateFormat';
+import { DateUtil } from 'src/helpers/DateUtil';
 
 import DrugRow from 'src/components/medication/DrugRow.jsx';
 
@@ -8,7 +8,7 @@ export default class DrugSection extends Component {
   constructor(props) {
     super(props);
     const date = new Date(Number.parseInt(props.header));
-    this.header = dateFormat(date);
+    this.header = DateUtil.dateFormat(date);
   }
 
   _displayRowData() {
