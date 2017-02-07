@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import DrugSection from 'src/components/medication/DrugSection.jsx';
+import { DateUtil } from 'src/helpers/DateUtil';
 import groupBy from 'lodash/groupBy';
 import orderBy from 'lodash/orderBy';
+import filter from 'lodash/filter';
+import isEmpty from 'lodash/isEmpty';
 
 const drugTableHeader = ['Drug Information - Name, Form, Route',
   'Schedule - Dosage, Frequency, Duration',
@@ -26,37 +29,44 @@ export default class DrugTable extends Component {
   }
 
   _showSections() {
-    const drugBuyGroup = groupBy(this.props.data, 'dateActivated');
-    let dateActivated = Object.keys(drugBuyGroup);
+    const prescriptionData = this.props.data;
+    //console.log("-----------", prescriptionData);
+    const drugByGroup = groupBy(prescriptionData, (data) => { console.log("=====", data.dateActivated); return DateUtil.dateWithoutTime(new Date(data.dateActivated)).valueOf(); });
+    console.log('dbg------', drugByGroup);
+    this.myD
+    let dateActivated = Object.keys(drugByGroup);
     dateActivated = orderBy(dateActivated, null, ['desc']);
     return dateActivated.map((date, index) => {
       return (
-        <DrugSection key={index} data={drugBuyGroup[date]} header={date} />
+        <DrugSection key={index} data={drugByGroup[date]} header={date} />
       );
     })
   }
 
-  render() {
+  _showData() {
+    if(!isEmpty(this.props.data)) {
+      return(
+        <div>
+          <div className="table-header">
+            {this._showHeaders()}
+          </div>
+          <div className="table-sections">
+            {this._showSections()}
+          </div>
+        </div>
+      );
+    }
     return (
-      <div>
-        <div className="table-header">
-          {this._showHeaders()}
-        </div>
-        <div className="table-sections">
-          {this._showSections()}
-        </div>
-      </div>
-    );
+      <div className="empty-table">No Active Treatments present</div>
+    )
+  }
+
+  render() {
+    return this._showData();
   }
 }
 
 DrugTable.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
-};
-
-DrugTable.defaultProps = {
-  data: [
-    { name: 'drug1', dateActivated: 1484850600000 },
-    { name: 'drug2', dateActivated: 1484850600000 }
-  ],
+  activePrescription: PropTypes.bool.isRequired,
 };
