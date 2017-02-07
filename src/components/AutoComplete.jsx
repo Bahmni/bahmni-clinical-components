@@ -63,7 +63,7 @@ export default class AutoComplete extends Component {
   }
 }
 
-ClinicalAutoComplete.propTypes = {
+AutoComplete.propTypes = {
   autofocus: PropTypes.bool,
   disabled: PropTypes.bool,
   labelKey: PropTypes.string,
@@ -76,7 +76,7 @@ ClinicalAutoComplete.propTypes = {
   value: PropTypes.object
 };
 
-ClinicalAutoComplete.defaultProps = {
+AutoComplete.defaultProps = {
   autofocus: false,
   disabled: false,
   labelKey: 'name',
