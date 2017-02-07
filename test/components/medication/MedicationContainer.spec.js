@@ -97,4 +97,29 @@ describe('MedicationContainer', () => {
 
     expect(wrapper.state().showModal).to.equal(false);
   });
+
+  it('should clear the autocomplete field when drug details are added and clicked done', () => {
+    const wrapper = mount(<MedicationContainer treatmentConfig={treatmentConfig} patientUuid={"patientUUid"}/>);
+
+    var drug = {name : "Ibuprofen"};
+    wrapper.instance().onDrugSelect(drug);
+    expect(wrapper.state().value).to.deep.equal(drug);
+
+    wrapper.instance().addNewDrug();
+    expect(wrapper.state().value).to.equal(null);
+    expect(wrapper.state().color).to.equal("red");
+  });
+
+  it('should clear the autocomplete field when drug details are added and clicked cancel', () => {
+    const wrapper = mount(<MedicationContainer treatmentConfig={treatmentConfig} patientUuid={"patientUuid"} />);
+
+    var drug = {name : "Ibuprofen"};
+    wrapper.instance().onDrugSelect(drug);
+    expect(wrapper.state().value).to.deep.equal(drug);
+
+    wrapper.instance().handleCloseModal();
+    expect(wrapper.state().value).to.equal(null);
+    expect(wrapper.state().color).to.equal("red");
+  });
+
 });

@@ -58,13 +58,13 @@ export default class MedicationContainer extends Component {
   }
 
   handleCloseModal() {
-    this.setState({ showModal: false });
+    this.setState({ showModal: false, value: null, color: 'red' });
   }
 
   addNewDrug(drug){
     var drugList = this.state.newPrescribedDrugs||[];
     drugList.push(drug);
-    this.setState({newPrescribedDrugs:drugList, showModal: false });
+    this.setState({newPrescribedDrugs:drugList, showModal: false, value: null, color: 'red' });
   }
 
   render() {
@@ -79,6 +79,7 @@ export default class MedicationContainer extends Component {
             onValueChange={this.onDrugSelect}
             placeholder="Search for drug to add to prescription"
             searchable={!(this.props.isDropDown && this.props.drugConceptSet)}
+            value={this.state.value}
           />
           <Button color={this.state.color} label="Add to prescription" />
           { this.state.showModal && <NewPrescriptionModal drug={this.state.value}

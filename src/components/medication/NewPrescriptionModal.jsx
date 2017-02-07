@@ -127,7 +127,7 @@ export default class NewPrescriptionModal extends Component {
         dosingInstructions,
         duration: this.state.duration.value,
         durationUnits: this.state.duration.unit.name,
-        scheduledDate: this.state.drugStartDate
+        startDate: this.state.drugStartDate
       }
     );
   }
@@ -144,7 +144,7 @@ export default class NewPrescriptionModal extends Component {
 
   getPRNStatus() {
     if (this.state.PRNStatus)
-      return "true"
+      return "true";
     else
     return "false";
   }

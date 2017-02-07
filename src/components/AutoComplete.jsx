@@ -5,14 +5,13 @@ import isEqual from 'lodash/isEqual';
 export default class AutoComplete extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
     this.handleChange = this.handleChange.bind(this);
     this.storeChildRef = this.storeChildRef.bind(this);
   }
 
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (!isEqual(this.state.value, nextState.value)) {
+  shouldComponentUpdate(nextProps) {
+      if (!isEqual(this.props.value, nextProps.value)) {
       return true;
     }
     return false;
@@ -23,7 +22,6 @@ export default class AutoComplete extends Component {
   }
 
   handleChange(value) {
-    this.setState({ value });
     this.props.onValueChange(value);
     if (this.props.searchable) {
       this.childRef.resetState();
@@ -38,7 +36,8 @@ export default class AutoComplete extends Component {
             minimumInput,
             loadOptions,
             placeholder,
-            searchable } = this.props;
+            searchable,
+            value } = this.props;
     const props = {
       autofocus,
       backspaceRemoves: false,
@@ -46,11 +45,11 @@ export default class AutoComplete extends Component {
       labelKey,
       minimumInput,
       loadOptions,
-      value: this.state.value,
       onChange: this.handleChange,
       valueKey,
       placeholder,
       searchable,
+      value,
       searchPromptText: null,
     };
     return (
@@ -64,7 +63,7 @@ export default class AutoComplete extends Component {
   }
 }
 
-AutoComplete.propTypes = {
+ClinicalAutoComplete.propTypes = {
   autofocus: PropTypes.bool,
   disabled: PropTypes.bool,
   labelKey: PropTypes.string,
@@ -74,9 +73,10 @@ AutoComplete.propTypes = {
   placeholder: PropTypes.string,
   searchable: PropTypes.bool,
   valueKey: PropTypes.string,
+  value: PropTypes.object
 };
 
-AutoComplete.defaultProps = {
+ClinicalAutoComplete.defaultProps = {
   autofocus: false,
   disabled: false,
   labelKey: 'name',

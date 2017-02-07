@@ -19,7 +19,7 @@ export class DrugOrder extends ImmutableDrugOrder {
 
   getSchedule(){
     return `${this.dosingInstructions.dose} ${this.dosingInstructions.doseUnits}, ${this.dosingInstructions.frequency} for 
-        ${this.duration} ${this.durationUnits} starting ${this.dosingInstructions.scheduledDate || 'Today'}`;
+        ${this.duration} ${this.durationUnits} starting ${this.startDate  || ' Today'}`;
   }
 
   getTotalQuantity(){
