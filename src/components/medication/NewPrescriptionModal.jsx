@@ -23,6 +23,7 @@ export default class NewPrescriptionModal extends Component {
     this.handleDateChange = this.handleDateChange.bind(this);
     this.togglePRNStatus = this.togglePRNStatus.bind(this);
     this.handleDosingInstructionChange = this.handleDosingInstructionChange.bind(this);
+    this.handleAdditionalInstructions = this.handleAdditionalInstructions.bind(this);
     this.createDrugOrder = this.createDrugOrder.bind(this);
   }
 
@@ -72,6 +73,10 @@ export default class NewPrescriptionModal extends Component {
     }
     totalQty.unit = dose.unit;
     return totalQty;
+  }
+
+  handleAdditionalInstructions(e) {
+    this.setState({ additionalInstructions: e.target.value });
   }
 
   handleFrequencyChange(frequency) {
@@ -124,6 +129,7 @@ export default class NewPrescriptionModal extends Component {
         duration: this.state.duration.value,
         durationUnits: this.state.duration.unit.name,
         startDate: this.state.drugStartDate,
+        additionalInstructions: this.state.additionalInstructions,
       }
     );
   }
@@ -241,6 +247,11 @@ export default class NewPrescriptionModal extends Component {
             validations={[]}
             value={this.state.dosingInstructions }
             valueKey={'name'}
+          />
+
+          <textarea
+            onChange={this.handleAdditionalInstructions}
+            value={this.state.additionalInstructions}
           />
 
           <button onClick={this.props.handleCloseModal}>Close</button>

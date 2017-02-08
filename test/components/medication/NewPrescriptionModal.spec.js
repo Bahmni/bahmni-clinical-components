@@ -272,4 +272,17 @@ describe('NewPrescriptionModal', () => {
     wrapper.instance().handleRouteChange(route);
     expect(wrapper.state().route).to.deep.equal(route);
   });
+
+  it('should set the additional instructions', () => {
+    const wrapper = mount(
+      <NewPrescriptionModal
+        drug={{ name: 'paracetamol' }}
+        treatmentConfig={treatmentConfig}
+      />
+    );
+    const additionalInstructions = { target: { value: 'Once a day' } };
+
+    wrapper.instance().handleAdditionalInstructions(additionalInstructions);
+    expect(wrapper.state().additionalInstructions).to.equal('Once a day');
+  });
 });

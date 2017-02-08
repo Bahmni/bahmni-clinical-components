@@ -35,7 +35,7 @@ export class DrugOrder extends ImmutableDrugOrder {
 
 
   getInstructions() {
-    return `${this.dosingInstructions.asNeeded && 'PRN'}`;
+    return `${this.dosingInstructions.asNeeded && 'PRN'}  ${this.additionalInstructions}`;
   }
 
 
