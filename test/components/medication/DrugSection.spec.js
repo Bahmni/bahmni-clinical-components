@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import chai, { expect } from 'chai';
 import DrugSection from 'src/components/medication/DrugSection.jsx';
-import fetchMock from 'fetch-mock';
 
 chai.use(chaiEnzyme());
 
@@ -11,8 +10,8 @@ chai.use(chaiEnzyme());
 describe('DrugSection', () => {
   it('should render section with only header and no rows', () => {
     const header = '10';
-    const data=[{}];
-    const wrapper = shallow(<DrugSection header={header} data={data}/>);
+    const data = [{}];
+    const wrapper = shallow(<DrugSection data={data} header={header} />);
     const sectionHeader = wrapper.find('.table-section-header');
 
     expect(sectionHeader.text()).to.equal(header);
@@ -20,10 +19,10 @@ describe('DrugSection', () => {
 
   it('should render section with header and rows', () => {
     const header = '10';
-    const data=[
+    const data = [
       { name: 'TestDrug1', dateActivated: header },
       { name: 'TestDrug2', dateActivated: header }];
-    const wrapper = shallow(<DrugSection data={data} header={header}/>);
+    const wrapper = shallow(<DrugSection data={data} header={header} />);
     const sectionHeader = wrapper.find('.table-section-header');
 
     const drugRows = wrapper.find('DrugRow');

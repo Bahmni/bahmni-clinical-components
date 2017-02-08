@@ -5,13 +5,10 @@ import isEmpty from 'lodash/isEmpty';
 import { prescriptionStatus } from 'src/constants';
 
 export default class DrugRow extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   _generateActions(status) {
     const { Active, Scheduled, Finished, Stopped } = prescriptionStatus;
-    switch(status) {
+    switch (status) {
       case Active:
         return this._activeActions();
       case Scheduled:
@@ -32,7 +29,7 @@ export default class DrugRow extends Component {
         <a href="#">stop</a>
         <a href="#">renew</a>
       </div>
-    )
+    );
   }
 
   _finishedActions() {
@@ -40,7 +37,7 @@ export default class DrugRow extends Component {
       <div className="table-actions-finished">
         <a href="#">add</a>
       </div>
-    )
+    );
   }
 
   _stoppedActions() {
@@ -53,24 +50,22 @@ export default class DrugRow extends Component {
 
   _getStatus(data) {
     const currentTime = Date.now();
-    if(!isEmpty(data)) {
-      if (data.dateStopped) {
-        return prescriptionStatus.Stopped;
-      } else if (data.effectiveStartDate >  currentTime) {
-        return prescriptionStatus.Scheduled;
-      } else if (data.effectiveStopDate < currentTime) {
-        return prescriptionStatus.Finished;
-      }
-      return prescriptionStatus.Active;
+    if (data.dateStopped) {
+      return prescriptionStatus.Stopped;
+    } else if (data.effectiveStartDate > currentTime) {
+      return prescriptionStatus.Scheduled;
+    } else if (data.effectiveStopDate < currentTime) {
+      return prescriptionStatus.Finished;
     }
+    return prescriptionStatus.Active;
   }
 
   _displayData() {
     const data = this.props.data;
     if (!isEmpty(data)) {
       const firstColumn = `${data.drug.name} ${data.drug.form}, ${data.dosingInstructions.route}`;
-      const secondColumn = `${data.dosingInstructions.dose}, ${data.dosingInstructions.frequency} for ${data.duration}
-        ${data.durationUnits} started on ${dateFormat(new Date(data.effectiveStartDate))} by ${data.creatorName}`;
+      const secondColumn = `${data.dosingInstructions.dose}, ${data.dosingInstructions.frequency} for ${data.duration}` +
+        `${data.durationUnits} started on ${dateFormat(new Date(data.effectiveStartDate))} by ${data.creatorName}`;
       const thirdColumn = data.dosingInstructions.quantity;
       const fourthColumn = data.instructions;
       const fifthColumn = this._getStatus(this.props.data);
@@ -84,7 +79,7 @@ export default class DrugRow extends Component {
           <div className="col4">{fifthColumn}</div>
           <div className="col5">{sixthColumn}</div>
         </div>
-      )
+      );
     }
     return null;
   }

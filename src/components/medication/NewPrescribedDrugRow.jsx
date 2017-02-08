@@ -3,10 +3,6 @@ import isEmpty from 'lodash/isEmpty';
 
 
 export default class NewPrescribedDrugRow extends Component {
-  constructor(props) {
-    super(props);
-  }
-
 
   _activeActions() {
     return (
@@ -15,7 +11,7 @@ export default class NewPrescribedDrugRow extends Component {
         <a href="#">favorites</a>
         <a href="#">remove</a>
       </div>
-    )
+    );
   }
 
 
@@ -25,12 +21,12 @@ export default class NewPrescribedDrugRow extends Component {
       return (
         <div className="table-row">
           <div className="col0">{this.props.drugOrder.getName()}</div>
-          <div className="col0">{this.props.drugOrder.getSchedule()}</div>
-          <div className="col0">{this.props.drugOrder.getTotalQuantity()}</div>
-          <div className="col0">{this.props.drugOrder.getInstructions()}</div>
-          <div className="col0">{this._activeActions()}</div>
+          <div className="col1">{this.props.drugOrder.getSchedule()}</div>
+          <div className="col2">{this.props.drugOrder.getTotalQuantity()}</div>
+          <div className="col3">{this.props.drugOrder.getInstructions()}</div>
+          <div className="col4">{this._activeActions()}</div>
         </div>
-      )
+      );
     }
     return null;
   }

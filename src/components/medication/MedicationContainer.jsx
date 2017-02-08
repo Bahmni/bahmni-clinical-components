@@ -4,9 +4,9 @@ import AutoComplete from 'src/components/AutoComplete.jsx';
 import { httpInterceptor } from 'src/helpers/httpInterceptor';
 import { urlConstants } from 'src/constants';
 import Button from 'src/components/Button.jsx';
-import DrugTable from 'src/components/medication/DrugTable.jsx'
+import DrugTable from 'src/components/medication/DrugTable.jsx';
 import NewPrescriptionModal from 'src/components/medication/NewPrescriptionModal.jsx';
-import NewPrescribedDrugTable from 'src/components/medication/NewPrescribedDrugTable.jsx'
+import NewPrescribedDrugTable from 'src/components/medication/NewPrescribedDrugTable.jsx';
 
 export default class MedicationContainer extends Component {
   constructor(props) {
@@ -61,46 +61,47 @@ export default class MedicationContainer extends Component {
     this.setState({ showModal: false, value: null, color: 'red' });
   }
 
-  addNewDrug(drug){
-    var drugList = this.state.newPrescribedDrugs||[];
+  addNewDrug(drug) {
+    const drugList = this.state.newPrescribedDrugs || [];
     drugList.push(drug);
-    this.setState({newPrescribedDrugs:drugList, showModal: false, value: null, color: 'red' });
+    this.setState({ newPrescribedDrugs: drugList,
+      showModal: false,
+      value: null,
+      color: 'red' });
   }
 
   render() {
     let minimumInput = 0;
     if (!this.props.isDropDown) {
       minimumInput = 2;
-      return (
-        <div>
-          <AutoComplete
-            loadOptions={this.getDrugs}
-            minimumInput={minimumInput}
-            onValueChange={this.onDrugSelect}
-            placeholder="Search for drug to add to prescription"
-            searchable={!(this.props.isDropDown && this.props.drugConceptSet)}
-            value={this.state.value}
-          />
-          <Button color={this.state.color} label="Add to prescription" />
-          { this.state.showModal && <NewPrescriptionModal drug={this.state.value}
-                                                          handleCloseModal={this.handleCloseModal} handleDone={this.addNewDrug}
-                                                          treatmentConfig={this.props.treatmentConfig}
-          /> }
-
-          <NewPrescribedDrugTable drugOrderList={this.state.newPrescribedDrugs}  />
-          <DrugTable data={this.state.drugHistoryData} />
-
-        </div>);
     }
+    return (
+      <div>
+        <AutoComplete
+          loadOptions={this.getDrugs}
+          minimumInput={minimumInput}
+          onValueChange={this.onDrugSelect}
+          placeholder="Search for drug to add to prescription"
+          searchable={!(this.props.isDropDown && this.props.drugConceptSet)}
+          value={this.state.value}
+        />
+        <Button color={this.state.color} label="Add to prescription" />
+        { this.state.showModal && <NewPrescriptionModal drug={this.state.value}
+          handleCloseModal={this.handleCloseModal} handleDone={this.addNewDrug}
+          treatmentConfig={this.props.treatmentConfig}
+        /> }
 
+        <NewPrescribedDrugTable drugOrderList={this.state.newPrescribedDrugs} />
+        <DrugTable data={this.state.drugHistoryData} />
 
+      </div>);
   }
 }
 
 MedicationContainer.propTypes = {
-  patientUuid: PropTypes.string.isRequired,
   drugConceptSet: PropTypes.string,
   isDropDown: PropTypes.bool,
+  patientUuid: PropTypes.string.isRequired,
   treatmentConfig: PropTypes.object.isRequired,
 };
 

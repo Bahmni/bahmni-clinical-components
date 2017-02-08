@@ -29,7 +29,7 @@ describe('DrugRow', () => {
   };
 
   it('should render empty row when data is absent', () => {
-    const wrapper = shallow(<DrugRow data={{}}/>);
+    const wrapper = shallow(<DrugRow data={{}} />);
     const tableRow = wrapper.find('.table-row');
     expect(tableRow).to.have.length(0);
   });
@@ -40,7 +40,7 @@ describe('DrugRow', () => {
         ${rowData.durationUnits} started on ${new Date(rowData.effectiveStartDate)}`;
     const thirdColumn = rowData.dosingInstructions.quantity;
     const fourthColumn = rowData.instructions;
-    const wrapper = shallow(<DrugRow data={rowData}/>);
+    const wrapper = shallow(<DrugRow data={rowData} />);
     const tableRow = wrapper.find('.table-row');
 
     expect(tableRow.children()).to.have.length(6);
@@ -54,7 +54,7 @@ describe('DrugRow', () => {
   describe('Status and Actions', () => {
     it('should display the active actions when the status is active', () => {
       sinon.stub(Date, 'now', () => rowData.effectiveStartDate);
-      const wrapper = shallow(<DrugRow data={rowData}/>);
+      const wrapper = shallow(<DrugRow data={rowData} />);
       const statusCol = wrapper.find('.col4');
       const actionsCol = wrapper.find('.table-actions-active');
 
@@ -67,8 +67,8 @@ describe('DrugRow', () => {
     });
 
     it('should display the scheduled actions when the status is scheduled', () => {
-      sinon.stub(Date, 'now', () => rowData.effectiveStartDate-1);
-      const wrapper = shallow(<DrugRow data={rowData}/>);
+      sinon.stub(Date, 'now', () => rowData.effectiveStartDate - 1);
+      const wrapper = shallow(<DrugRow data={rowData} />);
       const statusCol = wrapper.find('.col4');
       const actionsCol = wrapper.find('.table-actions-active');
 
@@ -82,7 +82,7 @@ describe('DrugRow', () => {
 
     it('should display the stopped actions when the status is stopped', () => {
       const data = Object.assign({}, rowData, { dateStopped: 1485282700000 });
-      const wrapper = shallow(<DrugRow data={data}/>);
+      const wrapper = shallow(<DrugRow data={data} />);
       const statusCol = wrapper.find('.col4');
       const actionsCol = wrapper.find('.table-actions-finished');
 
@@ -92,8 +92,8 @@ describe('DrugRow', () => {
     });
 
     it('should display the finished actions when the status is finished', () => {
-      sinon.stub(Date, 'now', () => rowData.effectiveStopDate+1);
-      const wrapper = shallow(<DrugRow data={rowData}/>);
+      sinon.stub(Date, 'now', () => rowData.effectiveStopDate + 1);
+      const wrapper = shallow(<DrugRow data={rowData} />);
       const statusCol = wrapper.find('.col4');
       const actionsCol = wrapper.find('.table-actions-finished');
 

@@ -4,7 +4,7 @@ export default class Button extends Component {
   constructor(props) {
     super(props);
     const value = props.value;
-    this.state = {value};
+    this.state = { value };
   }
 
   render() {

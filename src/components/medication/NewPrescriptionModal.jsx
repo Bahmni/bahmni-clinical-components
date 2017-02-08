@@ -52,24 +52,11 @@ export default class NewPrescriptionModal extends Component {
     durationUnitForFrequency && durationUnit.name === durationUnitForFrequency.defaultDurationUnit);
   }
 
-
-  handleMeasurementChange(measurement) {
-    const newState = { [measurement.name]: measurement };
-    if (!this.state.totalQuantity.isManuallySet) {
-      const totalQty = this.calculateTotalQuantity({ [measurement.name]: measurement });
-      newState.totalQuantity = totalQty;
+  getPRNStatus() {
+    if (this.state.PRNStatus) {
+      return 'true';
     }
-    this.setState(newState);
-  }
-
-  handleTotalQuantityChange(measurement) {
-    const newMeasurement = Object.assign({}, measurement);
-    newMeasurement.isManuallySet = true;
-    this.setState({ [measurement.name]: newMeasurement });
-  }
-
-  handleRouteChange(route) {
-    this.setState({ route });
+    return 'false';
   }
 
   calculateTotalQuantity(
@@ -86,7 +73,6 @@ export default class NewPrescriptionModal extends Component {
     totalQty.unit = dose.unit;
     return totalQty;
   }
-
 
   handleFrequencyChange(frequency) {
     const newState = { frequency };
@@ -110,24 +96,34 @@ export default class NewPrescriptionModal extends Component {
     this.setState({ drugStartDate: date });
   }
 
+  handleTotalQuantityChange(measurement) {
+    const newMeasurement = Object.assign({}, measurement);
+    newMeasurement.isManuallySet = true;
+    this.setState({ [measurement.name]: newMeasurement });
+  }
+
+  handleRouteChange(route) {
+    this.setState({ route });
+  }
+
   _constructDrugOrder() {
     const dosingInstructions =
-    {
-      dose: this.state.dose.value,
-      doseUnits: this.state.dose.unit.name,
-      route: this.state.route.name,
-      frequency: this.state.frequency.name,
-      asNeeded: this.state.PRNStatus,
-      quantity: this.state.totalQuantity.value,
-      quantityUnits: this.state.totalQuantity.unit.name
-    };
+      {
+        dose: this.state.dose.value,
+        doseUnits: this.state.dose.unit.name,
+        route: this.state.route.name,
+        frequency: this.state.frequency.name,
+        asNeeded: this.state.PRNStatus,
+        quantity: this.state.totalQuantity.value,
+        quantityUnits: this.state.totalQuantity.unit.name,
+      };
     return new DrugOrder(
       {
         drug: this.props.drug,
         dosingInstructions,
         duration: this.state.duration.value,
         durationUnits: this.state.duration.unit.name,
-        startDate: this.state.drugStartDate
+        startDate: this.state.drugStartDate,
       }
     );
   }
@@ -142,11 +138,13 @@ export default class NewPrescriptionModal extends Component {
     this.setState({ PRNStatus: !this.state.PRNStatus });
   }
 
-  getPRNStatus() {
-    if (this.state.PRNStatus)
-      return "true";
-    else
-    return "false";
+  handleMeasurementChange(measurement) {
+    const newState = { [measurement.name]: measurement };
+    if (!this.state.totalQuantity.isManuallySet) {
+      const totalQty = this.calculateTotalQuantity({ [measurement.name]: measurement });
+      newState.totalQuantity = totalQty;
+    }
+    this.setState(newState);
   }
 
   render() {

@@ -1,28 +1,27 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import NewPrescribedDrugRow from 'src/components/medication/NewPrescribedDrugRow.jsx';
 
 export default class NewPrescribedDrugTable extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   _showHeaders() {
-    const headerNames = [];
-    return headerNames.map((name, index) => {
-      return (
-        <div key={index} className="table-header-column">
+    const headerNames = [
+      'Drug Information',
+      'Schedule',
+      'Total Qty',
+      'Price',
+      'Instructions',
+      'Action'];
+    return headerNames.map((name, index) => (
+        <div className="table-header-column" key={index}>
           {name}
         </div>
-      );
-    })
+      ));
   }
 
   _showRow() {
-    return this.props.drugOrderList.map((drugOrder) => {
-      return (
-        <NewPrescribedDrugRow drugOrder={drugOrder}/>
-      );
-    })
+    return this.props.drugOrderList.map((drugOrder, index) => (
+        <NewPrescribedDrugRow drugOrder={drugOrder} key={index} />
+      ));
   }
 
   render() {
@@ -39,7 +38,7 @@ export default class NewPrescribedDrugTable extends Component {
 
 NewPrescribedDrugTable.propTypes = {
   drugOrderList: PropTypes.array,
-  headers: PropTypes.array
+  headers: PropTypes.array,
 };
 
 NewPrescribedDrugTable.defaultValue = {

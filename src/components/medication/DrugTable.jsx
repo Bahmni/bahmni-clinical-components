@@ -11,29 +11,22 @@ const drugTableHeader = ['Drug Information - Name, Form, Route',
   'Action'];
 
 export default class DrugTable extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   _showHeaders() {
-    return drugTableHeader.map((name, index) => {
-      return (
+    return drugTableHeader.map((name, index) => (
         <div key={index} className="table-header-column">
           {name}
         </div>
-      );
-    })
+      ));
   }
 
   _showSections() {
     const drugBuyGroup = groupBy(this.props.data, 'dateActivated');
     let dateActivated = Object.keys(drugBuyGroup);
     dateActivated = orderBy(dateActivated, null, ['desc']);
-    return dateActivated.map((date, index) => {
-      return (
+    return dateActivated.map((date, index) => (
         <DrugSection key={index} data={drugBuyGroup[date]} header={date} />
-      );
-    })
+      ));
   }
 
   render() {
@@ -57,6 +50,6 @@ DrugTable.propTypes = {
 DrugTable.defaultProps = {
   data: [
     { name: 'drug1', dateActivated: 1484850600000 },
-    { name: 'drug2', dateActivated: 1484850600000 }
+    { name: 'drug2', dateActivated: 1484850600000 },
   ],
 };

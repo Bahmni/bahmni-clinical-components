@@ -11,7 +11,7 @@ export default class AutoComplete extends Component {
 
 
   shouldComponentUpdate(nextProps) {
-      if (!isEqual(this.props.value, nextProps.value)) {
+    if (!isEqual(this.props.value, nextProps.value)) {
       return true;
     }
     return false;
@@ -72,8 +72,8 @@ AutoComplete.propTypes = {
   onValueChange: PropTypes.func,
   placeholder: PropTypes.string,
   searchable: PropTypes.bool,
+  value: PropTypes.object,
   valueKey: PropTypes.string,
-  value: PropTypes.object
 };
 
 AutoComplete.defaultProps = {

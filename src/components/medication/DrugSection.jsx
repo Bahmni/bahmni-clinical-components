@@ -13,11 +13,9 @@ export default class DrugSection extends Component {
 
   _displayRowData() {
     const rows = orderBy(this.props.data, 'sortWeight');
-    return rows.map((rowData, index) => {
-      return (
+    return rows.map((rowData, index) => (
         <DrugRow key={index} data={rowData} ></DrugRow>
-      )
-    })
+      ));
   }
 
   render() {

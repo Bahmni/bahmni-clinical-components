@@ -45,7 +45,10 @@ describe('MedicationContainer', () => {
     fetchMock.restore();
   });
   it('should render Autocomplete and Button components by default', () => {
-    const wrapper = mount(<MedicationContainer treatmentConfig={treatmentConfig} />);
+    const wrapper = mount(<MedicationContainer
+      patientUuid="some uuid"
+      treatmentConfig={treatmentConfig}
+    />);
 
     expect(wrapper.find('Button').length).to.equal(1);
     expect(wrapper.find('Select').length).to.equal(1);
@@ -54,7 +57,9 @@ describe('MedicationContainer', () => {
   });
 
   it('should change button props to red on drug select when drug is non coded  ', () => {
-    const props = { drugConceptSet: 'All TB Drugs', isDropDown: true, treatmentConfig };
+    const props = { drugConceptSet: 'All TB Drugs',
+      isDropDown: true, treatmentConfig,
+      patientUuid: 'some uuid' };
     const wrapper = mount(<MedicationContainer {...props} />);
     const onChange = wrapper.find('Select').props().onChange;
     onChange('paracetmol');
@@ -66,7 +71,10 @@ describe('MedicationContainer', () => {
   });
 
   it('should change button props to blue on drug select when drug is  coded  ', () => {
-    const props = { drugConceptSet: 'All TB Drugs', isDropDown: true, treatmentConfig };
+    const props = { drugConceptSet: 'All TB Drugs',
+      isDropDown: true,
+      treatmentConfig,
+      patientUuid: 'some uuid' };
     const wrapper = mount(<MedicationContainer {...props} />);
     const onChange = wrapper.find('Select').props().onChange;
     onChange({ uuid: 'some uuid' });
@@ -84,42 +92,56 @@ describe('MedicationContainer', () => {
       '%2Cconcept%3A(uuid%2Cname%2Cnames%3A(name)))&s=ordered&q=pa',
       options);
 
-    const wrapper = mount(<MedicationContainer treatmentConfig={treatmentConfig} />);
+    fetchMock.mock(
+      '/openmrs/ws/rest/v1/bahmnicore/drugOrders?includeActiveVisit=true&numberOfVisits=3' +
+      '&patientUuid=some uuid', []);
+
+    const wrapper = mount(<MedicationContainer
+      patientUuid="some uuid"
+      treatmentConfig={treatmentConfig}
+    />);
     const onChange = wrapper.find('AutoComplete').props().loadOptions;
     onChange('pa');
-    expect(fetchMock.calls().matched.length).to.eql(1);
+    expect(fetchMock.calls().matched.length).to.eql(2);
   });
 
   it('should close modal when Close button is clicked', () => {
-    const wrapper = mount(<MedicationContainer treatmentConfig={treatmentConfig} />);
+    const wrapper = mount(<MedicationContainer
+      patientUuid="some uuid"
+      treatmentConfig={treatmentConfig}
+    />);
 
     wrapper.instance().handleCloseModal();
-
     expect(wrapper.state().showModal).to.equal(false);
   });
 
   it('should clear the autocomplete field when drug details are added and clicked done', () => {
-    const wrapper = mount(<MedicationContainer treatmentConfig={treatmentConfig} patientUuid={"patientUUid"}/>);
+    const wrapper = mount(<MedicationContainer
+      patientUuid={'patientUuid'}
+      treatmentConfig={treatmentConfig}
+    />);
 
-    var drug = {name : "Ibuprofen"};
+    const drug = { name: 'Ibuprofen' };
     wrapper.instance().onDrugSelect(drug);
     expect(wrapper.state().value).to.deep.equal(drug);
 
     wrapper.instance().addNewDrug();
     expect(wrapper.state().value).to.equal(null);
-    expect(wrapper.state().color).to.equal("red");
+    expect(wrapper.state().color).to.equal('red');
   });
 
   it('should clear the autocomplete field when drug details are added and clicked cancel', () => {
-    const wrapper = mount(<MedicationContainer treatmentConfig={treatmentConfig} patientUuid={"patientUuid"} />);
+    const wrapper = mount(<MedicationContainer
+      patientUuid={'patientUuid'}
+      treatmentConfig={treatmentConfig}
+    />);
 
-    var drug = {name : "Ibuprofen"};
+    const drug = { name: 'Ibuprofen' };
     wrapper.instance().onDrugSelect(drug);
     expect(wrapper.state().value).to.deep.equal(drug);
 
     wrapper.instance().handleCloseModal();
     expect(wrapper.state().value).to.equal(null);
-    expect(wrapper.state().color).to.equal("red");
+    expect(wrapper.state().color).to.equal('red');
   });
-
 });
