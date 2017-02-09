@@ -8,5 +8,5 @@ export const prescriptionStatus = {
 export const urlConstants = {
   drugOptionUrl: '/openmrs/ws/rest/v1/drug',
   allDrugHistory: '/openmrs/ws/rest/v1/bahmnicore/drugOrders?' +
-                  'includeActiveVisit=true&numberOfVisits=3&patientUuid=',
+                  'includeActiveVisit=true&numberOfVisits=30&patientUuid=',
 };

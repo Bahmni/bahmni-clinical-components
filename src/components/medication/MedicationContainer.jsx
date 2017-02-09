@@ -93,7 +93,7 @@ export default class MedicationContainer extends Component {
       return (
         <div>
           <PrescriptionFilter data={this.state.drugHistoryData} onFilterChange={this._onFilterChange}/>
-          <DrugTable data={this._filterFunction()} activePrescription={false}/>
+          <DrugTable data={this._filterFunction()}/>
         </div>
       );
     }
@@ -108,7 +108,7 @@ export default class MedicationContainer extends Component {
         <div className="medication-wrap">
           <div className="add-prescription-wrap">
             <div className="medicine-search">
-              <AutoComplete
+              <ClinicalAutoComplete
                 loadOptions={this.getDrugs}
                 minimumInput={minimumInput}
                 onValueChange={this.onDrugSelect}

@@ -28,9 +28,9 @@ export default class DrugTable extends Component {
     let dateActivated = Object.keys(drugByGroup);
     dateActivated = orderBy(dateActivated, null, ['desc']);
 
-    return dateActivated.map((date, index) => {
+    return dateActivated.map((date) => {
       return (
-        <DrugSection key={index} data={drugByGroup[date]} header={date} />
+        <DrugSection key={date} data={drugByGroup[date]} header={date} />
       );
     })
   }
