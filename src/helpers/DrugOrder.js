@@ -17,7 +17,7 @@ export class DrugOrder extends ImmutableDrugOrder {
 
   getName() {
     return `${this.drug.name} ,` +
-           `(${this.drug.dosageForm.display}),` +
+           `${this.drug.dosageForm.display},` +
            `${this.dosingInstructions.route}`;
   }
 
@@ -26,7 +26,7 @@ export class DrugOrder extends ImmutableDrugOrder {
            `${this.dosingInstructions.doseUnits}, ` +
            `${this.dosingInstructions.frequency} for ` +
            `${this.duration} ${this.durationUnits} starting ` +
-           `${dateFormat(this.startDate) || 'Today'}`;
+           `${this.startDate!=new Date()?dateFormat(this.startDate) : 'Today'}`;
   }
 
   getTotalQuantity() {

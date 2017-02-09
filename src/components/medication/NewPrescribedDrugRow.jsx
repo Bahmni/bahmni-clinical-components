@@ -8,7 +8,7 @@ export default class NewPrescribedDrugRow extends Component {
     return (
       <div className="table-actions-active">
         <a href="#">edit</a>
-        <a href="#">favorites</a>
+
         <a href="#">remove</a>
       </div>
     );

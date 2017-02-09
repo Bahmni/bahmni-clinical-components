@@ -83,9 +83,10 @@ export default class NewPrescriptionModal extends Component {
     const newState = { frequency };
 
     const duration = Object.assign({}, this.state.duration);
-    duration.unit = this.getDurationUnitForFrequency(frequency) || duration.unit;
-    newState.duration = duration;
-
+    if(frequency) {
+      duration.unit = this.getDurationUnitForFrequency(frequency) || duration.unit;
+      newState.duration = duration;
+    }
     if (!this.state.totalQuantity.isManuallySet) {
       const totalQty = this.calculateTotalQuantity({ duration, frequency });
       newState.totalQuantity = totalQty;
@@ -201,7 +202,7 @@ export default class NewPrescriptionModal extends Component {
             labelKey="name"
             onChange={this.handleFrequencyChange}
             options={this.props.treatmentConfig.frequencies}
-            searchable={false}
+            searchable={true}
             value={this.state.frequency}
             valueKey="name"
           /> <br />
@@ -254,7 +255,7 @@ export default class NewPrescriptionModal extends Component {
             value={this.state.additionalInstructions}
           />
 
-          <button onClick={this.props.handleCloseModal}>Close</button>
+          <button onClick={this.props.handleCloseModal}>Cancel</button>
           <button onClick={this.createDrugOrder}>Done</button>
           </div>
         </ReactModal>

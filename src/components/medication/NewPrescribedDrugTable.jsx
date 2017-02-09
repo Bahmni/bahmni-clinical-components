@@ -8,7 +8,6 @@ export default class NewPrescribedDrugTable extends Component {
       'Drug Information',
       'Schedule',
       'Total Qty',
-      'Price',
       'Instructions',
       'Action'];
     return headerNames.map((name, index) => (
