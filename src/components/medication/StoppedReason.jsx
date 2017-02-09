@@ -43,5 +43,5 @@ export default class StoppedReason extends Component {
 }
 
 StoppedReason.propTypes = {
-  data: PropTypes.string.isRequired,
+  data: PropTypes.object.isRequired,
 };

@@ -81,15 +81,6 @@ export default class DrugRow extends Component {
   _displayData() {
     const data = this.props.data;
     if (!isEmpty(data)) {
-<<<<<<< HEAD
-      const firstColumn = `${data.drug.name} ${data.drug.form}, ${data.dosingInstructions.route}`;
-      const secondColumn = `${data.dosingInstructions.dose}, ${data.dosingInstructions.frequency} for ${data.duration}` +
-        `${data.durationUnits} started on ${dateFormat(new Date(data.effectiveStartDate))} by ${data.creatorName}`;
-      const thirdColumn = data.dosingInstructions.quantity;
-      const fourthColumn = data.instructions;
-      const fifthColumn = this._getStatus(this.props.data);
-      const sixthColumn = this._generateActions(fifthColumn);
-=======
       const drugNameAndForm = data.drug ? `${data.drug.name}, ${data.drug.form}` : data.drugNonCoded;
       const firstColumn = `${drugNameAndForm}, ${data.dosingInstructions.route || ''}`;
 
@@ -106,7 +97,6 @@ export default class DrugRow extends Component {
       const status = this._getStatus(this.props.data);
       const fifthColumn = status === prescriptionStatus.Stopped ? this._displayStopped() : status;
       const sixthColumn = this._generateActions(status);
->>>>>>> 9a00766... prescription history
       return (
         <div className="table-row">
           <div className="col0">{firstColumn}</div>

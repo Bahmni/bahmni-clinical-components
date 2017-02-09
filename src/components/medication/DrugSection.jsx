@@ -29,7 +29,7 @@ export default class DrugSection extends Component {
 }
 
 DrugSection.propTypes = {
-  header: PropTypes.number.isRequired,
+  header: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.object),
 };
 

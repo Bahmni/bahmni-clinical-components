@@ -1,5 +1,5 @@
 {
-    "bail": true,
+    "bail": false,
     "verbose": true,
     "collectCoverage": true,
     "modulePaths": [

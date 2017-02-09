@@ -4,6 +4,7 @@ import chaiEnzyme from 'chai-enzyme';
 import chai, { expect } from 'chai';
 import MedicationContainer from 'src/components/medication/MedicationContainer.jsx';
 import fetchMock from 'fetch-mock';
+import { urlConstants } from 'src/constants';
 
 chai.use(chaiEnzyme());
 
@@ -39,6 +40,9 @@ const treatmentConfig = {
   ] },
   dosingInstructions: [{ name: 'Before Meals' }],
 };
+
+const patientUuid = '123';
+
 
 describe('MedicationContainer', () => {
   afterEach(() => {

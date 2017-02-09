@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import DrugSection from 'src/components/medication/DrugSection.jsx';
-import { DateUtil } from 'src/helpers/DateUtil';
+import { DateUtil } from 'src/helpers/dateUtil';
 import groupBy from 'lodash/groupBy';
 import orderBy from 'lodash/orderBy';
-import filter from 'lodash/filter';
 import isEmpty from 'lodash/isEmpty';
 
 const drugTableHeader = ['Drug Information - Name, Form, Route',
@@ -25,23 +24,15 @@ export default class DrugTable extends Component {
 
   _showSections() {
     const prescriptionData = this.props.data;
-    //console.log("-----------", prescriptionData);
-    const drugByGroup = groupBy(prescriptionData, (data) => { console.log("=====", data.dateActivated); return DateUtil.dateWithoutTime(new Date(data.dateActivated)).valueOf(); });
-    console.log('dbg------', drugByGroup);
-    this.myD
+    const drugByGroup = groupBy(prescriptionData, (data) => { return DateUtil.dateWithoutTime(new Date(data.dateActivated)).valueOf(); });
     let dateActivated = Object.keys(drugByGroup);
     dateActivated = orderBy(dateActivated, null, ['desc']);
-<<<<<<< HEAD
-    return dateActivated.map((date, index) => (
-        <DrugSection key={index} data={drugBuyGroup[date]} header={date} />
-      ));
-=======
+
     return dateActivated.map((date, index) => {
       return (
         <DrugSection key={index} data={drugByGroup[date]} header={date} />
       );
     })
->>>>>>> 9a00766... prescription history
   }
 
   _showData() {
@@ -69,15 +60,4 @@ export default class DrugTable extends Component {
 
 DrugTable.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object),
-<<<<<<< HEAD
-};
-
-DrugTable.defaultProps = {
-  data: [
-    { name: 'drug1', dateActivated: 1484850600000 },
-    { name: 'drug2', dateActivated: 1484850600000 },
-  ],
-=======
-  activePrescription: PropTypes.bool.isRequired,
->>>>>>> 9a00766... prescription history
 };
