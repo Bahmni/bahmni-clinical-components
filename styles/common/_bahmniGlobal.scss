@@ -1,0 +1,19 @@
+.button, button, input[type="button"], input[type="reset"], a.button {
+  @include button;
+}
+
+.btn {
+  &--highlight, input[type="submit"], button[type="submit"] {
+    background: linear-gradient(to bottom, $bahmniPrimaryBtnColor, $bahmniPrimaryBtnColorHover) $bahmniPrimaryBtnColorHover !important;
+    border: 1px solid $bahmniPrimaryBtnColorHover;
+    color: $white;
+    letter-spacing: 0.5px;
+    font-family: $primarySemiBoldFont;
+    border-radius: 2px;
+  }
+  &--close {
+    padding: 5px;
+    font-size: 12px;
+    width: 74px;
+  }
+}

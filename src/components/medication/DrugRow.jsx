@@ -98,13 +98,13 @@ export default class DrugRow extends Component {
       const fifthColumn = status === prescriptionStatus.Stopped ? this._displayStopped() : status;
       const sixthColumn = this._generateActions(status);
       return (
-        <div className="table-row">
-          <div className="col0">{firstColumn}</div>
-          <div className="col1">{secondColumn}</div>
-          <div className="col2">{thirdColumn}</div>
-          <div className="col3">{fourthColumn}</div>
-          <div className="col4">{fifthColumn}</div>
-          <div className="col5">{sixthColumn}</div>
+        <div className="table__row">
+          <div className="table__cell  table__cell--0">{firstColumn}</div>
+          <div className="table__cell table__cell--1">{secondColumn}</div>
+          <div className="table__cell table__cell--2">{thirdColumn}</div>
+          <div className="table__cell table__cell--3">{fourthColumn}</div>
+          <div className="table__cell table__cell--4">{fifthColumn}</div>
+          <div className="table__cell table__cell--5">{sixthColumn}</div>
         </div>
       );
     }

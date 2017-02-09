@@ -104,26 +104,35 @@ export default class MedicationContainer extends Component {
     let minimumInput = 0;
     if (!this.props.isDropDown) {
       minimumInput = 2;
-    }
-    return (
-      <div>
-        <ClinicalAutoComplete
-          loadOptions={this.getDrugs}
-          minimumInput={minimumInput}
-          onValueChange={this.onDrugSelect}
-          placeholder="Search for drug to add to prescription"
-          searchable={!(this.props.isDropDown && this.props.drugConceptSet)}
-          value={this.state.value}
-        />
-        <Button color={this.state.color} label="Add to prescription" />
-        { this.state.showModal && <NewPrescriptionModal drug={this.state.value}
-          handleCloseModal={this.handleCloseModal} handleDone={this.addNewDrug}
-          treatmentConfig={this.props.treatmentConfig}
-        /> }
+      return (
+        <div className="medication-wrap">
+          <div className="add-prescription-wrap">
+            <div className="medicine-search">
+              <AutoComplete
+                loadOptions={this.getDrugs}
+                minimumInput={minimumInput}
+                onValueChange={this.onDrugSelect}
+                placeholder="Search for drug to add to prescription"
+                searchable={!(this.props.isDropDown && this.props.drugConceptSet)}
+              />
+            </div>
+            <Button >
+              <i className="fa fa-plus"></i> Add to prescription
+            </Button>
+          </div>
 
-        <NewPrescribedDrugTable drugOrderList={this.state.newPrescribedDrugs} />
-        {this._showDrugHistoryTabs()}
-      </div>);
+          { this.state.showModal && <NewPrescriptionModal drug={this.state.value}
+                                                          handleCloseModal={this.handleCloseModal}
+                                                          handleDone={this.addNewDrug}
+                                                          treatmentConfig={this.props.treatmentConfig}
+          /> }
+          <div className="medication__prescription-section">
+            <NewPrescribedDrugTable drugOrderList={this.state.newPrescribedDrugs}/>
+            {this._showDrugHistoryTabs()}
+          </div>
+
+        </div>);
+    }
   }
 }
 

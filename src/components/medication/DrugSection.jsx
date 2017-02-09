@@ -20,9 +20,11 @@ export default class DrugSection extends Component {
 
   render() {
     return (
-      <div className="table-section">
-        <div className="table-section-header">{this.header}</div>
-        {this._displayRowData()}
+      <div>
+          <div className="table__row table__row__date">
+              {this.header}
+          </div>
+          {this._displayRowData()}
       </div>
     );
   }

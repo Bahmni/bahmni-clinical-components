@@ -1,3 +1,4 @@
+import '../styles/styles.scss';
 export { ClinicalAutoComplete } from 'components/ClinicalAutoComplete.jsx';
 export { MedicationContainer } from 'components/medication/MedicationContainer.jsx';
 export { NewPrescriptionModal } from 'components/medication/NewPrescriptionModal.jsx';

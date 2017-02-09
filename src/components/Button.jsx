@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-
+import classNames from 'classnames';
 export default class Button extends Component {
   constructor(props) {
     super(props);
@@ -9,21 +9,18 @@ export default class Button extends Component {
 
   render() {
     return (
-      <div>
         <button
-          onClick={this.props.onClick}
+          onClick={this.props.onClick} className={ classNames('btn--highlight fl',
+          {'cancel': this.props.color == 'red'}) }
         >
-          {this.props.label}
+          {this.props.children}
         </button>
-        <p> {this.props.color}</p>
-      </div>
     );
   }
 }
 
 Button.propTypes = {
   color: PropTypes.string,
-  label: PropTypes.string,
   onClick: PropTypes.func,
   value: PropTypes.any,
 };

@@ -1,0 +1,204 @@
+.medication-wrap{
+  @include  clearfix();
+  .add-prescription-wrap{
+    @include  clearfix();
+    margin-bottom: 30px;
+    .medicine-search{
+       width:70%;
+       float: left;
+      .Select-control{
+        border-radius: 0;
+      }
+      .Select.Select--single.is-searchable.is-focused{
+        .Select-control{
+          outline: 1px solid #007FFF;
+        }
+      }
+      .Select-arrow{
+        display: inline-block;
+        font-family: FontAwesome;
+        font-weight: normal;
+        font-style: normal;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        padding: 0.2em;
+        display: inline;
+        width: auto;
+        height: auto;
+        line-height: normal;
+        vertical-align: baseline;
+        background-image: none;
+        background-position: 0 0;
+        background-repeat: repeat;
+        margin-top: 0;
+        border:none;
+        color: $gray400;
+        font-size: 18px;
+
+        &:before{
+          content: "\f002";
+        }
+      }
+    }
+    .btn{
+      margin-top:3px;
+      padding: 6px 10px 7px;
+    }
+  }
+}
+
+.medication__prescription{
+  padding-bottom: 50px;
+  border-bottom: 1px #858585 solid;
+  &:last-child{
+    border-bottom:none;
+  }
+}
+.medication__prescription-section {
+  color: #000;
+  font-size: 12px;
+  .table {
+    border: 1px #858585 solid;
+    .table__row {
+      display: flex;
+      width: 100%;
+      &__date{
+        background: #F5F5F5;
+        text-align: center;
+        border-bottom: 1px solid #858585;
+        border-top: 1px #858585 solid;
+        padding: 8px 10px;
+        box-sizing: border-box;
+        display: block;
+        font-size: 12px;
+        font-family: $primarySemiBoldFont;
+      }
+    }
+    .table__cell {
+      flex: 1;
+      padding: 10px;
+      border-right: 1px #858585 solid;
+      font-weight: 700;
+      font-family: $primarySemiBoldFont;
+      display: flex;
+      line-height: 1em;
+      font-size: 13px;
+      span.table__cell--extraInfo{
+        font-size: 12px;
+      }
+      &--0 {
+        flex: 4;
+        align-items: center;
+      }
+      &--1{
+        flex: 5;
+        flex-direction: column;
+        span {
+          &.table__cell--doseinfo__provider {
+            display: block;
+            text-align: right;
+            color: #cccccc;
+            font-size: 10px;
+          }
+        }
+      }
+      &--2 {
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        span.table__cell--totalqty__remainingdosage {
+          display: block;
+          font-size: 10px;
+        }
+      }
+      &--3 {
+        flex: 2;
+        justify-content: center;
+        align-items: center;
+      }
+      &--4 {
+        justify-content: center;
+        align-items: center;
+      }
+      &--5 {
+        flex: 2;
+        justify-content: center;
+        align-items: center;
+        .table-actions-active {
+          display: flex;
+          a {
+            flex: 1;
+            text-align: center;
+            margin-left: 10px;
+            text-decoration: underline;
+            &:hover{
+              text-decoration: none;
+            }
+          }
+
+        }
+      }
+      &:last-child {
+        border-right: none;
+      }
+    }
+
+  }
+  .table__header {
+    &--filled {
+      background: #dedede;
+    }
+    .table__cell--doseinfo{
+      flex-direction: row;
+    }
+  }
+
+  .table__body {
+    display: flex;
+    flex-direction: column;
+    .table__body__row{
+      border-bottom: 1px #858585 solid;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+    .table__cell {
+      font-family: $primaryFont;
+      font-weight: 400;
+      padding:10px;
+    }
+    .table__row--dateinfo {
+      flex: 1;
+      border-bottom: 1px #858585 solid;
+      background: rgba(222, 222, 222, 0.74);
+      .table__cell {
+        font-weight: 700;
+        font-family: $primarySemiBoldFont;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+
+.medicaion__prescription-types{
+  padding-top: 20px;
+  padding-bottom: 10px;
+  ul{
+    li{
+      display: inline-block;
+      float: left;
+      padding-right: 2%;
+      a{
+        display: block;
+        font-size: 16px;
+        &.active{
+          color: #000 !important;
+          font-family: $primarySemiBoldFont;
+        }
+      }
+    }
+  }
+}

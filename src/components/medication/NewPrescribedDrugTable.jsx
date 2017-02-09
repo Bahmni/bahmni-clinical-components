@@ -12,7 +12,7 @@ export default class NewPrescribedDrugTable extends Component {
       'Instructions',
       'Action'];
     return headerNames.map((name, index) => (
-        <div className="table-header-column" key={index}>
+        <div className="table__cell" key={index}>
           {name}
         </div>
       ));
@@ -25,14 +25,24 @@ export default class NewPrescribedDrugTable extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <div className="table-header">
-          {this._showHeaders()}
+    if(this._showRow() != ''){
+      return (
+        <div className="table">
+          <div className="table__header table__header--filled">
+            <div className="table__row">
+              {this._showHeaders()}
+            </div>
+          </div>
+          <div className="table__body">
+            <div className="table__body__row">
+              {this._showRow()}
+            </div>
+          </div>
         </div>
-        {this._showRow()}
-      </div>
-    );
+      );
+    }
+    return false;
+
   }
 }
 
