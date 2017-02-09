@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import Select from 'react-select';
 import isEqual from 'lodash/isEqual';
 
-export default class AutoComplete extends Component {
+export default class ClinicalAutoComplete extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
@@ -63,7 +63,7 @@ export default class AutoComplete extends Component {
   }
 }
 
-AutoComplete.propTypes = {
+ClinicalAutoComplete.propTypes = {
   autofocus: PropTypes.bool,
   disabled: PropTypes.bool,
   labelKey: PropTypes.string,
@@ -76,7 +76,7 @@ AutoComplete.propTypes = {
   valueKey: PropTypes.string,
 };
 
-AutoComplete.defaultProps = {
+ClinicalAutoComplete.defaultProps = {
   autofocus: false,
   disabled: false,
   labelKey: 'name',

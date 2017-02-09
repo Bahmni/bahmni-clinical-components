@@ -1,4 +1,4 @@
-export { AutoComplete } from 'components/AutoComplete.jsx';
+export { ClinicalAutoComplete } from 'components/ClinicalAutoComplete.jsx';
 export { MedicationContainer } from 'components/medication/MedicationContainer.jsx';
 export { NewPrescriptionModal } from 'components/medication/NewPrescriptionModal.jsx';
 export { Measurement } from 'components/Measurement.jsx';

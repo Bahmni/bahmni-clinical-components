@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { ComponentStore } from 'bahmni-form-controls';
-import AutoComplete from 'src/components/AutoComplete.jsx';
+import ClinicalAutoComplete from 'src/components/ClinicalAutoComplete.jsx';
 import { httpInterceptor } from 'src/helpers/httpInterceptor';
 import { urlConstants } from 'src/constants';
 import Button from 'src/components/Button.jsx';
@@ -107,7 +107,7 @@ export default class MedicationContainer extends Component {
     }
     return (
       <div>
-        <AutoComplete
+        <ClinicalAutoComplete
           loadOptions={this.getDrugs}
           minimumInput={minimumInput}
           onValueChange={this.onDrugSelect}

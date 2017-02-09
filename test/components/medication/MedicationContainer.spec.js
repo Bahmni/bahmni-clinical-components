@@ -104,7 +104,7 @@ describe('MedicationContainer', () => {
       patientUuid="some uuid"
       treatmentConfig={treatmentConfig}
     />);
-    const onChange = wrapper.find('AutoComplete').props().loadOptions;
+    const onChange = wrapper.find('ClinicalAutoComplete').props().loadOptions;
     onChange('pa');
     expect(fetchMock.calls().matched.length).to.eql(2);
   });

@@ -2,16 +2,16 @@ import React from 'react';
 import { mount } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import chai, { expect } from 'chai';
-import Autocomplete from 'src/components/AutoComplete.jsx';
+import ClinicalAutoComplete from 'src/components/ClinicalAutoComplete.jsx';
 
 chai.use(chaiEnzyme());
 
 
-describe('Autocomplete', () => {
-  it('should render Autocomplete', () => {
+describe('ClinicalAutocomplete', () => {
+  it('should render ClinicalAutocomplete', () => {
     const loadOptions = jest.fn();
 
-    const wrapper = mount(<Autocomplete loadOptions={loadOptions} />);
+    const wrapper = mount(<ClinicalAutoComplete loadOptions={loadOptions} />);
 
     expect(wrapper.find('Select').props().valueKey).to.equal('uuid');
     expect(wrapper.find('Select').props().labelKey).to.equal('name');
@@ -30,7 +30,7 @@ describe('Autocomplete', () => {
     const onValueChange = jest.fn(() => '');
 
     const wrapper = mount(
-            <Autocomplete
+            <ClinicalAutoComplete
               loadOptions={loadOptions}
               onValueChange={onValueChange}
             />);
@@ -53,8 +53,7 @@ describe('Autocomplete', () => {
     const onValueChange = jest.fn(() => '');
     const isSearchable = false;
     const wrapper = mount(
-            <Autocomplete
-              loadOptions={loadOptions}
+            <ClinicalAutoComplete loadOptions={loadOptions}
               onValueChange={onValueChange}
               searchable={isSearchable}
             />);
