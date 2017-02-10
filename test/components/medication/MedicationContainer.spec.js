@@ -4,7 +4,7 @@ import chaiEnzyme from 'chai-enzyme';
 import chai, { expect } from 'chai';
 import MedicationContainer from 'src/components/medication/MedicationContainer.jsx';
 import fetchMock from 'fetch-mock';
-import { urlConstants } from 'src/constants';
+import { DrugOrder } from 'src/helpers/DrugOrder';
 
 chai.use(chaiEnzyme());
 
@@ -41,7 +41,24 @@ const treatmentConfig = {
   dosingInstructions: [{ name: 'Before Meals' }],
 };
 
-const patientUuid = '123';
+const drugOrder = new DrugOrder({
+  drug: {
+    name: 'Ibuprofen',
+    form: 'Tablet(s)',
+    dosageForm: { display: 'Once a day' },
+  },
+  dosingInstructions: {
+    dose: 120,
+    doseUnits: 'Tablet(s)',
+    route: 'Oral',
+    frequency: 'Twice a day',
+    asNeeded: true,
+    quantity: 2880,
+    quantityUnits: 'Tablet(s)',
+  },
+  duration: 12,
+  durationUnits: 'Day(s)',
+});
 
 
 describe('MedicationContainer', () => {
@@ -97,7 +114,7 @@ describe('MedicationContainer', () => {
       options);
 
     fetchMock.mock(
-      '/openmrs/ws/rest/v1/bahmnicore/drugOrders?includeActiveVisit=true&numberOfVisits=3' +
+      '/openmrs/ws/rest/v1/bahmnicore/drugOrders?includeActiveVisit=true&numberOfVisits=30' +
       '&patientUuid=some uuid', []);
 
     const wrapper = mount(<MedicationContainer
@@ -147,5 +164,24 @@ describe('MedicationContainer', () => {
     wrapper.instance().handleCloseModal();
     expect(wrapper.state().value).to.equal(null);
     expect(wrapper.state().color).to.equal('red');
+  });
+
+  it('should not show prescription table when there are no prescribed drugs', () => {
+    const wrapper = mount(<MedicationContainer
+      patientUuid={'patientUuid'}
+      treatmentConfig={treatmentConfig}
+    />);
+
+    expect(wrapper.find('NewPrescribedDrugTable').length).to.equal(0);
+  });
+
+  it('should show prescription table when there are prescribed drugs', () => {
+    const wrapper = mount(<MedicationContainer
+      patientUuid={'patientUuid'}
+      treatmentConfig={treatmentConfig}
+    />);
+
+    wrapper.instance().addNewDrug(drugOrder);
+    expect(wrapper.find('NewPrescribedDrugTable').length).to.equal(1);
   });
 });

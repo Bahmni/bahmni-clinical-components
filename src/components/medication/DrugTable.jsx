@@ -22,7 +22,7 @@ export default class DrugTable extends Component {
 
   _showSections() {
     const prescriptionData = this.props.data;
-    const drugByGroup = groupBy(prescriptionData, (data) => { return DateUtil.dateWithoutTime(new Date(data.dateActivated)).valueOf(); });
+    const drugByGroup = groupBy(prescriptionData, (data) => DateUtil.dateWithoutTime(new Date(data.dateActivated)).valueOf());
     let dateActivated = Object.keys(drugByGroup);
     dateActivated = orderBy(dateActivated, null, ['desc']);
 

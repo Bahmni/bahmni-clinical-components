@@ -11,13 +11,14 @@ export const ImmutableDrugOrder = Record({
   totalQuantityUnit: undefined,
   startDate: undefined,
   additionalInstructions: undefined,
+  instructions: undefined,
 });
 
 export class DrugOrder extends ImmutableDrugOrder {
 
   getName() {
-    return `${this.drug.name} ,` +
-           `${this.drug.dosageForm.display},` +
+    return `${this.drug.name} ` +
+           `${this.drug.dosageForm.display}, ` +
            `${this.dosingInstructions.route}`;
   }
 
@@ -34,8 +35,15 @@ export class DrugOrder extends ImmutableDrugOrder {
   }
 
 
+  getPRNStatus() {
+    if(this.dosingInstructions.asNeeded){
+      return 'PRN ';
+    }
+    return '';
+  }
+
   getInstructions() {
-    return `${this.dosingInstructions.asNeeded && 'PRN'}  ${this.additionalInstructions}`;
+    return  this.getPRNStatus() + `${this.instructions && this.instructions.name || ''}  ${this.additionalInstructions || ''}`;
   }
 
 

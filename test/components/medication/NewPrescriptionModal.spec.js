@@ -255,9 +255,9 @@ describe('NewPrescriptionModal', () => {
     );
     const dosingInstructions = { name: 'Before meals', rootConcept: null };
 
-    expect(wrapper.state().dosingInstructions).to.equal(undefined);
+    expect(wrapper.state().instructions).to.equal(undefined);
     wrapper.instance().handleDosingInstructionChange(dosingInstructions);
-    expect(wrapper.state().dosingInstructions).to.deep.equal(dosingInstructions);
+    expect(wrapper.state().instructions).to.deep.equal(dosingInstructions);
   });
 
   it('should set the route on change', () => {
@@ -282,7 +282,7 @@ describe('NewPrescriptionModal', () => {
     );
     const additionalInstructions = { target: { value: 'Once a day' } };
 
-    wrapper.instance().handleAdditionalInstructions(additionalInstructions);
+    wrapper.instance().handleAdditionalInstructions (additionalInstructions);
     expect(wrapper.state().additionalInstructions).to.equal('Once a day');
   });
 });

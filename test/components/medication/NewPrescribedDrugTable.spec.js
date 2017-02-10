@@ -15,23 +15,21 @@ describe.only('NewPrescribedDrugTable', () => {
   });
 
   it('should render column names in the given order', () => {
-    const headerNames = ['Drug Information',
-      'Schedule',
+    const headerNames = ['Drug Information - <span className="table__cell--extraInfo">Name, Form, Route</span>',
+      'Schedule - <span className="table__cell--extraInfo">Dosage, Frequency, Duration</span>',
       'Total Qty',
-      'Price',
       'Instructions',
       'Action'];
     const data = [{}];
     const wrapper = shallow(<NewPrescribedDrugTable drugOrderList={data} />);
-    const tableHeader = wrapper.find('.table-header');
+    const tableHeader = wrapper.find('.table__row');
 
-    expect(tableHeader.children()).to.have.length(6);
-    expect(tableHeader.childAt(0).text()).to.equal(headerNames[0]);
-    expect(tableHeader.childAt(1).text()).to.equal(headerNames[1]);
-    expect(tableHeader.childAt(2).text()).to.equal(headerNames[2]);
-    expect(tableHeader.childAt(3).text()).to.equal(headerNames[3]);
-    expect(tableHeader.childAt(4).text()).to.equal(headerNames[4]);
-    expect(tableHeader.childAt(5).text()).to.equal(headerNames[5]);
+    expect(tableHeader.children()).to.have.length(5);
+    expect(tableHeader.childAt(0).props().dangerouslySetInnerHTML.__html).to.equal(headerNames[0]);
+    expect(tableHeader.childAt(1).props().dangerouslySetInnerHTML.__html).to.equal(headerNames[1]);
+    expect(tableHeader.childAt(2).props().dangerouslySetInnerHTML.__html).to.equal(headerNames[2]);
+    expect(tableHeader.childAt(3).props().dangerouslySetInnerHTML.__html).to.equal(headerNames[3]);
+    expect(tableHeader.childAt(4).props().dangerouslySetInnerHTML.__html).to.equal(headerNames[4]);
   });
 
   it('should render table sections', () => {

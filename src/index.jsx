@@ -8,4 +8,5 @@ export { NewPrescribedDrugTable } from 'components/medication/NewPrescribedDrugT
 export { NewPrescribedDrugRow } from 'components/medication/NewPrescribedDrugRow.jsx';
 // -------------------------- helpers ---------------------
 export { default as httpInterceptor } from 'src/helpers/httpInterceptor';
+export { DrugOrder } from 'src/helpers/DrugOrder';
 

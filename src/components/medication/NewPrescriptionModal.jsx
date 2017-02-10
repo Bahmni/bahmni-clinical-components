@@ -95,7 +95,7 @@ export default class NewPrescriptionModal extends Component {
   }
 
   handleDosingInstructionChange(value) {
-    this.setState({ dosingInstructions: value });
+    this.setState({ instructions: value });
   }
 
   handleDateChange(date) {
@@ -122,6 +122,7 @@ export default class NewPrescriptionModal extends Component {
         asNeeded: this.state.PRNStatus,
         quantity: this.state.totalQuantity.value,
         quantityUnits: this.state.totalQuantity.unit.name,
+        administrationInstructions: this.state.administrationInstructions,
       };
     return new DrugOrder(
       {
@@ -131,6 +132,7 @@ export default class NewPrescriptionModal extends Component {
         durationUnits: this.state.duration.unit.name,
         startDate: this.state.drugStartDate,
         additionalInstructions: this.state.additionalInstructions,
+        instructions: this.state.instructions,
       }
     );
   }
@@ -246,7 +248,7 @@ export default class NewPrescriptionModal extends Component {
             options={this.props.treatmentConfig.dosingInstructions}
             validate={false}
             validations={[]}
-            value={this.state.dosingInstructions }
+            value={this.state.instructions}
             valueKey={'name'}
           />
 

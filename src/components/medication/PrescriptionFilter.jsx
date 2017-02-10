@@ -3,7 +3,7 @@ import { DateUtil } from 'src/helpers/DateUtil';
 
 export const FilterValues = {
   Active: 'active',
-  All   : 'all',
+  All: 'all',
 };
 
 

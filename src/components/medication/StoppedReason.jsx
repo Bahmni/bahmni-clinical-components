@@ -4,7 +4,7 @@ import { DateUtil } from 'src/helpers/DateUtil';
 export default class StoppedReason extends Component {
   constructor(props) {
     super(props);
-    this.state= { toggleFlag: false };
+    this.state = { toggleFlag: false };
     this._toggleDisplay = this._toggleDisplay.bind(this);
   }
 
@@ -17,10 +17,10 @@ export default class StoppedReason extends Component {
     const stoppedReasonText = data.orderReasonText || '';
     const stoppedDate = DateUtil.dateFormat(data.dateStopped);
     let stoppedReason = `Stopped on ${stoppedDate}`;
-    if(stoppedReasonText) {
+    if (stoppedReasonText) {
       stoppedReason += ` due to ${stoppedReasonText}`;
     }
-    if(stoppedConceptReason) {
+    if (stoppedConceptReason) {
       stoppedReason += ` (${stoppedConceptReason})`;
     }
     if (this.state.toggleFlag) {

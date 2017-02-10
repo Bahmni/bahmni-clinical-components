@@ -9,23 +9,22 @@ chai.use(chaiEnzyme());
 
 
 describe('DrugSection', () => {
-
   it('should render section with only header and no rows', () => {
-   const header = '999973800000';
-   const data=[{}];
-   const wrapper = shallow(<DrugSection header={header} data={data}/>);
-   const sectionHeader = wrapper.find('.table-section-header');
+    const header = '999973800000';
+    const data = [{}];
+    const wrapper = shallow(<DrugSection header={header} data={data} />);
+    const sectionHeader = wrapper.find('.table-section-header');
     const headerText = DateUtil.dateFormat(new Date(Number.parseInt(header)));
 
-   expect(sectionHeader.text()).to.equal(headerText);
+    expect(sectionHeader.text()).to.equal(headerText);
   });
 
   it('should render section with header and rows', () => {
-   const header = '999973800000';
+    const header = '999973800000';
     const data = [
-      {name: 'TestDrug1', dateActivated: header},
-      {name: 'TestDrug2', dateActivated: header}];
-    const wrapper = shallow(<DrugSection data={data} header={header}/>);
+      { name: 'TestDrug1', dateActivated: header },
+      { name: 'TestDrug2', dateActivated: header }];
+    const wrapper = shallow(<DrugSection data={data} header={header} />);
     const sectionHeader = wrapper.find('.table-section-header');
 
     const headerText = DateUtil.dateFormat(new Date(Number.parseInt(header)));

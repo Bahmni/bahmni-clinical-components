@@ -7,7 +7,7 @@ import Button from 'src/components/Button.jsx';
 import DrugTable from 'src/components/medication/DrugTable.jsx';
 import NewPrescriptionModal from 'src/components/medication/NewPrescriptionModal.jsx';
 import NewPrescribedDrugTable from 'src/components/medication/NewPrescribedDrugTable.jsx';
-import PrescriptionFilter, { FilterValues } from 'src/components/medication/PrescriptionFilter.jsx'
+import PrescriptionFilter, { FilterValues } from 'src/components/medication/PrescriptionFilter.jsx';
 import { DateUtil } from 'src/helpers/DateUtil';
 import filter from 'lodash/filter';
 import isEmpty from 'lodash/isEmpty';
@@ -15,7 +15,13 @@ import isEmpty from 'lodash/isEmpty';
 export default class MedicationContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { drugHistoryData: [], color: 'red', showModal: false, newPrescribedDrugs: [], filter: FilterValues.Active  };
+    this.state = {
+      drugHistoryData: [],
+      color: 'red',
+      showModal: false,
+      newPrescribedDrugs: [],
+      filter: FilterValues.Active,
+    };
     this.getDrugs = this.getDrugs.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.onDrugSelect = this.onDrugSelect.bind(this);
@@ -76,10 +82,10 @@ export default class MedicationContainer extends Component {
   }
 
   _filterFunction() {
-    if(this.state.filter === FilterValues.Active) {
+    if (this.state.filter === FilterValues.Active) {
       return filter(this.state.drugHistoryData, (data) => {
         return !data.dateStopped && data.effectiveStopDate > DateUtil.dateWithoutTime().getTime();
-      })
+      });
     }
     return this.state.drugHistoryData;
   }
@@ -89,11 +95,14 @@ export default class MedicationContainer extends Component {
   }
 
   _showDrugHistoryTabs() {
-    if(!isEmpty(this.state.drugHistoryData)) {
+    if (!isEmpty(this.state.drugHistoryData)) {
       return (
         <div>
-          <PrescriptionFilter data={this.state.drugHistoryData} onFilterChange={this._onFilterChange}/>
-          <DrugTable data={this._filterFunction()}/>
+          <PrescriptionFilter
+            data={this.state.drugHistoryData}
+            onFilterChange={this._onFilterChange}
+          />
+          <DrugTable activePrescription={false} data={this._filterFunction()} />
         </div>
       );
     }
@@ -104,6 +113,7 @@ export default class MedicationContainer extends Component {
     let minimumInput = 0;
     if (!this.props.isDropDown) {
       minimumInput = 2;
+    }
       return (
         <div className="medication-wrap">
           <div className="add-prescription-wrap">
@@ -116,7 +126,7 @@ export default class MedicationContainer extends Component {
                 searchable={!(this.props.isDropDown && this.props.drugConceptSet)}
               />
             </div>
-            <Button >
+            <Button color={this.state.color}>
               <i className="fa fa-plus"></i> Add to prescription
             </Button>
           </div>
@@ -127,12 +137,12 @@ export default class MedicationContainer extends Component {
                                                           treatmentConfig={this.props.treatmentConfig}
           /> }
           <div className="medication__prescription-section">
-            <NewPrescribedDrugTable drugOrderList={this.state.newPrescribedDrugs}/>
-            {this._showDrugHistoryTabs()}
+            { !isEmpty(this.state.newPrescribedDrugs) &&
+            <NewPrescribedDrugTable drugOrderList={this.state.newPrescribedDrugs} /> }
+              {this._showDrugHistoryTabs()}
           </div>
 
         </div>);
-    }
   }
 }
 

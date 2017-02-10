@@ -1,20 +1,18 @@
 import React, { Component, PropTypes } from 'react';
 import NewPrescribedDrugRow from 'src/components/medication/NewPrescribedDrugRow.jsx';
 
+const drugTableHeader = ['Drug Information - <span className="table__cell--extraInfo">Name, Form, Route</span>',
+  'Schedule - <span className="table__cell--extraInfo">Dosage, Frequency, Duration</span>',
+  'Total Qty',
+  'Instructions',
+  'Action'];
+
 export default class NewPrescribedDrugTable extends Component {
 
   _showHeaders() {
-    const headerNames = [
-      'Drug Information',
-      'Schedule',
-      'Total Qty',
-      'Instructions',
-      'Action'];
-    return headerNames.map((name, index) => (
-        <div className="table__cell" key={index}>
-          {name}
-        </div>
-      ));
+    return drugTableHeader.map((name, index) => (
+      <div key={index} className={`table__cell table__cell--${index}`} dangerouslySetInnerHTML={{__html: name}} />
+    ));
   }
 
   _showRow() {
