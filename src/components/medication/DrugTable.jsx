@@ -6,7 +6,7 @@ import orderBy from 'lodash/orderBy';
 import isEmpty from 'lodash/isEmpty';
 
 const drugTableHeader = ['Drug Information - <span className="table__cell--extraInfo">Name, Form, Route</span>',
-  'Schedule - Dosage, Frequency, Duration',
+  'Schedule - <span className="table__cell--extraInfo">Dosage, Frequency, Duration</span>',
   'Total Qty',
   'Instructions',
   'Status',
@@ -16,9 +16,7 @@ export default class DrugTable extends Component {
 
   _showHeaders() {
     return drugTableHeader.map((name, index) => (
-      <div key={index} className={`table__cell table__cell--${index}`}>
-        {name}
-      </div>
+      <div key={index} className={`table__cell table__cell--${index}`} dangerouslySetInnerHTML={{__html: name}} />
     ));
   }
 
