@@ -5,8 +5,8 @@ import groupBy from 'lodash/groupBy';
 import orderBy from 'lodash/orderBy';
 import isEmpty from 'lodash/isEmpty';
 
-const drugTableHeader = ['Drug Information - <span className="table__cell--extraInfo">Name, Form, Route</span>',
-  'Schedule - <span className="table__cell--extraInfo">Dosage, Frequency, Duration</span>',
+const drugTableHeader = ['Drug Information - <small class="extraInfo">Name, Form, Route</small>',
+  'Schedule - <small class="extraInfo">Dosage, Frequency, Duration</small>',
   'Total Qty',
   'Instructions',
   'Status',
@@ -16,7 +16,8 @@ export default class DrugTable extends Component {
 
   _showHeaders() {
     return drugTableHeader.map((name, index) => (
-      <div key={index} className={`table__cell table__cell--${index}`} dangerouslySetInnerHTML={{__html: name}} />
+      <div className={ `table__cell table__cell--${index}` }
+         dangerouslySetInnerHTML={{__html: name}} key={ index } />
     ));
   }
 
@@ -28,13 +29,13 @@ export default class DrugTable extends Component {
 
     return dateActivated.map((date) => {
       return (
-        <DrugSection key={date} data={drugByGroup[date]} header={date} />
+        <DrugSection data={drugByGroup[date]} header={date} key={date} />
       );
-    })
+    });
   }
 
   _showData() {
-    if(!isEmpty(this.props.data)) {
+    if (!isEmpty(this.props.data)) {
     return (
       <div className="table">
         <div className="table__header table__header--filled">

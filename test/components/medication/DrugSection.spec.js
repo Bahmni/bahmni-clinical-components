@@ -13,7 +13,7 @@ describe('DrugSection', () => {
     const header = '999973800000';
     const data = [{}];
     const wrapper = shallow(<DrugSection header={header} data={data} />);
-    const sectionHeader = wrapper.find('.table-section-header');
+    const sectionHeader = wrapper.find('.table__row');
     const headerText = DateUtil.dateFormat(new Date(Number.parseInt(header)));
 
     expect(sectionHeader.text()).to.equal(headerText);
@@ -25,7 +25,7 @@ describe('DrugSection', () => {
       { name: 'TestDrug1', dateActivated: header },
       { name: 'TestDrug2', dateActivated: header }];
     const wrapper = shallow(<DrugSection data={data} header={header} />);
-    const sectionHeader = wrapper.find('.table-section-header');
+    const sectionHeader = wrapper.find('.table__row');
 
     const headerText = DateUtil.dateFormat(new Date(Number.parseInt(header)));
     const drugRows = wrapper.find('DrugRow');

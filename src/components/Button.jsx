@@ -10,8 +10,8 @@ export default class Button extends Component {
   render() {
     return (
         <button
-          onClick={this.props.onClick} className={ classNames('btn--highlight fl',
-          {'cancel': this.props.color == 'red'}) }
+          className={ classNames('btn--highlight fl',
+            { cancel: this.props.color === 'red' }) } onClick={this.props.onClick}
         >
           {this.props.children}
         </button>

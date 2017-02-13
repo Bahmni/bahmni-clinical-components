@@ -72,7 +72,9 @@ export default class DrugRow extends Component {
 
   _getDrugInstructions(data) {
     const sosDetails = data.dosingInstructions.asNeeded ? 'SOS' : '';
-    const administrationInstructions = JSON.parse(data.dosingInstructions.administrationInstructions);
+    const administrationInstructions = JSON.parse(
+      data.dosingInstructions.administrationInstructions
+    );
     const instructions = administrationInstructions.instructions;
     const additionalInstructions = administrationInstructions.additionalInstructions || '';
     return `${sosDetails} ${instructions} ${additionalInstructions}`;
@@ -81,14 +83,18 @@ export default class DrugRow extends Component {
   _displayData() {
     const data = this.props.data;
     if (!isEmpty(data)) {
-      const drugNameAndForm = data.drug ? `${data.drug.name}, ${data.drug.form}` : data.drugNonCoded;
+      const drugNameAndForm = data.drug ? `${data.drug.name}, 
+        ${data.drug.form}` : data.drugNonCoded;
       const firstColumn = `${drugNameAndForm}, ${data.dosingInstructions.route || ''}`;
 
       let dosingInstructions = '';
       if (data.dosingInstructions.dose) {
-        dosingInstructions += `${data.dosingInstructions.dose} ${data.dosingInstructions.doseUnits}, ${data.dosingInstructions.frequency}`;
+        dosingInstructions += `${data.dosingInstructions.dose} 
+        ${data.dosingInstructions.doseUnits}, ${data.dosingInstructions.frequency}`;
       } else {
-        const adminInstructions = JSON.parse(data.dosingInstructions.administrationInstructions);
+        const adminInstructions = JSON.parse(
+          data.dosingInstructions.administrationInstructions
+        );
         dosingInstructions += `${adminInstructions.morningDose}-${adminInstructions.afternoonDose}-${adminInstructions.eveningDose} ${data.dosingInstructions.doseUnits}`;
       }
       const secondColumn = `${dosingInstructions} for ${data.duration} ${data.durationUnits} started on ${DateUtil.dateFormat(new Date(data.effectiveStartDate))} by ${data.creatorName}`;

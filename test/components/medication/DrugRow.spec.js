@@ -33,7 +33,7 @@ describe('DrugRow', () => {
 
   it('should render empty row when data is absent', () => {
     const wrapper = shallow(<DrugRow data={{}} />);
-    const tableRow = wrapper.find('.table-row');
+    const tableRow = wrapper.find('.table__row');
     expect(tableRow).to.have.length(0);
   });
 
@@ -43,7 +43,7 @@ describe('DrugRow', () => {
     const thirdColumn = '24 tabs';
     const fourthColumn = ' Do not take this medicine ';
     const wrapper = shallow(<DrugRow data={rowData} />);
-    const tableRow = wrapper.find('.table-row');
+    const tableRow = wrapper.find('.table__row');
 
     expect(tableRow.children()).to.have.length(6);
 
@@ -57,7 +57,7 @@ describe('DrugRow', () => {
     it('should display the active actions when the status is active', () => {
       sinon.stub(Date, 'now', () => rowData.effectiveStartDate);
       const wrapper = shallow(<DrugRow data={rowData} />);
-      const statusCol = wrapper.find('.col4');
+      const statusCol = wrapper.find('.table__cell--4');
       const actionsCol = wrapper.find('.table-actions-active');
 
       expect(statusCol.text()).to.equal(prescriptionStatus.Active);
@@ -71,7 +71,7 @@ describe('DrugRow', () => {
     it('should display the scheduled actions when the status is scheduled', () => {
       sinon.stub(Date, 'now', () => rowData.effectiveStartDate - 1);
       const wrapper = shallow(<DrugRow data={rowData} />);
-      const statusCol = wrapper.find('.col4');
+      const statusCol = wrapper.find('.table__cell--4');
       const actionsCol = wrapper.find('.table-actions-active');
 
       expect(statusCol.text()).to.equal(prescriptionStatus.Scheduled);
@@ -85,7 +85,7 @@ describe('DrugRow', () => {
     it('should display the stopped actions when the status is stopped', () => {
       const data = Object.assign({}, rowData, { dateStopped: 1485282700000 });
       const wrapper = shallow(<DrugRow data={data} />);
-      const statusCol = wrapper.find('.col4');
+      const statusCol = wrapper.find('.table__cell--4');
       const actionsCol = wrapper.find('.table-actions-finished');
 
       expect(statusCol.text()).to.equal(`${prescriptionStatus.Stopped}<StoppedReason />`);
@@ -96,7 +96,7 @@ describe('DrugRow', () => {
     it('should display the finished actions when the status is finished', () => {
       sinon.stub(Date, 'now', () => rowData.effectiveStopDate + 1);
       const wrapper = shallow(<DrugRow data={rowData} />);
-      const statusCol = wrapper.find('.col4');
+      const statusCol = wrapper.find('.table__cell--4');
       const actionsCol = wrapper.find('.table-actions-finished');
 
       expect(statusCol.text()).to.equal(prescriptionStatus.Finished);

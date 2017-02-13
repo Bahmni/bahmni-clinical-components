@@ -83,8 +83,8 @@
       display: flex;
       line-height: 1em;
       font-size: 13px;
-      span.table__cell--extraInfo{
-        font-size: 12px;
+      small.extraInfo{
+        font-size: 10px;
       }
       &--0 {
         flex: 4;
@@ -94,12 +94,12 @@
         flex: 5;
         flex-direction: column;
         span {
-          &.table__cell--doseinfo__provider {
-            display: block;
-            text-align: right;
-            color: #cccccc;
-            font-size: 10px;
-          }
+          //&.table__cell--doseinfo__provider {
+          //  display: block;
+          //  text-align: right;
+          //  color: #cccccc;
+          //  font-size: 10px;
+          //}
         }
       }
       &--2 {
