@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import chai, { expect } from 'chai';
+import sinon from 'sinon';
 import ClinicalAutoComplete from 'src/components/ClinicalAutoComplete.jsx';
 
 chai.use(chaiEnzyme());
@@ -64,5 +65,25 @@ describe('ClinicalAutocomplete', () => {
     onChange(options[1]);
 
     expect(loadOptions.mock.calls.length).to.equal(1);
+  });
+
+  it('should update component when props value is changed', () => {
+    const spy = sinon.spy(ClinicalAutoComplete.prototype, 'shouldComponentUpdate');
+    const options = [
+      { name: 'one', value: 'One' },
+      { name: 'two', value: 'Two' },
+      { name: 'three', value: 'Three' },
+    ];
+    const loadOptions = jest.fn(() => options);
+    const onValueChange = jest.fn(() => '');
+    const isSearchable = false;
+    const wrapper = mount(
+      <ClinicalAutoComplete loadOptions={loadOptions}
+        onValueChange={onValueChange}
+        searchable={isSearchable}
+      />);
+
+    wrapper.setProps({ value: { name: 'Paracetamol' } });
+    expect(spy.calledOnce).to.equal(true);
   });
 });

@@ -22,7 +22,7 @@ describe('NewPrescribedDrugRow', () => {
       asNeeded: true,
       quantity: 2880,
       quantityUnits: 'Tablet(s)',
-      administrationInstructions: ''
+      administrationInstructions: '',
     },
     duration: 12,
     durationUnits: 'Day(s)',
@@ -48,7 +48,7 @@ describe('NewPrescribedDrugRow', () => {
     expect(tableRow.childAt(0).text()).to.eql(name);
     expect(tableRow.childAt(1).text()).to.eql(schedule);
     expect(tableRow.childAt(2).text()).to.eql('2880 Tablet(s)');
-    expect(tableRow.childAt(3).text()).to.eql(' PRN   ');
+    expect(tableRow.childAt(3).text()).to.eql('PRN ');
   });
 
   it('should display the  actions ', () => {

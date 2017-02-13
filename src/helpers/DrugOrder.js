@@ -7,8 +7,6 @@ export const ImmutableDrugOrder = Record({
   dosingInstructions: undefined,
   duration: undefined,
   durationUnits: undefined,
-  totalQuantity: undefined,
-  totalQuantityUnit: undefined,
   startDate: undefined,
   additionalInstructions: undefined,
   instructions: undefined,
@@ -27,7 +25,8 @@ export class DrugOrder extends ImmutableDrugOrder {
            `${this.dosingInstructions.doseUnits}, ` +
            `${this.dosingInstructions.frequency} for ` +
            `${this.duration} ${this.durationUnits} starting ` +
-           `${this.startDate!=new Date()?dateFormat(this.startDate) : 'Today'}`;
+           `${this.startDate !== new Date().toISOString().split('T')[0]
+             ? dateFormat(this.startDate) : 'Today'}`;
   }
 
   getTotalQuantity() {
@@ -36,14 +35,15 @@ export class DrugOrder extends ImmutableDrugOrder {
 
 
   getPRNStatus() {
-    if(this.dosingInstructions.asNeeded){
+    if (this.dosingInstructions.asNeeded) {
       return 'PRN ';
     }
     return '';
   }
 
   getInstructions() {
-    return  this.getPRNStatus() + `${this.instructions && this.instructions.name || ''}  ${this.additionalInstructions || ''}`;
+    return `${this.getPRNStatus()}` +
+      `${this.instructions && this.instructions.name || ''}  ${this.additionalInstructions || ''}`;
   }
 
 

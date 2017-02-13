@@ -17,26 +17,26 @@ export default class DrugTable extends Component {
   _showHeaders() {
     return drugTableHeader.map((name, index) => (
       <div className={ `table__cell table__cell--${index}` }
-         dangerouslySetInnerHTML={{__html: name}} key={ index } />
+        dangerouslySetInnerHTML={{ __html: name }} key={ index }
+      />
     ));
   }
 
   _showSections() {
     const prescriptionData = this.props.data;
-    const drugByGroup = groupBy(prescriptionData, (data) => DateUtil.dateWithoutTime(new Date(data.dateActivated)).valueOf());
+    const drugByGroup = groupBy(prescriptionData, (data) =>
+      DateUtil.dateWithoutTime(new Date(data.dateActivated)).valueOf());
     let dateActivated = Object.keys(drugByGroup);
     dateActivated = orderBy(dateActivated, null, ['desc']);
 
-    return dateActivated.map((date) => {
-      return (
+    return dateActivated.map((date) => (
         <DrugSection data={drugByGroup[date]} header={date} key={date} />
-      );
-    });
+      ));
   }
 
   _showData() {
     if (!isEmpty(this.props.data)) {
-    return (
+      return (
       <div className="table">
         <div className="table__header table__header--filled">
           <div className="table__row" >

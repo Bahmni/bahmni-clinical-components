@@ -95,10 +95,16 @@ export default class DrugRow extends Component {
         const adminInstructions = JSON.parse(
           data.dosingInstructions.administrationInstructions
         );
-        dosingInstructions += `${adminInstructions.morningDose}-${adminInstructions.afternoonDose}-${adminInstructions.eveningDose} ${data.dosingInstructions.doseUnits}`;
+        dosingInstructions +=
+          `${adminInstructions.morningDose}` +
+          `-${adminInstructions.afternoonDose}-${adminInstructions.eveningDose}`
+          + `${data.dosingInstructions.doseUnits}`;
       }
-      const secondColumn = `${dosingInstructions} for ${data.duration} ${data.durationUnits} started on ${DateUtil.dateFormat(new Date(data.effectiveStartDate))} by ${data.creatorName}`;
-      const thirdColumn = `${data.dosingInstructions.quantity} ${data.dosingInstructions.quantityUnits}`;
+      const secondColumn = `${dosingInstructions} for ` +
+        `${data.duration} ${data.durationUnits} started on ` +
+        `${DateUtil.dateFormat(new Date(data.effectiveStartDate))} by ${data.creatorName}`;
+      const thirdColumn = `${data.dosingInstructions.quantity}` +
+        ` ${data.dosingInstructions.quantityUnits}`;
       const fourthColumn = this._getDrugInstructions(data);
       const status = this._getStatus(this.props.data);
       const fifthColumn = status === prescriptionStatus.Stopped ? this._displayStopped() : status;

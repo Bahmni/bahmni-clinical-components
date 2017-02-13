@@ -12,7 +12,7 @@ describe('DrugSection', () => {
   it('should render section with only header and no rows', () => {
     const header = '999973800000';
     const data = [{}];
-    const wrapper = shallow(<DrugSection header={header} data={data} />);
+    const wrapper = shallow(<DrugSection data={data} header={header} />);
     const sectionHeader = wrapper.find('.table__row');
     const headerText = DateUtil.dateFormat(new Date(Number.parseInt(header)));
 

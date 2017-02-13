@@ -83,7 +83,7 @@ export default class NewPrescriptionModal extends Component {
     const newState = { frequency };
 
     const duration = Object.assign({}, this.state.duration);
-    if(frequency) {
+    if (frequency) {
       duration.unit = this.getDurationUnitForFrequency(frequency) || duration.unit;
       newState.duration = duration;
     }
@@ -122,7 +122,6 @@ export default class NewPrescriptionModal extends Component {
         asNeeded: this.state.PRNStatus,
         quantity: this.state.totalQuantity.value,
         quantityUnits: this.state.totalQuantity.unit.name,
-        administrationInstructions: this.state.administrationInstructions,
       };
     return new DrugOrder(
       {
@@ -204,7 +203,7 @@ export default class NewPrescriptionModal extends Component {
             labelKey="name"
             onChange={this.handleFrequencyChange}
             options={this.props.treatmentConfig.frequencies}
-            searchable={true}
+            searchable
             value={this.state.frequency}
             valueKey="name"
           /> <br />

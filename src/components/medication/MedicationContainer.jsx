@@ -83,9 +83,8 @@ export default class MedicationContainer extends Component {
 
   _filterFunction() {
     if (this.state.filter === FilterValues.Active) {
-      return filter(this.state.drugHistoryData, (data) => {
-        return !data.dateStopped && data.effectiveStopDate > DateUtil.dateWithoutTime().getTime();
-      });
+      return filter(this.state.drugHistoryData, (data) =>
+      !data.dateStopped && data.effectiveStopDate > DateUtil.dateWithoutTime().getTime());
     }
     return this.state.drugHistoryData;
   }
@@ -114,7 +113,7 @@ export default class MedicationContainer extends Component {
     if (!this.props.isDropDown) {
       minimumInput = 2;
     }
-      return (
+    return (
         <div className="medication-wrap">
           <div className="add-prescription-wrap">
             <div className="medicine-search">
@@ -132,9 +131,9 @@ export default class MedicationContainer extends Component {
           </div>
 
           { this.state.showModal && <NewPrescriptionModal drug={this.state.value}
-                                                          handleCloseModal={this.handleCloseModal}
-                                                          handleDone={this.addNewDrug}
-                                                          treatmentConfig={this.props.treatmentConfig}
+            handleCloseModal={this.handleCloseModal}
+            handleDone={this.addNewDrug}
+            treatmentConfig={this.props.treatmentConfig}
           /> }
           <div className="medication__prescription-section">
             { !isEmpty(this.state.newPrescribedDrugs) &&

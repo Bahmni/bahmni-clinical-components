@@ -15,7 +15,8 @@ describe.only('NewPrescribedDrugTable', () => {
   });
 
   it('should render column names in the given order', () => {
-    const headerNames = ['Drug Information - <span className="table__cell--extraInfo">Name, Form, Route</span>',
+    const headerNames = [
+      'Drug Information - <span className="table__cell--extraInfo">Name, Form, Route</span>',
       'Schedule - <span className="table__cell--extraInfo">Dosage, Frequency, Duration</span>',
       'Total Qty',
       'Instructions',

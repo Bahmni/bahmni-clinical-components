@@ -38,7 +38,8 @@ describe('DrugRow', () => {
   });
 
   it('should render row with the appropriate data', () => {
-    const firstColumn = `${rowData.drug.name}, ${rowData.drug.form}, ${rowData.dosingInstructions.route}`;
+    const firstColumn =
+      `${rowData.drug.name}, ${rowData.drug.form}, ${rowData.dosingInstructions.route}`;
     const secondColumn = '12 tabs, Once a day for 2 Day(s) started on 25 Jan 17 by testUser';
     const thirdColumn = '24 tabs';
     const fourthColumn = ' Do not take this medicine ';

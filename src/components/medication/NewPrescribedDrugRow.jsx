@@ -21,8 +21,10 @@ export default class NewPrescribedDrugRow extends Component {
         <div className="table__row">
           <div className="table__cell  table__cell--0">{this.props.drugOrder.getName()}</div>
           <div className="table__cell  table__cell--1">{this.props.drugOrder.getSchedule()}</div>
-          <div className="table__cell  table__cell--2">{this.props.drugOrder.getTotalQuantity()}</div>
-          <div className="table__cell  table__cell--3"> {this.props.drugOrder.getInstructions()}</div>
+          <div className="table__cell  table__cell--2">
+            {this.props.drugOrder.getTotalQuantity()}</div>
+          <div className="table__cell  table__cell--3">
+            {this.props.drugOrder.getInstructions()}</div>
           <div className="table__cell  table__cell--4">{this._activeActions()}</div>
         </div>
       );

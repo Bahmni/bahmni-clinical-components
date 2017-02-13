@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { DateUtil } from 'src/helpers/DateUtil';
 
 export const FilterValues = {
   Active: 'active',
@@ -8,9 +7,6 @@ export const FilterValues = {
 
 
 export default class PrescriptionFilter extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (

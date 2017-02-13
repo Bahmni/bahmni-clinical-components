@@ -282,7 +282,53 @@ describe('NewPrescriptionModal', () => {
     );
     const additionalInstructions = { target: { value: 'Once a day' } };
 
-    wrapper.instance().handleAdditionalInstructions (additionalInstructions);
+    wrapper.instance().handleAdditionalInstructions(additionalInstructions);
     expect(wrapper.state().additionalInstructions).to.equal('Once a day');
+  });
+
+  it('should create a drug order from state', () => {
+    const addNewDrug = jest.fn((drugOrder) => drugOrder);
+    const wrapper = mount(
+      <NewPrescriptionModal
+        drug={{ name: 'paracetamol' }}
+        handleDone={addNewDrug}
+        treatmentConfig={treatmentConfig}
+      />
+    );
+    const drugInformation = {
+      dose: { value: '12', unit: { name: 'ml' } },
+      duration: { value: '12', unit: { factor: 1, name: 'Day(s)' } },
+      route: { name: 'Oral' },
+      frequency: { frequencyPerDay: 1, name: 'Once a day' },
+      PRNStatus: true,
+      drug: { concept: { name: 'Paracetamol' } },
+      additionalInstructions: 'With water',
+      instructions: { name: 'Empty Stomach' },
+      totalQuantity: { value: 144, unit: { name: 'ml' } },
+      startDate: '2017-02-13',
+    };
+
+    const drugOrder = {
+      dosingInstructions: {
+        dose: '12',
+        doseUnits: 'ml',
+        frequency: 'Once a day',
+        asNeeded: true,
+        quantity: 144,
+        quantityUnits: 'ml',
+        route: 'Oral',
+      },
+      drug: { concept: { name: 'Paracetamol' } },
+      duration: '12',
+      durationUnits: 'Day(s)',
+      instructions: { name: 'Empty Stomach' },
+      startDate: '2017-02-13',
+    };
+    wrapper.setState(drugInformation);
+    wrapper.instance().createDrugOrder();
+
+    expect(addNewDrug.mock.calls.length).to.equal(1);
+    expect(addNewDrug.mock.calls[0][0].dosingInstructions)
+      .to.deep.equal(drugOrder.dosingInstructions);
   });
 });
