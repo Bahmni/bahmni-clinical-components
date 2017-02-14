@@ -1,8 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import isEmpty from 'lodash/isEmpty';
+import isEqual from 'lodash/isEqual';
 
 
 export default class NewPrescribedDrugRow extends Component {
+
+  shouldComponentUpdate(nextProps) {
+    if (!isEqual(this.props.drugOrder, nextProps.drugOrder)) {
+      return true;
+    }
+    return false;
+  }
 
   _activeActions() {
     return (
@@ -39,6 +47,6 @@ export default class NewPrescribedDrugRow extends Component {
 }
 
 NewPrescribedDrugRow.propTypes = {
-  drugOrder: PropTypes.object.isRequired,
+  drugOrder: PropTypes.object,
 };
 

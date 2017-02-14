@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import NewPrescribedDrugRow from 'src/components/medication/NewPrescribedDrugRow.jsx';
+import isEqual from 'lodash/isEqual';
 
 const drugTableHeader = [
   'Drug Information - <span className="table__cell--extraInfo">Name, Form, Route</span>',
@@ -9,6 +10,14 @@ const drugTableHeader = [
   'Action'];
 
 export default class NewPrescribedDrugTable extends Component {
+
+  shouldComponentUpdate(nextProps) {
+    if (!isEqual(this.props.drugOrderList, nextProps.drugOrderList) ||
+      !isEqual(this.props.headers, nextProps.headers)) {
+      return true;
+    }
+    return false;
+  }
 
   _showHeaders() {
     return drugTableHeader.map((name, index) => (

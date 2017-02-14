@@ -61,4 +61,45 @@ describe('NewPrescribedDrugRow', () => {
     expect(actionsCol.childAt(1).text()).to.equal('remove');
     Date.now.restore();
   });
+
+  it('should not update the component when props are same', () => {
+    const spy = sinon.spy(NewPrescribedDrugRow.prototype, 'shouldComponentUpdate');
+    const wrapper = shallow(<NewPrescribedDrugRow drugOrder={rowData} />);
+
+    wrapper.setProps({ drugOrder: rowData });
+
+    expect(spy.calledOnce).to.equal(true);
+    expect(spy.returnValues[0]).to.equal(false);
+    spy.restore();
+  });
+
+  it('should update the component when props are changed', () => {
+    const oldData = new DrugOrder({
+      drug: {
+        name: 'Paracetemol',
+        dosageForm: { display: 'Tablet(s)' },
+      },
+      dosingInstructions: {
+        dose: 120,
+        doseUnits: 'Tablet(s)',
+        route: 'Oral',
+        frequency: 'Twice a day',
+        asNeeded: true,
+        quantity: 2880,
+        quantityUnits: 'Tablet(s)',
+        administrationInstructions: '',
+      },
+      duration: 12,
+      durationUnits: 'Day(s)',
+      startDate: '2017-02-12',
+    });
+    const spy = sinon.spy(NewPrescribedDrugRow.prototype, 'shouldComponentUpdate');
+    const wrapper = shallow(<NewPrescribedDrugRow drugOrder={oldData} />);
+
+    wrapper.setProps({ drugOrder: rowData });
+
+    expect(spy.calledOnce).to.equal(true);
+    expect(spy.returnValues[0]).to.equal(true);
+    spy.restore();
+  });
 });

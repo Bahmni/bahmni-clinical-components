@@ -85,5 +85,7 @@ describe('ClinicalAutocomplete', () => {
 
     wrapper.setProps({ value: { name: 'Paracetamol' } });
     expect(spy.calledOnce).to.equal(true);
+    expect(spy.returnValues[0]).to.equal(true);
+    spy.restore();
   });
 });
