@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 export const FilterValues = {
   Active: 'active',
@@ -6,19 +6,13 @@ export const FilterValues = {
 };
 
 
-export default class PrescriptionFilter extends Component {
+const PrescriptionFilter = (props) =>
+  (<div className="drug-tab">
+    <button onClick={() => props.onFilterChange(FilterValues.Active)}>Active</button>
+    <button onClick={() => props.onFilterChange(FilterValues.All)}>Show All</button>
+  </div>);
 
-  render() {
-    return (
-      <div className="drug-tab">
-        <ul>
-          <li><a onClick={() => this.props.onFilterChange(FilterValues.Active)}>Active Prescriptions</a></li>
-          <li><a onClick={() => this.props.onFilterChange(FilterValues.All)} >Show All</a></li>
-        </ul>
-      </div>
-    );
-  }
-}
+export default PrescriptionFilter;
 
 PrescriptionFilter.propTypes = {
   data: PropTypes.string.isRequired,

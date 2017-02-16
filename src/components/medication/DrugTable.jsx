@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import DrugSection from 'src/components/medication/DrugSection.jsx';
-import { DateUtil } from 'src/helpers/dateUtil';
+import { DateUtil } from 'src/helpers/DateUtil';
 import groupBy from 'lodash/groupBy';
 import orderBy from 'lodash/orderBy';
 import isEmpty from 'lodash/isEmpty';

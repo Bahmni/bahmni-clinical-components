@@ -15,11 +15,13 @@ import isEmpty from 'lodash/isEmpty';
 export default class MedicationContainer extends Component {
   constructor(props) {
     super(props);
+    const store = props.store.getState();
+    const newPrescribedDrugs = (store.prescription && store.prescription.newPrescribedDrugs) || [];
     this.state = {
       drugHistoryData: [],
       color: 'red',
       showModal: false,
-      newPrescribedDrugs: [],
+      newPrescribedDrugs,
       filter: FilterValues.Active,
     };
     this.getDrugs = this.getDrugs.bind(this);
@@ -73,12 +75,20 @@ export default class MedicationContainer extends Component {
   }
 
   addNewDrug(drug) {
-    const drugList = this.state.newPrescribedDrugs || [];
+    const drugList = Object.assign([], this.state.newPrescribedDrugs);
     drugList.push(drug);
     this.setState({ newPrescribedDrugs: drugList,
       showModal: false,
       value: null,
       color: 'red' });
+    this.props.store.dispatch(
+      {
+        type: 'ADD_PRESCRIPTION',
+        data: {
+          newPrescribedDrugs: this.state.newPrescribedDrugs,
+        },
+      }
+    );
   }
 
   _filterFunction() {
@@ -89,8 +99,8 @@ export default class MedicationContainer extends Component {
     return this.state.drugHistoryData;
   }
 
-  _onFilterChange(filter) {
-    this.setState({ filter });
+  _onFilterChange(filterData) {
+    this.setState({ filterData });
   }
 
   _showDrugHistoryTabs() {
@@ -149,6 +159,7 @@ MedicationContainer.propTypes = {
   drugConceptSet: PropTypes.string,
   isDropDown: PropTypes.bool,
   patientUuid: PropTypes.string.isRequired,
+  store: PropTypes.object.isRequired,
   treatmentConfig: PropTypes.object.isRequired,
 };
 

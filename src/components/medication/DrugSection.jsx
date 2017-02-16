@@ -7,7 +7,7 @@ import DrugRow from 'src/components/medication/DrugRow.jsx';
 export default class DrugSection extends Component {
   constructor(props) {
     super(props);
-    const date = new Date(Number.parseInt(props.header));
+    const date = new Date(Number.parseInt(props.header, 10));
     this.header = DateUtil.dateFormat(date);
   }
 

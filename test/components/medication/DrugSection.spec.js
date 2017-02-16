@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import chai, { expect } from 'chai';
 import DrugSection from 'src/components/medication/DrugSection.jsx';
-import { DateUtil } from 'src/helpers/dateUtil';
+import { DateUtil } from 'src/helpers/DateUtil';
 
 chai.use(chaiEnzyme());
 
@@ -14,7 +14,7 @@ describe('DrugSection', () => {
     const data = [{}];
     const wrapper = shallow(<DrugSection data={data} header={header} />);
     const sectionHeader = wrapper.find('.table__row');
-    const headerText = DateUtil.dateFormat(new Date(Number.parseInt(header)));
+    const headerText = DateUtil.dateFormat(new Date(Number.parseInt(header, 10)));
 
     expect(sectionHeader.text()).to.equal(headerText);
   });
@@ -27,7 +27,7 @@ describe('DrugSection', () => {
     const wrapper = shallow(<DrugSection data={data} header={header} />);
     const sectionHeader = wrapper.find('.table__row');
 
-    const headerText = DateUtil.dateFormat(new Date(Number.parseInt(header)));
+    const headerText = DateUtil.dateFormat(new Date(Number.parseInt(header, 10)));
     const drugRows = wrapper.find('DrugRow');
     expect(sectionHeader.text()).to.equal(headerText);
     expect(drugRows).to.have.length(data.length);

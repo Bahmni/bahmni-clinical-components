@@ -4,7 +4,7 @@ import chaiEnzyme from 'chai-enzyme';
 import chai, { expect } from 'chai';
 import DrugTable from 'src/components/medication/DrugTable.jsx';
 import fetchMock from 'fetch-mock';
-import { DateUtil } from 'src/helpers/dateUtil';
+import { DateUtil } from 'src/helpers/DateUtil';
 
 chai.use(chaiEnzyme());
 

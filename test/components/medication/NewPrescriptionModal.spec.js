@@ -53,6 +53,7 @@ describe('NewPrescriptionModal', () => {
       mount(
         <NewPrescriptionModal
           drug={{ name: 'paracetamol' }}
+          handleDone={ () => {} }
           treatmentConfig={treatmentConfig}
         />
       ).instance().modalRef, true
@@ -69,6 +70,7 @@ describe('NewPrescriptionModal', () => {
       mount(
         <NewPrescriptionModal
           drug={{ name: 'paracetamol' }}
+          handleDone={ () => {} }
           treatmentConfig={treatmentConfig}
         />
       ).instance().modalRef, true
@@ -86,6 +88,7 @@ describe('NewPrescriptionModal', () => {
       const wrapper = mount(
         <NewPrescriptionModal
           drug={{ name: 'paracetamol' }}
+          handleDone={ () => {} }
           treatmentConfig={treatmentConfig}
         />
       );
@@ -98,6 +101,7 @@ describe('NewPrescriptionModal', () => {
       const wrapper = mount(
         <NewPrescriptionModal
           drug={{ name: 'paracetamol' }}
+          handleDone={ () => {} }
           treatmentConfig={treatmentConfig}
         />
       );
@@ -110,6 +114,7 @@ describe('NewPrescriptionModal', () => {
       const wrapper = mount(
         <NewPrescriptionModal
           drug={{ name: 'paracetamol' }}
+          handleDone={ () => {} }
           treatmentConfig={treatmentConfig}
         />
       );
@@ -124,6 +129,7 @@ describe('NewPrescriptionModal', () => {
     const wrapper = mount(
       <NewPrescriptionModal
         drug={{ name: 'paracetamol' }}
+        handleDone={ () => {} }
         treatmentConfig={treatmentConfig}
       />
     );
@@ -138,6 +144,7 @@ describe('NewPrescriptionModal', () => {
       mount(
         <NewPrescriptionModal
           drug={{ name: 'paracetamol' }}
+          handleDone={ () => {} }
           treatmentConfig={treatmentConfig}
         />
       ).instance().modalRef, true
@@ -156,6 +163,7 @@ describe('NewPrescriptionModal', () => {
     const wrapper = mount(
       <NewPrescriptionModal
         drug={{ name: 'paracetamol' }}
+        handleDone={ () => {} }
         treatmentConfig={treatmentConfig}
       />
     );
@@ -174,6 +182,7 @@ describe('NewPrescriptionModal', () => {
     const wrapper = mount(
       <NewPrescriptionModal
         drug={{ name: 'paracetamol' }}
+        handleDone={ () => {} }
         treatmentConfig={treatmentConfig}
       />
     );
@@ -193,6 +202,7 @@ describe('NewPrescriptionModal', () => {
       mount(
         <NewPrescriptionModal
           drug={{ name: 'paracetamol' }}
+          handleDone={ () => {} }
           treatmentConfig={treatmentConfig}
         />
       ).instance().modalRef, true
@@ -208,6 +218,7 @@ describe('NewPrescriptionModal', () => {
     const wrapper = mount(
       <NewPrescriptionModal
         drug={{ name: 'paracetamol' }}
+        handleDone={ () => {} }
         treatmentConfig={treatmentConfig}
       />
     );
@@ -222,6 +233,7 @@ describe('NewPrescriptionModal', () => {
     const wrapper = mount(
       <NewPrescriptionModal
         drug={{ name: 'paracetamol' }}
+        handleDone={ () => {} }
         treatmentConfig={treatmentConfig}
       />
     );
@@ -235,10 +247,11 @@ describe('NewPrescriptionModal', () => {
     const wrapper = mount(
       <NewPrescriptionModal
         drug={{ name: 'paracetamol' }}
+        handleDone={ () => {} }
         treatmentConfig={treatmentConfig}
       />
     );
-    const totalQuantity = { name: 'totalQuantity', unit: { name: 'ml' }, value: 120 };
+    const totalQuantity = { name: 'totalQuantity', unit: { name: 'ml' }, value: '120' };
 
     wrapper.instance().handleTotalQuantityChange(totalQuantity);
 
@@ -250,6 +263,7 @@ describe('NewPrescriptionModal', () => {
     const wrapper = mount(
       <NewPrescriptionModal
         drug={{ name: 'paracetamol' }}
+        handleDone={ () => {} }
         treatmentConfig={treatmentConfig}
       />
     );
@@ -264,6 +278,7 @@ describe('NewPrescriptionModal', () => {
     const wrapper = mount(
       <NewPrescriptionModal
         drug={{ name: 'paracetamol' }}
+        handleDone={ () => {} }
         treatmentConfig={treatmentConfig}
       />
     );
@@ -277,6 +292,7 @@ describe('NewPrescriptionModal', () => {
     const wrapper = mount(
       <NewPrescriptionModal
         drug={{ name: 'paracetamol' }}
+        handleDone={ () => {} }
         treatmentConfig={treatmentConfig}
       />
     );
@@ -304,7 +320,7 @@ describe('NewPrescriptionModal', () => {
       drug: { concept: { name: 'Paracetamol' } },
       additionalInstructions: 'With water',
       instructions: { name: 'Empty Stomach' },
-      totalQuantity: { value: 144, unit: { name: 'ml' } },
+      totalQuantity: { value: '144', unit: { name: 'ml' } },
       startDate: '2017-02-13',
     };
 
@@ -314,7 +330,7 @@ describe('NewPrescriptionModal', () => {
         doseUnits: 'ml',
         frequency: 'Once a day',
         asNeeded: true,
-        quantity: 144,
+        quantity: '144',
         quantityUnits: 'ml',
         route: 'Oral',
       },

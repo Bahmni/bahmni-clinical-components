@@ -60,6 +60,11 @@ const drugOrder = new DrugOrder({
   durationUnits: 'Day(s)',
 });
 
+const mockStore = {
+  getState: () => ({}),
+  dispatch: () => {},
+};
+
 
 describe('MedicationContainer', () => {
   afterEach(() => {
@@ -68,6 +73,7 @@ describe('MedicationContainer', () => {
   it('should render Autocomplete and Button components by default', () => {
     const wrapper = mount(<MedicationContainer
       patientUuid="some uuid"
+      store={mockStore}
       treatmentConfig={treatmentConfig}
     />);
 
@@ -78,10 +84,12 @@ describe('MedicationContainer', () => {
   });
 
   it('should change button props to red on drug select when drug is non coded  ', () => {
-    const props = { drugConceptSet: 'All TB Drugs',
+    const props = {
+      drugConceptSet: 'All TB Drugs',
       isDropDown: true, treatmentConfig,
-      patientUuid: 'some uuid' };
-    const wrapper = mount(<MedicationContainer {...props} />);
+      patientUuid: 'some uuid',
+    };
+    const wrapper = mount(<MedicationContainer {...props} store={ mockStore } />);
     const onChange = wrapper.find('Select').props().onChange;
     onChange('paracetmol');
     expect(wrapper.find('Button').length).to.equal(1);
@@ -96,7 +104,7 @@ describe('MedicationContainer', () => {
       isDropDown: true,
       treatmentConfig,
       patientUuid: 'some uuid' };
-    const wrapper = mount(<MedicationContainer {...props} />);
+    const wrapper = mount(<MedicationContainer {...props} store={ mockStore } />);
     const onChange = wrapper.find('Select').props().onChange;
     onChange({ uuid: 'some uuid' });
     expect(wrapper.find('Button').length).to.equal(1);
@@ -119,6 +127,7 @@ describe('MedicationContainer', () => {
 
     const wrapper = mount(<MedicationContainer
       patientUuid="some uuid"
+      store={mockStore}
       treatmentConfig={treatmentConfig}
     />);
     const onChange = wrapper.find('ClinicalAutoComplete').props().loadOptions;
@@ -129,6 +138,7 @@ describe('MedicationContainer', () => {
   it('should close modal when Close button is clicked', () => {
     const wrapper = mount(<MedicationContainer
       patientUuid="some uuid"
+      store={mockStore}
       treatmentConfig={treatmentConfig}
     />);
 
@@ -139,6 +149,7 @@ describe('MedicationContainer', () => {
   it('should clear the autocomplete field when drug details are added and clicked done', () => {
     const wrapper = mount(<MedicationContainer
       patientUuid={'patientUuid'}
+      store={mockStore}
       treatmentConfig={treatmentConfig}
     />);
 
@@ -154,6 +165,7 @@ describe('MedicationContainer', () => {
   it('should clear the autocomplete field when drug details are added and clicked cancel', () => {
     const wrapper = mount(<MedicationContainer
       patientUuid={'patientUuid'}
+      store={mockStore}
       treatmentConfig={treatmentConfig}
     />);
 
@@ -169,6 +181,7 @@ describe('MedicationContainer', () => {
   it('should not show prescription table when there are no prescribed drugs', () => {
     const wrapper = mount(<MedicationContainer
       patientUuid={'patientUuid'}
+      store={mockStore}
       treatmentConfig={treatmentConfig}
     />);
 
@@ -178,6 +191,7 @@ describe('MedicationContainer', () => {
   it('should show prescription table when there are prescribed drugs', () => {
     const wrapper = mount(<MedicationContainer
       patientUuid={'patientUuid'}
+      store={mockStore}
       treatmentConfig={treatmentConfig}
     />);
 
