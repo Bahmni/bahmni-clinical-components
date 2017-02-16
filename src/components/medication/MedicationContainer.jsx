@@ -85,7 +85,7 @@ export default class MedicationContainer extends Component {
       {
         type: 'ADD_PRESCRIPTION',
         data: {
-          newPrescribedDrugs: this.state.newPrescribedDrugs,
+          newPrescribedDrugs: drugList,
         },
       }
     );
