@@ -4,12 +4,17 @@
 
 .btn {
   &--highlight, input[type="submit"], button[type="submit"] {
-    background: linear-gradient(to bottom, $bahmniPrimaryBtnColor, $bahmniPrimaryBtnColorHover) $bahmniPrimaryBtnColorHover !important;
+    background: linear-gradient(to bottom, $bahmniPrimaryBtnColor, $bahmniPrimaryBtnColorHover) $bahmniPrimaryBtnColorHover;
     border: 1px solid $bahmniPrimaryBtnColorHover;
     color: $white;
     letter-spacing: 0.5px;
     font-family: $primarySemiBoldFont;
     border-radius: 2px;
+    &.error{
+      background: linear-gradient(to bottom, #ff6666, #ff3d3d);
+      background-color: #ff3d3d;
+      border: #ff3d3d 1px solid;
+    }
   }
   &--close {
     padding: 5px;

@@ -34,23 +34,26 @@ export default class Measurement extends Component {
   }
 
   render() {
-    return (<div>
-            <p>{this.props.label}</p>
-            <NumericBox
-              onChange={this.handleValueChange}
-              validate validations={[]}
-              value={this.props.measurement.value}
-            />
-
-            <p>Units</p>
-            <Select
-              labelKey="name"
-              onChange={this.handleUnitsChange}
-              options={this.props.options}
-              searchable={false}
-              value={this.props.measurement.unit}
-              valueKey="name"
-            />
+    return (<div className="number-units">
+            <div className="number">
+              <label>{this.props.label}</label>
+              <NumericBox
+                onChange={this.handleValueChange}
+                validate validations={[]}
+                value={this.props.measurement.value}
+              />
+            </div>
+            <div className="units">
+              <label>Units</label>
+              <Select
+                labelKey="name"
+                onChange={this.handleUnitsChange}
+                options={this.props.options}
+                searchable={false}
+                value={this.props.measurement.unit}
+                valueKey="name"
+              />
+            </div>
            </div>
     );
   }

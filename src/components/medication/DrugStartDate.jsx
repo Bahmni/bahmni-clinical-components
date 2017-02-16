@@ -35,7 +35,7 @@ export default class DrugStartDate extends Component {
   }
 
   render() {
-    return (<div>
+    return (<div className="form-builder-radio">
         <RadioButton onValueChange={this.handleChange}
           options={this.options}
           validate={false}

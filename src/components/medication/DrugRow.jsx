@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { DateUtil } from 'src/helpers/DateUtil';
 import StoppedReason from 'src/components/medication/StoppedReason.jsx';
 import isEmpty from 'lodash/isEmpty';
+// import classNames from 'classnames';
 
 import { prescriptionStatus } from 'src/constants';
 
@@ -115,7 +116,7 @@ export default class DrugRow extends Component {
           <div className="table__cell table__cell--1">{secondColumn}</div>
           <div className="table__cell table__cell--2">{thirdColumn}</div>
           <div className="table__cell table__cell--3">{fourthColumn}</div>
-          <div className="table__cell table__cell--4">{fifthColumn}</div>
+          <div className="table__cell table__cell--4" ><span className={fifthColumn}>{fifthColumn}</span></div>
           <div className="table__cell table__cell--5">{sixthColumn}</div>
         </div>
       );

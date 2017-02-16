@@ -119,6 +119,12 @@
       &--4 {
         justify-content: center;
         align-items: center;
+        span.active{
+          color: orange;
+        }
+        span.scheduled{
+          color: green;
+        }
       }
       &--5 {
         flex: 2;
@@ -197,6 +203,131 @@
         &.active{
           color: #000 !important;
           font-family: $primarySemiBoldFont;
+        }
+      }
+    }
+  }
+}
+
+p.prescription-heading{
+  padding: 0 0 3px;
+  border-bottom: 1px solid $gray500;
+  color: $gray600;
+  margin: 0 0 10px;
+  span{
+    font-size: 11px;
+    color: $gray400;
+  }
+}
+.prescription-modal{
+  display: flex;
+  label{
+    display: block;
+    font-family: $primarySemiBoldFont;
+    font-size: 12px;
+    color: $gray600;
+    margin-bottom: 5px;
+  }
+  .prescription-modal-left{
+    flex-grow:4;
+    display: flex;
+    .flex-item{
+      flex-grow:1;
+      padding-right: 15px;
+    }
+    input[type="number"]{
+      width:50px;
+      display: block;
+      padding: 8px 5px 7px;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border: 1px solid $gray400;
+    }
+    .number-units{
+      display: flex;
+      .number ,.units{
+        padding-right: 5px;
+      }
+      .units{
+        width:100%;
+      }
+    }
+    .form-builder-radio{
+      display: block;
+      .options-list{
+        margin-top:10px;
+        font-family: $primarySemiBoldFont;
+        font-size: 12px;
+        color: $gray600;
+        &:last-child{
+          margin-top:35px;
+        }
+        input[type="radio"]{
+          margin-right: 10px;
+        }
+
+      }
+    }
+    input[type="date"]{
+      margin-top: 5px;
+      padding: 8px 10px 7px;
+      margin-left: 20px;
+      width: 160px;
+      border-radius: 4px;
+      border: 1px solid $gray400;
+      box-sizing: border-box;
+    }
+
+
+  }
+  .prescription-modal-right{
+    flex-grow:1;
+    .prn-button{
+      width: 100%;
+      float:none;
+      margin:0 0 10px;
+      background: $gray300;
+      box-shadow: 1px 1px 2px $gray300;
+      padding: 8px 10px;
+      color: $black;
+      border: 1px solid $gray500;
+    }
+    .form-control-buttons{
+      float: none;
+      clear: both;
+      display: block;
+    }
+    textarea{
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border-radius: 4px;
+      border: 1px solid $gray400;
+    }
+  }
+}
+
+.prescription-button{
+    @include clearfix();
+    margin:20px 0;
+}
+.drug-tab{
+  margin:10px 0;
+  ul{
+    li {
+      display: inline-block;
+      margin-right: 30px;
+      a{
+        color: $link;
+        font-size: 14px;
+        text-decoration: underline;
+        &:hover{
+          text-decoration: none;
+        }
+        &:active ,&:focus{
+          color: $black;
+          font-family: $primarySemiBoldFont;
+          text-decoration: none;
         }
       }
     }

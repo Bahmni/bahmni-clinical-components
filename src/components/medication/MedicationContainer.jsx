@@ -126,7 +126,7 @@ export default class MedicationContainer extends Component {
               />
             </div>
             <Button color={this.state.color}>
-              <i className="fa fa-plus"></i> Add to prescription
+              <i className="fa fa-plus"></i>Add to prescription
             </Button>
           </div>
 

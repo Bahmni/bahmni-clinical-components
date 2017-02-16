@@ -28,7 +28,6 @@ export default class DrugTable extends Component {
       DateUtil.dateWithoutTime(new Date(data.dateActivated)).valueOf());
     let dateActivated = Object.keys(drugByGroup);
     dateActivated = orderBy(dateActivated, null, ['desc']);
-
     return dateActivated.map((date) => (
         <DrugSection data={drugByGroup[date]} header={date} key={date} />
       ));
