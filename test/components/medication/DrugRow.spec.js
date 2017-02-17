@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
 import chai, { expect } from 'chai';
+import moment from 'moment';
 
 import DrugRow from 'src/components/medication/DrugRow.jsx';
 import { prescriptionStatus } from 'src/constants';
@@ -27,8 +28,8 @@ describe('DrugRow', () => {
     },
     duration: 2,
     durationUnits: 'Day(s)',
-    effectiveStartDate: 1485282600000,
-    effectiveStopDate: 1485455399000,
+    effectiveStartDate: moment('2017-01-25').valueOf(),
+    effectiveStopDate: moment('2017-01-26').valueOf(),
   };
 
   it('should render empty row when data is absent', () => {

@@ -5,6 +5,7 @@ import chai, { expect } from 'chai';
 import DrugTable from 'src/components/medication/DrugTable.jsx';
 import fetchMock from 'fetch-mock';
 import { DateUtil } from 'src/helpers/DateUtil';
+import moment from 'moment';
 
 chai.use(chaiEnzyme());
 
@@ -24,9 +25,9 @@ describe.only('DrugTable', () => {
 
   it('should render table sections', () => {
     const data = [
-      { name: 'TestDrug1', dateActivated: 999973800000 },
-      { name: 'TestDrug2', dateActivated: 949973800000 },
-      { name: 'testDrug3', dateActivated: 949973800000 },
+      { name: 'TestDrug1', dateActivated: moment('2001-09-08').valueOf() },
+      { name: 'TestDrug2', dateActivated: moment('2001-07-12').valueOf() },
+      { name: 'testDrug3', dateActivated: moment('2001-07-12').valueOf() },
     ];
     const wrapper = shallow(<DrugTable data={data} />);
     const tableSections = wrapper.find('DrugSection');
