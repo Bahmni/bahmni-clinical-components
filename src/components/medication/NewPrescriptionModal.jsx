@@ -200,42 +200,43 @@ export default class NewPrescriptionModal extends Component {
                   label="Dose"
                   measurement={this.state.dose}
                   onChange={this.handleMeasurementChange}
-                  options={this.props.treatmentConfig.doseUnits}/> <br />
+                  options={this.props.treatmentConfig.doseUnits}
+                /> <br />
                 <label>Routes</label>
                 <Select
-                    labelKey="name"
-                    onChange={this.handleRouteChange}
-                    options={this.props.treatmentConfig.routes}
-                    searchable={false}
-                    value={this.state.route}
-                    valueKey="name"
+                  labelKey="name"
+                  onChange={this.handleRouteChange}
+                  options={this.props.treatmentConfig.routes}
+                  searchable={false}
+                  value={this.state.route}
+                  valueKey="name"
                 />
               </div>
               <div className="frequency flex-item">
                 <label>Frequency</label>
                 <Select
-                    labelKey="name"
-                    onChange={this.handleFrequencyChange}
-                    options={this.props.treatmentConfig.frequencies}
-                    searchable={true}
-                    value={this.state.frequency}
-                    valueKey="name"
+                  labelKey="name"
+                  onChange={this.handleFrequencyChange}
+                  options={this.props.treatmentConfig.frequencies}
+                  searchable
+                  value={this.state.frequency}
+                  valueKey="name"
                 />
               </div>
               <div className="duration flex-item">
                 <Measurement
-                    label="Duration"
-                    measurement={this.state.duration}
-                    onChange={this.handleMeasurementChange}
-                    options={this.props.treatmentConfig.durationUnits}
+                  label="Duration"
+                  measurement={this.state.duration}
+                  onChange={this.handleMeasurementChange}
+                  options={this.props.treatmentConfig.durationUnits}
                 />
               </div>
               <div className="total-quantity flex-item ">
                 <Measurement
-                    label="Quantity"
-                    measurement={this.state.totalQuantity}
-                    onChange={this.handleTotalQuantityChange}
-                    options={this.props.treatmentConfig.doseUnits}
+                  label="Quantity"
+                  measurement={this.state.totalQuantity}
+                  onChange={this.handleTotalQuantityChange}
+                  options={this.props.treatmentConfig.doseUnits}
                 />
               </div>
               <div className="start-date flex-item">
@@ -248,7 +249,9 @@ export default class NewPrescriptionModal extends Component {
             </div>
             <div className="prescription-modal-right">
               <label>PRN {this.getPRNStatus()}</label>
-              <button onClick={this.togglePRNStatus} className="prn-button">PRN {this.state.PRNStatus}</button>
+              <button className="prn-button" onClick={this.togglePRNStatus}>
+                PRN {this.state.PRNStatus}
+              </button>
 
               <label>Additional Instructions</label>
               <ButtonSelect
@@ -263,13 +266,14 @@ export default class NewPrescriptionModal extends Component {
 
               <textarea
                 onChange={this.handleAdditionalInstructions}
-                value={this.state.additionalInstructions} placeholder="Add notes"
+                placeholder="Add notes"
+                value={this.state.additionalInstructions}
               />
             </div>
           </div>
           <div className="prescription-button">
-            <button onClick={this.props.handleCloseModal} className="fl">Cancel</button>
-            <button onClick={this.createDrugOrder} className="btn--highlight fr">Done</button>
+            <button className="fl" onClick={this.props.handleCloseModal}>Cancel</button>
+            <button className="btn--highlight fr" onClick={this.createDrugOrder}>Done</button>
           </div>
         </div>
         </ReactModal>

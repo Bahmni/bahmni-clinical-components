@@ -116,7 +116,9 @@ export default class DrugRow extends Component {
           <div className="table__cell table__cell--1">{secondColumn}</div>
           <div className="table__cell table__cell--2">{thirdColumn}</div>
           <div className="table__cell table__cell--3">{fourthColumn}</div>
-          <div className="table__cell table__cell--4" ><span className={fifthColumn}>{fifthColumn}</span></div>
+          <div className="table__cell table__cell--4" >
+            <span className={fifthColumn}>{fifthColumn}</span>
+          </div>
           <div className="table__cell table__cell--5">{sixthColumn}</div>
         </div>
       );

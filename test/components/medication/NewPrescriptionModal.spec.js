@@ -42,6 +42,7 @@ const treatmentConfig = {
   ] },
   dosingInstructions: [{ name: 'Before Meals' }],
   doseUnits: ['Tablet', 'ml', 'IU'],
+  routes: [{ name: 'Nasal', rootConcept: null }, { name: 'Topical', rootConcept: null }],
 };
 
 describe('NewPrescriptionModal', () => {
@@ -77,9 +78,10 @@ describe('NewPrescriptionModal', () => {
     );
     const nodes = wrapper.find('Select');
     expect(nodes.at(0).props().options).to.equal(treatmentConfig.doseUnits);
-    expect(nodes.at(1).props().options).to.equal(treatmentConfig.frequencies);
-    expect(nodes.at(2).props().options).to.equal(treatmentConfig.durationUnits);
-    expect(nodes.at(3).props().options).to.equal(treatmentConfig.doseUnits);
+    expect(nodes.at(1).props().options).to.equal(treatmentConfig.routes);
+    expect(nodes.at(2).props().options).to.equal(treatmentConfig.frequencies);
+    expect(nodes.at(3).props().options).to.equal(treatmentConfig.durationUnits);
+    expect(nodes.at(4).props().options).to.equal(treatmentConfig.doseUnits);
   });
 
 
